@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Loader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#E5E4E2] flex items-center justify-center min-h-screen">
+
+   <div class="relative flex items-center justify-center">
+
+    <!-- Outer Spinning Ring -->
+    <div class="absolute w-28 h-28 border-4 border-yellow-500/20 rounded-full"></div>
+    <div class="absolute w-28 h-28 border-4 border-transparent border-t-[#6ca7e2] rounded-full animate-spin"></div>
+
+    <!-- Center Image -->
+    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center p-1 shadow-lg">
+        <img
+            src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/logo.svg"
+            alt="University Logo"
+            class="w-full h-full object-contain"
+        >
+    </div>
+
+   </div>
+
+   <script>
+      setTimeout(() => {
+         window.location.href = "https://curious-dolphin-48e870.netlify.app/";
+      }, 2000); // 3 seconds
+   </script>
+
+</body>
+</html>

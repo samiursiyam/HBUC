@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notice Board</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:20px;
+    background:
+    radial-gradient(circle at top left,#60a5fa 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#818cf8 0%,transparent 30%),
+    linear-gradient(135deg,#f8fafc,#e0e7ff,#f1f5f9);
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.header h1{
+    font-size:clamp(2rem,5vw,3.2rem);
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.header p{
+    color:#475569;
+}
+
+.notice-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.notice-card{
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.notice-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.notice-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.notice-content{
+    padding:20px;
+}
+
+.notice-date{
+    display:inline-block;
+    padding:6px 14px;
+    background:#dbeafe;
+    color:#2563eb;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.notice-title{
+    font-size:22px;
+    font-weight:700;
+    color:#0f172a;
+    margin:12px 0;
+}
+
+.notice-text{
+    color:#475569;
+    line-height:1.8;
+}
+
+@media(max-width:768px){
+
+    .notice-grid{
+        grid-template-columns:1fr;
+    }
+
+    .notice-img{
+        height:200px;
+    }
+
+    .notice-title{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>📢 Notice Board</h1>
+        <p>সকল গুরুত্বপূর্ণ নোটিশ এখানে প্রকাশ করা হবে</p>
+    </div>
+
+    <div class="notice-grid">
+
+        <!-- Notice 1 -->
+        <div class="notice-card">
+            <img src="images/notice1.jpg" alt="Notice Image" class="notice-img">
+
+            <div class="notice-content">
+                <div class="notice-date">29 June 2026</div>
+
+                <div class="notice-title">
+                    অ্যাসাইনমেন্ট জমা
+                </div>
+
+                <div class="notice-text">
+                    আগামী "১-৭-২০২৬ তারিখের মধ্যে I-B এর Assignment সকল শিক্ষার্থীকে জমা দিতে হবে।
+                </div>
+            </div>
+        </div>
+
+       
+
+        <!-- Notice 3 -->
+        <div class="notice-card">
+            <img src="images/notice3.jpg" alt="Notice Image" class="notice-img">
+
+            <div class="notice-content">
+                <div class="notice-date">1 july 2026</div>
+
+                <div class="notice-title">
+                    ছুটির ঘোষণা
+                </div>
+
+                <div class="notice-text">
+                   এইচএসসি পরীক্ষার দিনগুলোতে কলেজ বন্ধ থাকবে।
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📸 Class Gallery · 8 subjects</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+
+      /* ===== NEW PREMIUM TEAL + ORANGE WHITE BACKGROUND ===== */
+      background:
+        radial-gradient(circle at 20% 20%, rgba(20,184,166,0.18), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(249,115,22,0.15), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(59,130,246,0.10), transparent 40%),
+        linear-gradient(135deg, #fefcfb, #f1f5f9);
+    }
+
+    /* soft glow */
+    body::before{
+      content:"";
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%);
+      top:-150px;
+      left:-150px;
+      filter:blur(55px);
+      animation:float 10s infinite alternate;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle, rgba(249,115,22,0.15), transparent 70%);
+      bottom:-150px;
+      right:-150px;
+      filter:blur(55px);
+      animation:float2 12s infinite alternate;
+    }
+
+    @keyframes float{
+      from{transform:translate(0,0);}
+      to{transform:translate(70px,50px);}
+    }
+
+    @keyframes float2{
+      from{transform:translate(0,0);}
+      to{transform:translate(-70px,-50px);}
+    }
+
+    .dashboard {
+      max-width: 1400px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 2rem;
+      border-radius: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(20,184,166,0.15);
+    }
+
+    .header h1 {
+      font-weight: 700;
+      font-size: 1.9rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header h1 i {
+      color: #14b8a6;
+      font-size: 2rem;
+    }
+
+    .header .badge {
+      background: rgba(249,115,22,0.12);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #f97316;
+      font-size: 0.95rem;
+    }
+
+    .header .badge a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header .badge a:hover {
+      text-decoration: underline;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    /* CARD — now clickable as a link */
+    .subject-card {
+      display: block;             /* make the whole card clickable */
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transition: 0.25s ease;
+      border: 1px solid rgba(20,184,166,0.15);
+      cursor: pointer;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-5px);
+      border-color: #f97316;
+      box-shadow: 0 18px 40px rgba(249,115,22,0.12);
+    }
+
+    /* IMAGE */
+    .image-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #e3f2f1;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid rgba(20,184,166,0.15);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-wrapper .fallback-icon {
+      font-size: 3.5rem;
+      color: #14b8a6;
+      opacity: 0.3;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* CONTENT */
+    .card-content {
+      padding: 1.2rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header h3 {
+      font-size: 1.1rem;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .subject-code {
+      margin-left: auto;
+      background: rgba(20,184,166,0.12);
+      color: #14b8a6;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .card-footer {
+      margin-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .pic-label {
+      font-size: 0.7rem;
+      color: #f97316;
+      background: rgba(249,115,22,0.10);
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+    }
+
+    @media (max-width: 680px) {
+      .subject-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <div class="header">
+    <h1><i class="fas fa-images"></i> Subjects</h1>
+    <span class="badge"><i class="fa fa-book"></i> <a href="https://www.nu.ac.bd/Syllabus/Syllabus_Honours/BBA_Honours/Finance_and_Banking_First_Year_Pub_Date_12112025.pdf" target="_blank">Syllabus</a></span>
+  </div>
+
+  <div class="subject-grid" id="subjectGrid"></div>
+
+</div>
+
+<script>
+(function() {
+
+  // -------------------- SUBJECT DATA WITH LINKS --------------------
+  // Each subject gets a unique page (could be real URL, or #demo)
+  // Clicking the card opens the link (subject.page) in same tab.
+  // You can replace these with actual URLs.
+  const SUBJECTS = [
+    { name: 'History of Bangladesh', icon: 'fa-landmark', code: '1st year', img: '#', page: 'history.html' },
+    { name: 'ICT', icon: 'fa-microchip', code: '1st year', img: 'ict.jpg', page: 'ict.html' },
+    { name: 'ICT Lab', icon: 'fa-desktop', code: '1st year', img: 'L-i.jpg', page: 'ict-lab.html' },
+    { name: 'Finance', icon: 'fa-coins', code: '1st year', img: 'fi.jpg', page: 'finance.html' },
+    { name: 'Business Intro', icon: 'fa-briefcase', code: '1st year', img: 'buss.jpg', page: 'business-intro.html' },
+    { name: 'Accounting', icon: 'fa-calculator', code: '1st year', img: 'acc.jpg', page: 'accounting.html' },
+    { name: 'Business Math', icon: 'fa-square-root-variable', code: '1st year', img: 'math.jpg', page: 'business-math.html' },
+    { name: 'Microeconomics', icon: 'fa-chart-line', code: '1st year', img: 'rco.jpg', page: 'microeconomics.html' },
+  ];
+
+  const grid = document.getElementById('subjectGrid');
+
+  SUBJECTS.forEach(sub => {
+
+    // Create an anchor element that wraps the whole card
+    const cardLink = document.createElement('a');
+    cardLink.className = 'subject-card';
+    cardLink.href = sub.page;            // link destination
+    cardLink.setAttribute('role', 'button');
+
+    // Build the inner HTML (identical to before, but inside <a>)
+    cardLink.innerHTML = `
+      <div class="image-wrapper">
+        <img src="${sub.img}" onerror="this.style.display='none'">
+        <i class="fas ${sub.icon} fallback-icon"></i>
+      </div>
+
+      <div class="card-content">
+        <div class="card-header">
+          <h3>${sub.name}</h3>
+          <span class="subject-code">${sub.code}</span>
+        </div>
+
+        <div class="card-footer">
+          <span class="pic-label">Subject</span>
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(cardLink);
+  });
+
+})();
+</script>
+
+</body>
+</html>

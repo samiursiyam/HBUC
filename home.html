@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>HBUC · ইউনিভার্সিটি</title>
+
+  <!-- Tailwind + Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* === global reset & base === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f8fafc;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth; /* Smooth scrolling-er jonno default function */
+    }
+    .font-serif-luxury {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .gold-text {
+      color: #2563eb;
+    }
+    .bg-gold {
+      background: #2563eb;
+    }
+
+    /* mobile-first */
+    @media (max-width: 640px) {
+      .header-top {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        gap: 6px 12px;
+        padding: 8px 16px !important;
+        text-align: center;
+      }
+      .header-top .location-text { font-size: 11px; }
+      .header-top .social-icons { gap: 8px; }
+      .header-top .phone-text { font-size: 11px; }
+      .banner-logo { max-width: 85%; margin: 12px auto; }
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        gap: 2px 6px;
+        padding: 10px 6px !important;
+      }
+      .nav-menu a {
+        font-size: 10px !important;
+        padding: 6px 8px !important;
+        white-space: nowrap;
+      }
+      .notice-area {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 6px 10px !important;
+      }
+      .notice-label {
+        text-align: center;
+        padding: 4px 8px !important;
+        font-size: 13px !important;
+        width: 100% !important;
+      }
+      .notice-marquee { margin-left: 0 !important; margin-top: 4px; font-size: 12px !important; }
+      .slider-container { height: 280px !important; }
+      .counter-card { padding: 1.2rem 1rem !important; }
+    }
+    @media (max-width: 480px) {
+      .header-top .location-text { font-size: 10px; }
+      .nav-menu a { font-size: 9px !important; padding: 4px 6px !important; }
+      .slider-container { height: 240px !important; }
+    }
+
+    /* slider */
+    .slide-img {
+      transition: opacity 0.8s ease-in-out;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    .dot-active {
+      background-color: white !important;
+      opacity: 1 !important;
+      transform: scale(1.2);
+    }
+    .dot-inactive {
+      background-color: rgba(255, 255, 255, 0.5) !important;
+    }
+    .marquee-text {
+      color: #e63946;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    @media (max-width: 640px) {
+      .marquee-text { font-size: 12px; }
+    }
+
+    /* card glow */
+    .card-glow {
+      transition: all 0.4s ease;
+    }
+    .card-glow:hover {
+      transform: translateY(-10px) scale(1.03);
+    }
+    .float-card {
+      animation: floatSoft 4s infinite alternate ease-in-out;
+    }
+    .float-card:nth-child(2) {
+      animation-delay: 0.7s;
+    }
+    @keyframes floatSoft {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+    .float-card:hover {
+      animation-play-state: paused;
+    }
+    .counter-num {
+      font-feature-settings: "tnum";
+    }
+
+    /* ===== FOOTER (white) ===== */
+    footer {
+      background: #ffffff !important;
+      border-top: 1px solid #e5e7eb;
+    }
+    .shimmer-text {
+      background: linear-gradient(90deg, #4f46e5, #7c3aed, #4f46e5);
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .footer-item {
+      animation: slideUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    .footer-item:nth-child(1) { animation-delay: 0.05s; }
+    .footer-item:nth-child(2) { animation-delay: 0.1s; }
+    .footer-item:nth-child(3) { animation-delay: 0.15s; }
+    .footer-item:nth-child(4) { animation-delay: 0.2s; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .footer-link {
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-block;
+      color: #4b5563;
+    }
+    .footer-link::before {
+      content: '›';
+      position: absolute;
+      left: -18px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      color: #4f46e5;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .footer-link:hover {
+      color: #111827;
+      transform: translateX(12px);
+    }
+    .footer-link:hover::before {
+      opacity: 1;
+      left: -14px;
+    }
+    .social-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      color: #4b5563;
+      font-size: 16px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    .social-circle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .social-circle:hover {
+      transform: translateY(-6px) scale(1.1);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+    }
+    .social-circle:hover::before {
+      opacity: 1;
+    }
+    .social-circle i {
+      position: relative;
+      z-index: 1;
+    }
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 16px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: default;
+    }
+    .contact-chip:hover {
+      background: #f3f4f6;
+      border-color: #c7d2fe;
+      transform: translateX(6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    }
+    .contact-chip-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eef2ff;
+      color: #4f46e5;
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .contact-chip:hover .contact-chip-icon {
+      background: #c7d2fe;
+      color: #4338ca;
+      transform: scale(1.05);
+    }
+    .newsletter-wrap {
+      position: relative;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    .newsletter-wrap:focus-within {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+      background: #ffffff;
+    }
+    .newsletter-input {
+      width: 100%;
+      padding: 14px 18px 14px 48px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #111827;
+      font-size: 14px;
+    }
+    .newsletter-input::placeholder {
+      color: #9ca3af;
+      font-weight: 300;
+    }
+    .newsletter-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    .newsletter-wrap:focus-within .newsletter-icon {
+      color: #4f46e5;
+    }
+    .subscribe-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+    .subscribe-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #4338ca, #6d28d9);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 14px;
+    }
+    .subscribe-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(79, 70, 229, 0.3);
+    }
+    .subscribe-btn:hover::after {
+      opacity: 1;
+    }
+    .subscribe-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(79, 70, 229, 0.15), 
+        rgba(124, 58, 237, 0.15), 
+        transparent
+      );
+    }
+    .bottom-link {
+      color: #6b7280;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .bottom-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      transition: width 0.3s ease;
+    }
+    .bottom-link:hover {
+      color: #111827;
+    }
+    .bottom-link:hover::after {
+      width: 100%;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 992px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+    footer h4 {
+      color: #111827 !important;
+    }
+    footer .shimmer-text {
+      background: linear-gradient(90deg, #4f46e5, #7c3aed, #4f46e5);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    footer p.text-gray-500 {
+      color: #6b7280 !important;
+    }
+    footer .text-gray-400 {
+      color: #4b5563 !important;
+    }
+    footer .text-gray-600 {
+      color: #6b7280 !important;
+    }
+    footer .text-gray-700 {
+      color: #374151 !important;
+    }
+    footer .text-gray-300 {
+      color: #1f2937 !important;
+    }
+    .bottom-link {
+      color: #6b7280 !important;
+    }
+    .bottom-link:hover {
+      color: #111827 !important;
+    }
+    footer .footer-link {
+      color: #4b5563 !important;
+    }
+    footer .footer-link:hover {
+      color: #111827 !important;
+    }
+    .newsletter-wrap, .contact-chip {
+      background: #f9fafb !important;
+      border-color: #e5e7eb !important;
+    }
+    .contact-chip:hover {
+      background: #f3f4f6 !important;
+    }
+    .newsletter-wrap:focus-within {
+      background: #ffffff !important;
+    }
+    .social-circle {
+      background: #f3f4f6 !important;
+      border-color: #e5e7eb !important;
+    }
+    .social-circle:hover {
+      background: transparent !important;
+    }
+    footer .footer-divider {
+      background: linear-gradient(90deg, transparent, rgba(79,70,229,0.12), rgba(124,58,237,0.12), transparent) !important;
+    }
+
+    /* about section tweaks */
+    #about .bg-white.rounded-xl {
+      transition: all 0.3s ease;
+    }
+    #about .bg-white.rounded-xl:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="w-full bg-white shadow-sm">
+
+  <!-- top bar -->
+  <div class="bg-[#264079] text-white header-top flex flex-wrap items-center justify-between px-4 sm:px-10 md:px-20 py-1.5 text-xs md:text-sm">
+    <div class="flex items-center gap-2 location-text">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Shantinagar, Dhaka-1000, Bangladesh</span>
+    </div>
+    <div class="flex items-center gap-3 social-icons">
+      <a href="#" class="hover:text-gray-200 transition"><i class="fa-brands fa-square-facebook text-lg"></i></a>
+      <a href="#" class="hover:text-gray-200 transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+    </div>
+    <div class="flex items-center gap-2 phone-text">
+      <i class="fa-solid fa-phone"></i>
+      <span>01621183068</span>
+    </div>
+  </div>
+
+  <!-- banner logo -->
+  <div class="flex justify-center my-2 md:my-4 px-4">
+    <img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website-banner6.svg" 
+         alt="University Logo"
+         class="banner-logo w-full max-w-xs md:max-w-md lg:max-w-2xl object-contain">
+  </div>
+
+  <!-- navigation -->
+  <div class="bg-[#e9ebe0] nav-menu flex flex-wrap items-center justify-center gap-1 md:gap-6 px-2 py-2 md:px-10">
+    <a href="#" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      HOME
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="teacher.html" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      TEACHERS
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="student.html" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      STUDENTS
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="subject.html" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      SUBJECTS
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="notice.html" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      NOTICES
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#about" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      ABOUT US
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#contact" class="text-xs md:text-sm relative text-gray-700 group px-3 py-2 transition-all duration-300 hover:font-bold hover:text-gray-800">
+      CONTACT US
+      <span class="absolute left-0 -bottom-1 h-[3px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+  </div>
+</header>
+
+<!-- ===== NOTICE MARQUEE ===== -->
+<div class="notice-area flex flex-wrap items-center bg-white border-b border-gray-200 px-3 py-1 md:px-8">
+  <div class="notice-label bg-red-600 text-white font-bold text-xs md:text-sm px-4 py-1.5 md:px-8 rounded-sm flex-shrink-0">
+    সাম্প্রতিক বিজ্ঞপ্তি :
+  </div>
+  <div class="flex-1 overflow-hidden ml-2">
+    <marquee direction="left" scrollamount="5" class="marquee-text py-1">
+      • “শিক্ষার্থী ও শিক্ষকদের সকল নোটিশ, আপডেট এবং গুরুত্বপূর্ণ তথ্য এখানে নিয়মিত প্রকাশ করা হবে।”
+    </marquee>
+  </div>
+</div>
+
+<!-- ===== SLIDER ===== -->
+<div class="relative w-full overflow-hidden shadow-lg">
+  <div class="relative w-full slider-container" style="height:480px; max-height:75vh; min-height:240px;">
+    <img id="slide1" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/66b352033738c2985.jpg" 
+         class="slide-img absolute w-full h-full object-cover opacity-100" alt="campus 1">
+    <img id="slide2" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00dc3622f21802.jpg" 
+         class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 2">
+   
+    <img id="slide3" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00ef0934149645.jpg" 
+         class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 3">
+  </div>
+
+
+
+
+
+
+
+  <button id="prevBtn" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-xl md:text-3xl font-bold px-3 py-1 md:px-4 md:py-2 rounded-full transition-all duration-300 hover:scale-110 z-10">
+    &#10094;
+  </button>
+  <button id="nextBtn" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-xl md:text-3xl font-bold px-3 py-1 md:px-4 md:py-2 rounded-full transition-all duration-300 hover:scale-110 z-10">
+    &#10095;
+  </button>
+
+  <div class="absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 z-10">
+    <button data-index="0" class="dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white transition-all duration-300 dot-active"></button>
+    <button data-index="1" class="dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/50 transition-all duration-300 dot-inactive"></button>
+    <button data-index="2" class="dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/50 transition-all duration-300 dot-inactive"></button>
+  </div>
+</div>
+
+  <div class="w-full h-20 sm:h-48 md:h-20 lg:h-20 bg-[#d5ebe6] flex items-center justify-center shadow-xl">
+    <p class="text-black text-lg sm:text-xl md:text-2xl font-bold text-center px-4 uppercase tracking-[8px]">
+        HABIBULLAH BAHAR COLLEGE
+    </p>
+</div>
+
+
+<br><hr class=" border-2 border-gray-800"><br>
+
+
+
+<section class="py-10">
+
+    <!-- Our Journey Section Title -->
+    <div class="max-w-5xl mx-auto px-4">
+
+        <div class="text-center py-6 mb-10 bg-gray-300 rounded-xl">
+
+            <h2 class="text-2xl md:text-4xl font-bold text-slate-800">
+                Our Journey
+            </h2>
+
+            <div class="w-16 h-1 bg-indigo-600 mx-auto my-3 rounded-full"></div>
+
+            <p class="text-slate-600 max-w-2xl mx-auto px-4">
+                Explore our memorable moments, presentations, friendships, and achievements throughout our college journey.
+            </p>
+
+        </div>
+
+       <!-- Gallery Grid -->
+<div class="max-w-4xl mx-auto">
+    <div class="grid grid-cols-2 gap-6">
+
+        <!-- Image 1 -->
+        <div class="group overflow-hidden rounded-2xl shadow-lg bg-white">
+            <img src="image/h1.jpeg"
+                alt="Gallery Image"
+                class="w-full h-48 md:h-72 object-cover transition duration-500 group-hover:scale-110">
+        </div>
+
+        <!-- Image 2 -->
+        <div class="group overflow-hidden rounded-2xl shadow-lg bg-white">
+            <img src="image/h2.jpeg"
+                alt="Gallery Image"
+                class="w-full h-48 md:h-72 object-cover transition duration-500 group-hover:scale-110">
+        </div>
+
+        <!-- Video -->
+        <div class="col-span-2 flex justify-center">
+            <video
+                controls
+                class="w-full max-w-md rounded-2xl shadow-lg">
+                <source src="image/hv1.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+</div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+<br><br><br>
+
+<!-- ===== COUNTER CARDS ===== -->
+<div class="flex flex-wrap justify-center gap-10 max-w-4xl mx-auto my-12 px-4">
+  <div class="float-card card-glow w-[180px] h-[180px] rounded-full bg-white border border-gray-200 shadow-2xl flex flex-col items-center justify-center">
+    <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-4">
+      <i class="fas fa-user-graduate text-3xl text-purple-600"></i>
+    </div>
+    <div class="counter counter-num text-6xl font-bold text-gray-900" data-target="19">0</div>
+    <div class="mt-2 text-lg font-semibold tracking-widest uppercase text-gray-500">Students</div>
+    <div class="w-2 h-2 rounded-full bg-purple-500 mt-3"></div>
+    <div class="mt-4 px-4 py-2 rounded-full bg-purple-50 border border-purple-100 text-purple-600 text-xs font-semibold uppercase tracking-wider">
+      <i class="fas fa-arrow-up mr-1"></i> +12% This Year
+    </div>
+  </div>
+
+  <div class="float-card card-glow w-[180px] h-[180px] rounded-full bg-white border border-gray-200 shadow-2xl flex flex-col items-center justify-center">
+    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+      <i class="fas fa-chalkboard-teacher text-[20px] text-pink-600"></i>
+    </div>
+    <div class="counter counter-num text-6xl font-bold text-gray-900" data-target="7">0</div>
+    <div class="mt-2 text-{20px} font-semibold tracking-widest uppercase text-gray-500">Teachers</div>
+    <div class="w-2 h-2 rounded-full bg-pink-500 mt-3"></div>
+    <div class="mt-4 px-4 py-2 rounded-full bg-pink-50 border border-pink-100 text-pink-600 text-xs font-semibold uppercase tracking-wider">
+      <i class="fas fa-star mr-1"></i> 4.9 Rating
+    </div>
+  </div>
+</div>
+
+<!-- ========== ABOUT SECTION (merged from second file) ========== -->
+<section id="about" class="py-16 md:py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left Content -->
+      <div>
+        <span class="gold-text uppercase text-xs tracking-[0.25em] font-semibold">
+          Educational Platform
+        </span>
+        <h2 class="font-serif-luxury text-4xl md:text-5xl font-bold text-gray-800 mt-3">
+          আমাদের ওয়েবসাইট সম্পর্কে
+        </h2>
+        <div class="w-20 h-1 bg-gold mt-5 mb-8 rounded-full"></div>
+
+        <p class="text-gray-600 leading-8 text-lg">
+          আমাদের কলেজের সকল শিক্ষার্থী ও শিক্ষকদের জন্য একটি আধুনিক,
+          তথ্যসমৃদ্ধ এবং সহজে ব্যবহারযোগ্য প্ল্যাটফর্ম তৈরির লক্ষ্য নিয়ে
+          এই ওয়েবসাইটটি তৈরি করা হয়েছে। এখানে বিভিন্ন বিষয়ভিত্তিক নোট,
+          গুরুত্বপূর্ণ শিক্ষামূলক তথ্য এবং প্রয়োজনীয় একাডেমিক রিসোর্স
+          এক জায়গায় পাওয়া যাবে।
+        </p>
+
+        <p class="text-gray-600 leading-8 text-lg mt-5">
+          শিক্ষার্থীদের সুবিধার কথা বিবেচনা করে এই প্ল্যাটফর্মে কলেজ
+          জীবনের চার বছরের সকল বিষয়ভিত্তিক নোট, গুরুত্বপূর্ণ ক্লাস
+          ম্যাটেরিয়াল, সাজেশন এবং প্রয়োজনীয় শিক্ষাসামগ্রী সংরক্ষণ ও
+          আপলোড করা হবে। ফলে ফাইনাল পরীক্ষার প্রস্তুতির সময় বা যেকোনো
+          প্রয়োজনের মুহূর্তে শিক্ষার্থীরা খুব সহজেই তাদের প্রয়োজনীয়
+          নোট ও তথ্য এক জায়গা থেকে সংগ্রহ করতে পারবে।
+        </p>
+
+        <p class="text-gray-600 leading-8 text-lg mt-5">
+          এছাড়াও নিয়মিত নতুন নোট, অ্যাসাইনমেন্ট, পরীক্ষার আপডেট,
+          রুটিন, শিক্ষক ও শিক্ষার্থীদের তথ্য এবং কলেজের বিভিন্ন
+          অনুষ্ঠানের তথ্য প্রকাশ করা হবে। আমাদের লক্ষ্য হলো
+          শিক্ষার্থীদের পড়াশোনাকে আরও সহজ, দ্রুত এবং কার্যকর করে তোলা।
+        </p>
+
+        <!-- Features -->
+        <div class="grid grid-cols-2 gap-6 mt-10">
+          <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition">
+            <h4 class="font-semibold text-gray-800">Study Notes</h4>
+            <p class="text-sm text-gray-500 mt-2">৪ বছরের সকল নোট এক জায়গায়</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition">
+            <h4 class="font-semibold text-gray-800">Exam Updates</h4>
+            <p class="text-sm text-gray-500 mt-2">পরীক্ষা ও রুটিন সংক্রান্ত তথ্য</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition">
+            <h4 class="font-semibold text-gray-800">Assignments</h4>
+            <p class="text-sm text-gray-500 mt-2">অ্যাসাইনমেন্ট ও গুরুত্বপূর্ণ নোটিশ</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition">
+            <h4 class="font-semibold text-gray-800">Student Support</h4>
+            <p class="text-sm text-gray-500 mt-2">শিক্ষার্থীদের জন্য সহায়ক প্ল্যাটফর্ম</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div>
+        <div class="w-80 h-80 mx-auto overflow-hidden rounded-full shadow-2xl">
+    <img
+        src="image/pic4.jpeg"
+        alt="About Us"
+        class="w-full h-full object-cover hover:scale-105 transition duration-700"
+    >
+</div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ====================== FOOTER (WHITE) ====================== -->
+<!-- ============================================================ -->
+<footer id="contact" class="w-full mt-8">
+  <div class="max-w-7xl mx-auto px-6 pt-14 pb-6">
+
+    <div class="footer-grid">
+
+      <!-- COL 1: BRAND -->
+      <div class="footer-item">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25">
+            <!-- <i class="fas fa-university text-white"></i> -->
+
+            <img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/logo.svg" alt="">
+          </div>
+          <span class="text-xl font-extrabold shimmer-text">HBUC</span>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+          "এখানে একাডেমি-সম্পর্কিত সকল গ্রুপের লিংক দেওয়া হয়েছে, যাতে সবাই সহজেই পড়াশোনার তথ্য, নোটিশ এবং গুরুত্বপূর্ণ আপডেট জানতে পারে।" 📚✨
+        </p>
+        <div class="flex gap-3 mt-6">
+          
+         Friends 
+          <a href="https://m.me/j/AbbqkhQcpepfV0eT/?send_source=gc%3Acopy_invite_link_t" class="social-circle">
+    <i class="fab fa-facebook-messenger"></i>
+</a>
+
+
+
+          Main
+          
+          <a href="https://chat.whatsapp.com/E2dTp1AvVuhIb6KKTeGQbV" class="social-circle" target="_blank">    <i class="fab fa-whatsapp"></i></a>
+         History
+          
+          <a href="https://chat.whatsapp.com/C8gqmXhhXmn5o1OumpEfEK" class="social-circle" target="_blank">    <i class="fab fa-whatsapp"></i></a>
+          
+
+
+
+        </div>
+      </div>
+
+      <!-- COL 2: QUICK LINKS -->
+      <div class="footer-item">
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
+          <span class="w-6 h-0.5 bg-indigo-500/50"></span>
+          Quick Links
+        </h4>
+        <ul class="space-y-3.5">
+          <li><a href="#" class="footer-link text-sm">Home</a></li>
+          <li><a href="#" class="footer-link text-sm">Teachers</a></li>
+          <li><a href="#" class="footer-link text-sm">Student</a></li>
+          <li><a href="#" class="footer-link text-sm">Subjects</a></li>
+         
+          <li><a href="#about" class="footer-link text-sm">About Us</a></li>
+          <li><a href="#contact" class="footer-link text-sm">Contact us </a></li>
+        </ul>
+      </div>
+
+      <!-- COL 3: CONTACT -->
+      <div class="footer-item">
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
+          <span class="w-6 h-0.5 bg-indigo-500/50"></span>
+          Contact Info
+        </h4>
+        <div class="space-y-3">
+          <div class="contact-chip">
+            <div class="contact-chip-icon"><i class="fas fa-map-pin"></i></div>
+            <span class="text-gray-400 text-sm">Shantinagar, Dhaka-1000</span>
+          </div>
+          <div class="contact-chip">
+            <div class="contact-chip-icon"><i class="fas fa-phone"></i></div>
+            <span class="text-gray-400 text-sm">+880 01621183068</span>
+          </div>
+          <div class="contact-chip">
+            <div class="contact-chip-icon"><i class="fas fa-envelope"></i></div>
+            <span class="text-gray-400 text-sm">rsiyam548@gmail.com</span>
+          </div>
+          <div class="contact-chip">
+            <div class="contact-chip-icon"><i class="fas fa-clock"></i></div>
+            <span class="text-gray-400 text-sm">Sat–Thu: 8AM – 6PM</span>
+          </div>
+        </div>
+      </div>
+  
+      
+      <!-- COL 4: NEWSLETTER -->
+      <div class="footer-item">
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
+          <span class="w-6 h-0.5 bg-indigo-500/50"></span>
+          Stay Updated
+        </h4>
+        <p class="text-gray-500 text-sm mb-4">
+          Get latest news, events & updates directly in your inbox.
+        </p>
+        <div class="space-y-3">
+          <div class="newsletter-wrap">
+            <i class="fas fa-envelope newsletter-icon"></i>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="newsletter-input"
+            />
+          </div>
+          <button class="subscribe-btn">
+            <span><i class="fas fa-arrow-right mr-2"></i> Subscribe</span>
+          </button>
+        </div>
+        <p class="text-gray-600 text-xs mt-3 flex items-center gap-1.5">
+          <i class="fas fa-check-circle text-indigo-400 text-xs"></i>
+          Remember Me • 
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider my-10"></div>
+
+    <!-- Bottom Bar -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-gray-600 text-sm">
+        © 2026 <span class="text-gray-300 font-medium">HBUC</span>......
+        Made by Samiur Rahman (Siyam).
+      </p>
+      <div class="flex items-center gap-5 text-sm">
+        <a href="#" class="bottom-link">Privacy</a>
+        <span class="text-gray-700">•</span>
+        <a href="#" class="bottom-link">Terms</a>
+        <span class="text-gray-700">•</span>
+        <a href="#" class="bottom-link">Cookies</a>
+        <span class="text-gray-700">•</span>
+        <a href="#" class="bottom-link">Support</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- ====================== JAVASCRIPT =========================== -->
+<!-- ============================================================ -->
+<script>
+  (function() {
+    // ---- SLIDER ----
+    const slides = [
+      document.getElementById('slide1'),
+      document.getElementById('slide2'),
+      document.getElementById('slide3')
+    ];
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    let autoInterval = null;
+
+    function changeSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      slides.forEach((img, i) => {
+        img.style.opacity = '0';
+      });
+      slides[index].style.opacity = '1';
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('dot-inactive');
+          dot.classList.add('dot-active');
+        } else {
+          dot.classList.remove('dot-active');
+          dot.classList.add('dot-inactive');
+        }
+      });
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      changeSlide(currentIndex + 1);
+      resetAutoPlay();
+    }
+
+    function prevSlide() {
+      changeSlide(currentIndex - 1);
+      resetAutoPlay();
+    }
+
+    function resetAutoPlay() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
+      autoInterval = setInterval(() => {
+        nextSlide();
+      }, 4500);
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', nextSlide);
+    document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', function() {
+        changeSlide(idx);
+        resetAutoPlay();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    resetAutoPlay();
+
+    // ---- COUNTER ANIMATION ----
+    const counters = document.querySelectorAll('.counter');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          if (!counter.dataset.started) {
+            counter.dataset.started = true;
+            animateCounter(counter);
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counters.forEach(counter => observer.observe(counter));
+
+    function animateCounter(counter) {
+      const target = parseInt(counter.dataset.target, 10);
+      let current = 0;
+      const increment = Math.max(1, Math.ceil(target / 120));
+
+      function update() {
+        current += increment;
+        if (current >= target) {
+          counter.innerText = target.toLocaleString();
+          return;
+        }
+        counter.innerText = Math.ceil(current).toLocaleString();
+        requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    if (document.readyState === 'complete') {
+      counters.forEach(counter => {
+        const rect = counter.getBoundingClientRect();
+        if (rect.top < window.innerHeight && !counter.dataset.started) {
+          counter.dataset.started = true;
+          animateCounter(counter);
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
