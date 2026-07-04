@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <title>Lab: ICT · 9 Units</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -364,13 +364,13 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Lab: ICT</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
         <span></span><span></span><span></span>
       </span>
-      <span class="text-sm font-medium">Chapters</span>
+      <span class="text-sm font-medium">Units</span>
     </button>
   </div>
 
@@ -383,30 +383,31 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
-        <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">Lab: ICT</h2>
+        <p class="text-sm text-slate-400 mt-0.5">9 Units</p>
       </div>
       <div class="px-4 pt-4 pb-2">
-        <input type="text" placeholder="Search chapter..." 
+        <input type="text" placeholder="Search unit..." 
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 9 Lab ICT Units -->
+        <div class="chapter-item chapter-active" data-chapter="Hardware Assembly & Software Installation">01 · Hardware Assembly & Software Installation</div>
+        <div class="chapter-item" data-chapter="Word Processing Lab">02 · Word Processing Lab</div>
+        <div class="chapter-item" data-chapter="Spreadsheet Lab (Excel)">03 · Spreadsheet Lab (Excel)</div>
+        <div class="chapter-item" data-chapter="PowerPoint Presentation Lab">04 · PowerPoint Presentation Lab</div>
+        <div class="chapter-item" data-chapter="Antivirus Installation">05 · Antivirus Installation</div>
+        <div class="chapter-item" data-chapter="Internet & Email Usage">06 · Internet & Email Usage</div>
+        <div class="chapter-item" data-chapter="Data Analytics & ML Lab">07 · Data Analytics & ML Lab</div>
+        <div class="chapter-item" data-chapter="Freelancing Lab">08 · Freelancing Lab</div>
+        <div class="chapter-item" data-chapter="Lab Review & Assessment">09 · Lab Review & Assessment</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Hardware Assembly & Software Installation</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -444,59 +445,64 @@
       const modalClose = document.getElementById('modalCloseBtn');
       const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
+      let currentChapter = 'Hardware Assembly & Software Installation';
       let scale = 1;
       let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Hardware Assembly & Software Installation': [
+          { src: 'image/hi1.jpeg', desc: '🔧 Hardware Assembly' },
+          { src: 'image/hi2.jpeg', desc: '💿 Software Installation' },
+          { src: 'image/hi3.jpeg', desc: '📁 File Management' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Word Processing Lab': [
+          { src: 'image/c1.jpeg', desc: '📄 Word Document' },
+          { src: 'image/c2.jpeg', desc: '✏️ Formatting Tools' },
+          { src: 'image/c3.jpeg', desc: '🖨️ Print Options' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Spreadsheet Lab (Excel)': [
+          { src: 'image/c4.jpeg', desc: '📊 Excel Sheets' },
+          { src: 'image/c5.jpeg', desc: '🧮 Formulas & Functions' },
+          { src: 'image/c6.jpeg', desc: '📈 Graphs & Charts' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'PowerPoint Presentation Lab': [
+          { src: 'image/p1.jpeg', desc: '📽️ Presentation' },
+          { src: 'image/p2.jpeg', desc: '🎨 Slide Formatting' },
+          { src: 'image/p3.jpeg', desc: '✨ Animation & Transition' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'Antivirus Installation': [
+          { src: 'image/i1.jpeg', desc: '🛡️ Antivirus Software' },
+          { src: 'image/i2.jpeg', desc: '🔒 Security Setup' },
+          { src: 'image/i3.jpeg', desc: '🔄 Virus Protection' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'Internet & Email Usage': [
+          { src: 'image/l1.jpeg', desc: '🌐 Internet Access' },
+          { src: 'image/l2.jpeg', desc: '📧 Email Usage' },
+          { src: 'image/l3.jpeg', desc: '☁️ Virtual Drive' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Data Analytics & ML Lab': [
+          { src: 'image/e1.jpeg', desc: '📊 Data Collection' },
+          { src: 'image/e2.jpeg', desc: '🤖 Pattern Recognition' },
+          { src: 'image/e3.jpeg', desc: '🧠 ML Classification' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Freelancing Lab': [
+          { src: 'image/t1.jpeg', desc: '💼 Marketplace' },
+          { src: 'image/t2.jpeg', desc: '📝 Proposal Writing' },
+          { src: 'image/t3.jpeg', desc: '🌟 Portfolio Creation' }
+        ],
+        'Lab Review & Assessment': [
+          { src: 'image/hi1.jpeg', desc: '📋 Lab Assessment' },
+          { src: 'image/hi2.jpeg', desc: '✅ Practical Exam' },
+          { src: 'image/hi3.jpeg', desc: '📊 Project Review' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '💻 Lab concept' },
+        { src: 'image/hi2.jpeg', desc: '🔧 Practical' },
+        { src: 'image/hi3.jpeg', desc: '📊 ICT Lab' }
       ];
 
       function showToast(msg) {
@@ -694,7 +700,7 @@
         });
       });
 
-      const searchInput = document.querySelector('input[placeholder="Search chapter..."]');
+      const searchInput = document.querySelector('input[placeholder="Search unit..."]');
       if (searchInput) {
         searchInput.addEventListener('input', function() {
           const q = this.value.toLowerCase().trim();
@@ -706,7 +712,7 @@
       }
 
       // Init
-      updateChapter('Pre-colonial Era');
+      updateChapter('Hardware Assembly & Software Installation');
     })();
   </script>
 </body>

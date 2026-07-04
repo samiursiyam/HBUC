@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Introduction to Business · 9 Chapters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,54 +112,24 @@
       box-shadow: 0 30px 60px rgba(0,0,0,0.9);
       transform: scale(0.95);
       transition: transform 0.25s ease;
-      max-height: 90vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
     .modal-overlay.active .modal-box {
       transform: scale(1);
     }
-    .modal-img-wrapper {
-      flex: 1;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-in;
-      min-height: 0;
-      position: relative;
-    }
-    .modal-img-wrapper.zoomed {
-      cursor: zoom-out;
-    }
     .modal-box .modal-img {
       width: 100%;
       height: auto;
-      max-height: 60vh;
+      max-height: 400px;
       object-fit: contain;
       border-radius: 1rem;
       background: #0f1f3f;
-      transition: transform 0.1s ease;
-      transform-origin: center center;
-      touch-action: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    .modal-box .modal-img.zoomed {
-      max-height: none;
-      width: auto;
-      max-width: none;
-      cursor: zoom-out;
+      margin-bottom: 1rem;
     }
     .modal-box .modal-desc {
       font-size: 1.2rem;
       font-weight: 500;
       color: #e2e8f0;
       text-align: center;
-      margin-top: 0.5rem;
-      flex-shrink: 0;
     }
     .modal-close {
       margin-top: 1.5rem;
@@ -172,10 +142,9 @@
       cursor: pointer;
       transition: background 0.2s;
       display: inline-block;
-      flex-shrink: 0;
     }
     .modal-close:hover { background: #6366f1; }
-    .modal-footer { text-align: center; flex-shrink: 0; }
+    .modal-footer { text-align: center; }
 
     .sidebar-toggle {
       display: none;
@@ -284,7 +253,7 @@
       .content { padding: 1rem 0.75rem 2rem; }
       .img-card img { height: 130px; }
       .modal-box { padding: 1.2rem; }
-      .modal-box .modal-img { max-height: 50vh; }
+      .modal-box .modal-img { max-height: 280px; }
       .chapter-item { padding: 0.75rem 1rem !important; font-size: 0.95rem; }
     }
 
@@ -325,21 +294,6 @@
     .notes-section {
       display: none !important;
     }
-
-    .zoom-hint {
-      position: absolute;
-      bottom: 10px;
-      right: 16px;
-      background: rgba(0,0,0,0.6);
-      color: #e2e8f0;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      letter-spacing: 0.3px;
-      pointer-events: none;
-      opacity: 0.6;
-      backdrop-filter: blur(4px);
-    }
   </style>
 </head>
 <body>
@@ -349,9 +303,8 @@
   <!-- Image Modal -->
   <div class="modal-overlay" id="imageModal">
     <div class="modal-box">
-      <div class="modal-img-wrapper" id="modalImgWrapper">
+      <div class="modal-img-wrapper">
         <img src="" alt="preview" class="modal-img" id="modalImg">
-        <span class="zoom-hint">🔄 scroll / pinch to zoom</span>
       </div>
       <p class="modal-desc" id="modalDesc">🏛️ ..</p>
       <div class="modal-footer">
@@ -364,7 +317,7 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Introduction to Business</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
@@ -383,30 +336,31 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
-        <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">Introduction to Business</h2>
+        <p class="text-sm text-slate-400 mt-0.5">9 Chapters</p>
       </div>
       <div class="px-4 pt-4 pb-2">
         <input type="text" placeholder="Search chapter..." 
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 9 business chapters -->
+        <div class="chapter-item chapter-active" data-chapter="Concepts in Business">01 · Concepts in Business</div>
+        <div class="chapter-item" data-chapter="Sole Proprietorship">02 · Sole Proprietorship</div>
+        <div class="chapter-item" data-chapter="Partnership">03 · Partnership</div>
+        <div class="chapter-item" data-chapter="Joint Stock Companies (JSC)">04 · Joint Stock Companies (JSC)</div>
+        <div class="chapter-item" data-chapter="Cooperative Society">05 · Cooperative Society</div>
+        <div class="chapter-item" data-chapter="State Enterprises">06 · State Enterprises</div>
+        <div class="chapter-item" data-chapter="Franchising">07 · Franchising</div>
+        <div class="chapter-item" data-chapter="Business Start-Up">08 · Business Start-Up</div>
+        <div class="chapter-item" data-chapter="Financial Markets and Institutions in Bangladesh">09 · Financial Markets and Institutions in Bangladesh</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Concepts in Business</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -442,61 +396,63 @@
       const modalImg = document.getElementById('modalImg');
       const modalDesc = document.getElementById('modalDesc');
       const modalClose = document.getElementById('modalCloseBtn');
-      const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
-      let scale = 1;
-      let isZoomed = false;
+      let currentChapter = 'Concepts in Business';
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Concepts in Business': [
+          { src: 'image/hi1.jpeg', desc: '📊 Concept of Business' },
+          { src: 'image/hi2.jpeg', desc: '🏛️ Functions of Business' },
+          { src: 'image/hi3.jpeg', desc: '📈 Business Ownership' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Sole Proprietorship': [
+          { src: 'image/c1.jpeg', desc: '👤 Sole Proprietorship' },
+          { src: 'image/c2.jpeg', desc: '📋 Characteristics' },
+          { src: 'image/c3.jpeg', desc: '⚖️ Advantages & Disadvantages' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Partnership': [
+          { src: 'image/c4.jpeg', desc: '🤝 Partnership Deed' },
+          { src: 'image/c5.jpeg', desc: '📜 Rights & Duties' },
+          { src: 'image/c6.jpeg', desc: '🏛️ Dissolution' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'Joint Stock Companies (JSC)': [
+          { src: 'image/p1.jpeg', desc: '🏢 Joint Stock Company' },
+          { src: 'image/p2.jpeg', desc: '📄 Memorandum & Articles' },
+          { src: 'image/p3.jpeg', desc: '📊 Shareholders Meeting' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'Cooperative Society': [
+          { src: 'image/i1.jpeg', desc: '🤝 Cooperative Society' },
+          { src: 'image/i2.jpeg', desc: '📋 Principles' },
+          { src: 'image/i3.jpeg', desc: '🏛️ Types & Formation' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'State Enterprises': [
+          { src: 'image/l1.jpeg', desc: '🏛️ State Enterprises' },
+          { src: 'image/l2.jpeg', desc: '📈 Historical Background' },
+          { src: 'image/l3.jpeg', desc: '⚖️ Successes & Failures' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Franchising': [
+          { src: 'image/e1.jpeg', desc: '📋 Franchising Agreement' },
+          { src: 'image/e2.jpeg', desc: '📊 Pros & Cons' },
+          { src: 'image/e3.jpeg', desc: '🏛️ Types of Franchising' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Business Start-Up': [
+          { src: 'image/t1.jpeg', desc: '🚀 Startup Ideas' },
+          { src: 'image/t2.jpeg', desc: '📊 Internal & External Analysis' },
+          { src: 'image/t3.jpeg', desc: '📈 Opportunity Evaluation' }
+        ],
+        'Financial Markets and Institutions in Bangladesh': [
+          { src: 'image/hi1.jpeg', desc: '🏛️ Financial Institutions' },
+          { src: 'image/hi2.jpeg', desc: '📊 Stock Exchanges' },
+          { src: 'image/hi3.jpeg', desc: '🏦 Micro Finance Institute' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '📖 Business concept' },
+        { src: 'image/hi2.jpeg', desc: '📜 Business analysis' },
+        { src: 'image/hi3.jpeg', desc: '🏛️ Enterprise' }
       ];
 
       function showToast(msg) {
@@ -522,15 +478,20 @@
           card.appendChild(img);
           const label = document.createElement('div');
           label.className = 'img-label';
+          // short label (first few words)
           const short = imgData.desc.length > 30 ? imgData.desc.slice(0, 30) + '…' : imgData.desc;
           label.textContent = short;
           card.appendChild(label);
 
+          // click to open modal
           card.addEventListener('click', function(e) {
             const src = this.dataset.src || img.src;
             const desc = this.dataset.imgdesc || '🖼️ Image';
             if (src && src !== '#') {
-              openModal(src, desc);
+              modalImg.src = src;
+              modalImg.alt = desc;
+              modalDesc.textContent = desc;
+              modal.classList.add('active');
             } else {
               showToast('🖼️ ' + desc);
             }
@@ -540,120 +501,12 @@
         });
       }
 
-      // --- Modal with zoom ---
-      function openModal(src, desc) {
-        modalImg.src = src;
-        modalImg.alt = desc;
-        modalDesc.textContent = desc;
-        resetZoom();
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        resetZoom();
-      }
-
-      function resetZoom() {
-        scale = 1;
-        isZoomed = false;
-        modalImg.style.transform = 'scale(1)';
-        modalImg.classList.remove('zoomed');
-        modalWrapper.classList.remove('zoomed');
-        modalWrapper.style.cursor = 'zoom-in';
-      }
-
-      // Mouse wheel zoom
-      modalImg.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        const delta = e.deltaY > 0 ? -0.1 : 0.1;
-        scale = Math.min(Math.max(scale + delta, 0.5), 4);
-        modalImg.style.transform = `scale(${scale})`;
-        if (scale > 1.05) {
-          modalImg.classList.add('zoomed');
-          modalWrapper.classList.add('zoomed');
-          modalWrapper.style.cursor = 'zoom-out';
-          isZoomed = true;
-        } else {
-          modalImg.classList.remove('zoomed');
-          modalWrapper.classList.remove('zoomed');
-          modalWrapper.style.cursor = 'zoom-in';
-          isZoomed = false;
-        }
-      }, { passive: false });
-
-      // Click on image to toggle zoom
-      modalImg.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (isZoomed) {
-          resetZoom();
-        } else {
-          scale = 2;
-          modalImg.style.transform = `scale(${scale})`;
-          modalImg.classList.add('zoomed');
-          modalWrapper.classList.add('zoomed');
-          modalWrapper.style.cursor = 'zoom-out';
-          isZoomed = true;
-        }
-      });
-
-      // Double click to reset
-      modalImg.addEventListener('dblclick', function(e) {
-        e.preventDefault();
-        resetZoom();
-      });
-
-      // --- Pinch-to-zoom for mobile ---
-      let initialPinchDistance = 0;
-      let initialPinchScale = 1;
-
-      modalImg.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 2) {
-          const touch1 = e.touches[0];
-          const touch2 = e.touches[1];
-          initialPinchDistance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
-          initialPinchScale = scale;
-        }
-      }, { passive: true });
-
-      modalImg.addEventListener('touchmove', function(e) {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          const touch1 = e.touches[0];
-          const touch2 = e.touches[1];
-          const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
-          const delta = distance / initialPinchDistance;
-          scale = Math.min(Math.max(initialPinchScale * delta, 0.5), 4);
-          modalImg.style.transform = `scale(${scale})`;
-          if (scale > 1.05) {
-            modalImg.classList.add('zoomed');
-            modalWrapper.classList.add('zoomed');
-            modalWrapper.style.cursor = 'zoom-out';
-            isZoomed = true;
-          } else {
-            modalImg.classList.remove('zoomed');
-            modalWrapper.classList.remove('zoomed');
-            modalWrapper.style.cursor = 'zoom-in';
-            isZoomed = false;
-          }
-        }
-      }, { passive: false });
-
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-      });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-      });
-
       function updateChapter(chapterName) {
         if (!chapterName) return;
         currentChapter = chapterName;
         chapterTitle.textContent = chapterName;
 
+        // update active class
         chapterItems.forEach(el => {
           el.classList.remove('chapter-active');
           const dataChapter = el.getAttribute('data-chapter');
@@ -662,6 +515,7 @@
           }
         });
 
+        // render images for this chapter
         renderImages(chapterName);
         showToast(`📖 ${chapterName}`);
         closeSidebar();
@@ -683,6 +537,7 @@
         sidebarOverlay.addEventListener('click', closeSidebar);
       }
 
+      // Chapter click: use data-chapter attribute
       chapterItems.forEach(item => {
         item.addEventListener('click', function() {
           const chapter = this.getAttribute('data-chapter');
@@ -694,6 +549,19 @@
         });
       });
 
+      // Modal close
+      function closeModal() {
+        modal.classList.remove('active');
+      }
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Search
       const searchInput = document.querySelector('input[placeholder="Search chapter..."]');
       if (searchInput) {
         searchInput.addEventListener('input', function() {
@@ -705,8 +573,8 @@
         });
       }
 
-      // Init
-      updateChapter('Pre-colonial Era');
+      // Init: Concepts in Business
+      updateChapter('Concepts in Business');
     })();
   </script>
 </body>

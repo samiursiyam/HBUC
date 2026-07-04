@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <title>Principles of Accounting · 10 Chapters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -326,6 +326,7 @@
       display: none !important;
     }
 
+    /* zoom hint */
     .zoom-hint {
       position: absolute;
       bottom: 10px;
@@ -364,7 +365,7 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Principles of Accounting</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
@@ -383,30 +384,32 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
-        <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">Principles of Accounting</h2>
+        <p class="text-sm text-slate-400 mt-0.5">10 Chapters</p>
       </div>
       <div class="px-4 pt-4 pb-2">
         <input type="text" placeholder="Search chapter..." 
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 10 Accounting chapters -->
+        <div class="chapter-item chapter-active" data-chapter="Introduction to Accounting">01 · Introduction to Accounting</div>
+        <div class="chapter-item" data-chapter="Financial Accounting Process">02 · Financial Accounting Process</div>
+        <div class="chapter-item" data-chapter="Processing Accounting Data">03 · Processing Accounting Data</div>
+        <div class="chapter-item" data-chapter="The Ledger">04 · The Ledger</div>
+        <div class="chapter-item" data-chapter="The Trial Balance">05 · The Trial Balance</div>
+        <div class="chapter-item" data-chapter="Accounting for Merchandising Operations">06 · Accounting for Merchandising Operations</div>
+        <div class="chapter-item" data-chapter="Financial Statements">07 · Financial Statements</div>
+        <div class="chapter-item" data-chapter="Financial Statement Analysis">08 · Financial Statement Analysis</div>
+        <div class="chapter-item" data-chapter="Accounting for Assets">09 · Accounting for Assets</div>
+        <div class="chapter-item" data-chapter="Accounting for Liabilities">10 · Accounting for Liabilities</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Introduction to Accounting</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -444,59 +447,69 @@
       const modalClose = document.getElementById('modalCloseBtn');
       const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
+      let currentChapter = 'Introduction to Accounting';
       let scale = 1;
       let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Introduction to Accounting': [
+          { src: 'image/hi1.jpeg', desc: '📊 Accounting Equation' },
+          { src: 'image/hi2.jpeg', desc: '📜 GAAP Principles' },
+          { src: 'image/hi3.jpeg', desc: '🏛️ Branches of Accounting' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Financial Accounting Process': [
+          { src: 'image/c1.jpeg', desc: '📊 Accounting Equation' },
+          { src: 'image/c2.jpeg', desc: '📋 Financial Transactions' },
+          { src: 'image/c3.jpeg', desc: '⚖️ Financial Position' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Processing Accounting Data': [
+          { src: 'image/c4.jpeg', desc: '📋 Vouchers & Journals' },
+          { src: 'image/c5.jpeg', desc: '📊 Recording Transactions' },
+          { src: 'image/c6.jpeg', desc: '📑 Special Journals' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'The Ledger': [
+          { src: 'image/p1.jpeg', desc: '📚 Ledger Concept' },
+          { src: 'image/p2.jpeg', desc: '📊 Posting Mechanism' },
+          { src: 'image/p3.jpeg', desc: '📑 Accounts & Branches' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'The Trial Balance': [
+          { src: 'image/i1.jpeg', desc: '⚖️ Trial Balance' },
+          { src: 'image/i2.jpeg', desc: '📊 Accounting Accuracy' },
+          { src: 'image/i3.jpeg', desc: '📋 Errors Detection' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'Accounting for Merchandising Operations': [
+          { src: 'image/l1.jpeg', desc: '📦 Invoices & Systems' },
+          { src: 'image/l2.jpeg', desc: '📊 Perpetual vs Periodic' },
+          { src: 'image/l3.jpeg', desc: '📋 Inventory Accounting' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Financial Statements': [
+          { src: 'image/e1.jpeg', desc: '📊 Income Statement' },
+          { src: 'image/e2.jpeg', desc: '📋 Balance Sheet' },
+          { src: 'image/e3.jpeg', desc: '📑 Financial Reporting' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Financial Statement Analysis': [
+          { src: 'image/t1.jpeg', desc: '📊 Horizontal Analysis' },
+          { src: 'image/t2.jpeg', desc: '📈 Vertical Analysis' },
+          { src: 'image/t3.jpeg', desc: '📊 Ratio Analysis' }
+        ],
+        'Accounting for Assets': [
+          { src: 'image/hi1.jpeg', desc: '💰 Cash Accounting' },
+          { src: 'image/hi2.jpeg', desc: '📊 Receivables' },
+          { src: 'image/hi3.jpeg', desc: '🏛️ Fixed Assets' }
+        ],
+        'Accounting for Liabilities': [
+          { src: 'image/c1.jpeg', desc: '📋 Short-term Liabilities' },
+          { src: 'image/c2.jpeg', desc: '📊 Long-term Liabilities' },
+          { src: 'image/c3.jpeg', desc: '⚖️ Equity Accounting' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '📖 Accounting concept' },
+        { src: 'image/hi2.jpeg', desc: '📜 Financial reporting' },
+        { src: 'image/hi3.jpeg', desc: '🏛️ Accounting principles' }
       ];
 
       function showToast(msg) {
@@ -706,7 +719,7 @@
       }
 
       // Init
-      updateChapter('Pre-colonial Era');
+      updateChapter('Introduction to Accounting');
     })();
   </script>
 </body>

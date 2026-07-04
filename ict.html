@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <title>Information and Communication Technology · 9 Units</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -364,13 +364,13 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Information and Communication Technology</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
         <span></span><span></span><span></span>
       </span>
-      <span class="text-sm font-medium">Chapters</span>
+      <span class="text-sm font-medium">Units</span>
     </button>
   </div>
 
@@ -383,30 +383,31 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
-        <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">ICT</h2>
+        <p class="text-sm text-slate-400 mt-0.5">9 Units</p>
       </div>
       <div class="px-4 pt-4 pb-2">
-        <input type="text" placeholder="Search chapter..." 
+        <input type="text" placeholder="Search unit..." 
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 9 ICT Units -->
+        <div class="chapter-item chapter-active" data-chapter="Introduction to ICT and Computer System">01 · Introduction to ICT and Computer System</div>
+        <div class="chapter-item" data-chapter="Computer Hardware and Software">02 · Computer Hardware and Software</div>
+        <div class="chapter-item" data-chapter="Introduction to Word Processing Application">03 · Introduction to Word Processing Application</div>
+        <div class="chapter-item" data-chapter="Spreadsheet Application">04 · Spreadsheet Application</div>
+        <div class="chapter-item" data-chapter="Presentation Application">05 · Presentation Application</div>
+        <div class="chapter-item" data-chapter="Privacy and Security">06 · Privacy and Security</div>
+        <div class="chapter-item" data-chapter="Using The Internet to Communicate and Accessing Information">07 · Using The Internet to Communicate and Accessing Information</div>
+        <div class="chapter-item" data-chapter="Emerging Technologies: Data Analytics, AI, ML">08 · Emerging Technologies: Data Analytics, AI, ML</div>
+        <div class="chapter-item" data-chapter="Introduction to Freelancing">09 · Introduction to Freelancing</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Introduction to ICT and Computer System</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -444,59 +445,64 @@
       const modalClose = document.getElementById('modalCloseBtn');
       const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
+      let currentChapter = 'Introduction to ICT and Computer System';
       let scale = 1;
       let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Introduction to ICT and Computer System': [
+          { src: 'image/hi1.jpeg', desc: '💻 ICT Concepts' },
+          { src: 'image/hi2.jpeg', desc: '🔄 Information Processing Cycle' },
+          { src: 'image/hi3.jpeg', desc: '📊 Impact of ICT' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Computer Hardware and Software': [
+          { src: 'image/c1.jpeg', desc: '🖥️ Hardware Categories' },
+          { src: 'image/c2.jpeg', desc: '💿 Storage Devices' },
+          { src: 'image/c3.jpeg', desc: '📦 Software Packages' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Introduction to Word Processing Application': [
+          { src: 'image/c4.jpeg', desc: '📄 Word Processing' },
+          { src: 'image/c5.jpeg', desc: '✏️ Formatting Tools' },
+          { src: 'image/c6.jpeg', desc: '📋 Tables and Layout' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'Spreadsheet Application': [
+          { src: 'image/p1.jpeg', desc: '📊 Excel Interface' },
+          { src: 'image/p2.jpeg', desc: '🧮 Formulas and Functions' },
+          { src: 'image/p3.jpeg', desc: '📈 Charts and Graphs' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'Presentation Application': [
+          { src: 'image/i1.jpeg', desc: '📽️ PowerPoint' },
+          { src: 'image/i2.jpeg', desc: '🎨 Slide Design' },
+          { src: 'image/i3.jpeg', desc: '✨ Animations and Transitions' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'Privacy and Security': [
+          { src: 'image/l1.jpeg', desc: '🔒 Information Security' },
+          { src: 'image/l2.jpeg', desc: '🛡️ Cyber Threats' },
+          { src: 'image/l3.jpeg', desc: '⚖️ Digital Ethics' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Using The Internet to Communicate and Accessing Information': [
+          { src: 'image/e1.jpeg', desc: '🌐 Internet Concepts' },
+          { src: 'image/e2.jpeg', desc: '📧 Email Usage' },
+          { src: 'image/e3.jpeg', desc: '☁️ Cloud Storage' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Emerging Technologies: Data Analytics, AI, ML': [
+          { src: 'image/t1.jpeg', desc: '📊 Data Analytics' },
+          { src: 'image/t2.jpeg', desc: '🤖 Artificial Intelligence' },
+          { src: 'image/t3.jpeg', desc: '🧠 Machine Learning' }
+        ],
+        'Introduction to Freelancing': [
+          { src: 'image/hi1.jpeg', desc: '💼 Freelancing Concept' },
+          { src: 'image/hi2.jpeg', desc: '🌐 Online Marketplaces' },
+          { src: 'image/hi3.jpeg', desc: '📝 Professional Profiles' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '📖 ICT concept' },
+        { src: 'image/hi2.jpeg', desc: '📜 Technology' },
+        { src: 'image/hi3.jpeg', desc: '💻 Digital' }
       ];
 
       function showToast(msg) {
@@ -694,7 +700,7 @@
         });
       });
 
-      const searchInput = document.querySelector('input[placeholder="Search chapter..."]');
+      const searchInput = document.querySelector('input[placeholder="Search unit..."]');
       if (searchInput) {
         searchInput.addEventListener('input', function() {
           const q = this.value.toLowerCase().trim();
@@ -706,7 +712,7 @@
       }
 
       // Init
-      updateChapter('Pre-colonial Era');
+      updateChapter('Introduction to ICT and Computer System');
     })();
   </script>
 </body>

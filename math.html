@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <title>Business Mathematics · 8 Chapters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -364,7 +364,7 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Business Mathematics</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
@@ -383,7 +383,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">Business Mathematics</h2>
         <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
       </div>
       <div class="px-4 pt-4 pb-2">
@@ -391,22 +391,22 @@
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 8 Business Mathematics chapters -->
+        <div class="chapter-item chapter-active" data-chapter="Number System">01 · Number System</div>
+        <div class="chapter-item" data-chapter="Indices and Logarithms">02 · Indices and Logarithms</div>
+        <div class="chapter-item" data-chapter="Theory of Sets">03 · Theory of Sets</div>
+        <div class="chapter-item" data-chapter="Linear and Quadratic Equations">04 · Linear and Quadratic Equations</div>
+        <div class="chapter-item" data-chapter="The Straight Lines">05 · The Straight Lines</div>
+        <div class="chapter-item" data-chapter="Permutations and Combinations">06 · Permutations and Combinations</div>
+        <div class="chapter-item" data-chapter="Mathematics of Finance">07 · Mathematics of Finance</div>
+        <div class="chapter-item" data-chapter="Matrices and Determinants">08 · Matrices and Determinants</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Number System</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -444,59 +444,59 @@
       const modalClose = document.getElementById('modalCloseBtn');
       const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
+      let currentChapter = 'Number System';
       let scale = 1;
       let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Number System': [
+          { src: 'image/hi1.jpeg', desc: '🔢 Real Number System' },
+          { src: 'image/hi2.jpeg', desc: '📊 Sequence and Series' },
+          { src: 'image/hi3.jpeg', desc: '📐 Relations and Functions' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Indices and Logarithms': [
+          { src: 'image/c1.jpeg', desc: '📈 Laws of Indices' },
+          { src: 'image/c2.jpeg', desc: '📊 Logarithm Properties' },
+          { src: 'image/c3.jpeg', desc: '🧮 Natural Logarithm' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Theory of Sets': [
+          { src: 'image/c4.jpeg', desc: '📋 Sets and Operations' },
+          { src: 'image/c5.jpeg', desc: '📊 Venn Diagram' },
+          { src: 'image/c6.jpeg', desc: '📐 De-Morgan\'s Laws' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'Linear and Quadratic Equations': [
+          { src: 'image/p1.jpeg', desc: '📈 Linear Equations' },
+          { src: 'image/p2.jpeg', desc: '📊 Quadratic Equations' },
+          { src: 'image/p3.jpeg', desc: '🧮 Roots and Coefficients' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'The Straight Lines': [
+          { src: 'image/i1.jpeg', desc: '📐 Coordinate Geometry' },
+          { src: 'image/i2.jpeg', desc: '📈 Straight Line Equations' },
+          { src: 'image/i3.jpeg', desc: '📊 Business Applications' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'Permutations and Combinations': [
+          { src: 'image/l1.jpeg', desc: '🔢 Permutations' },
+          { src: 'image/l2.jpeg', desc: '📊 Combinations' },
+          { src: 'image/l3.jpeg', desc: '📐 Business Applications' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Mathematics of Finance': [
+          { src: 'image/e1.jpeg', desc: '💰 Simple & Compound Interest' },
+          { src: 'image/e2.jpeg', desc: '📊 Annuity' },
+          { src: 'image/e3.jpeg', desc: '📈 Amortization' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Matrices and Determinants': [
+          { src: 'image/t1.jpeg', desc: '📊 Matrix Types' },
+          { src: 'image/t2.jpeg', desc: '🧮 Algebra of Matrices' },
+          { src: 'image/t3.jpeg', desc: '📐 Determinants & Cramer\'s Rule' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '📖 Mathematics concept' },
+        { src: 'image/hi2.jpeg', desc: '📜 Mathematical analysis' },
+        { src: 'image/hi3.jpeg', desc: '📐 Business math' }
       ];
 
       function showToast(msg) {
@@ -706,7 +706,7 @@
       }
 
       // Init
-      updateChapter('Pre-colonial Era');
+      updateChapter('Number System');
     })();
   </script>
 </body>

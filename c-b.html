@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>History Notes · 8 Chapters</title>
+  <title>Business Communication · 9 Chapters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -364,7 +364,7 @@
   <div class="mobile-header">
     <div>
       <h1 class="text-2xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-      <p class="text-xs text-slate-400">History Notes</p>
+      <p class="text-xs text-slate-400">Business Communication</p>
     </div>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
       <span class="menu-icon">
@@ -383,30 +383,31 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-5 pb-2 border-b border-slate-800/60 hidden md:block">
         <h1 class="text-3xl font-bold text-indigo-400 tracking-tight">Σ</h1>
-        <h2 class="text-2xl font-bold mt-1 leading-tight">History Notes</h2>
-        <p class="text-sm text-slate-400 mt-0.5">8 Chapters</p>
+        <h2 class="text-2xl font-bold mt-1 leading-tight">Business Communication</h2>
+        <p class="text-sm text-slate-400 mt-0.5">9 Chapters</p>
       </div>
       <div class="px-4 pt-4 pb-2">
         <input type="text" placeholder="Search chapter..." 
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 8 chapters, each with unique data-chapter -->
-        <div class="chapter-item chapter-active" data-chapter="Pre-colonial Era">01 · Pre-colonial Era</div>
-        <div class="chapter-item" data-chapter="Colonial Era (18th & 19th Century)">02 · Colonial Era (18th & 19th Century)</div>
-        <div class="chapter-item" data-chapter="Colonial Era (First Half of the 20th Century)">03 · Colonial Era (First Half of the 20th Century)</div>
-        <div class="chapter-item" data-chapter="Post-partition (1947-1971)">04 · Post-Partition Era (1947-1971)</div>
-        <div class="chapter-item" data-chapter="Changing Bengali Identity">05 · Changing Bengali Identity</div>
-        <div class="chapter-item" data-chapter="Liberation Movement of 1971 and Mass Uprising till 2024">06 · Liberation Movement of 1971 and Mass Uprising till 2024</div>
-        <div class="chapter-item" data-chapter="History of Other Ethnic Groups">07 · History of Other Ethnic Groups</div>
-        <div class="chapter-item" data-chapter="Cultural Heritage and Modern Transformations">08 · Cultural Heritage and Modern Transformations</div>
+        <!-- exactly 9 Business Communication chapters -->
+        <div class="chapter-item chapter-active" data-chapter="Introduction to Communication">01 · Introduction to Communication</div>
+        <div class="chapter-item" data-chapter="Classification & Methods of Communication">02 · Classification & Methods of Communication</div>
+        <div class="chapter-item" data-chapter="Media of Communication">03 · Media of Communication</div>
+        <div class="chapter-item" data-chapter="Principles of Effective Communication">04 · Principles of Effective Communication</div>
+        <div class="chapter-item" data-chapter="Effective Meeting">05 · Effective Meeting</div>
+        <div class="chapter-item" data-chapter="Technology and Business Communication">06 · Technology and Business Communication</div>
+        <div class="chapter-item" data-chapter="Communication through Letters">07 · Communication through Letters</div>
+        <div class="chapter-item" data-chapter="Communication through Memorandum and Reports">08 · Communication through Memorandum and Reports</div>
+        <div class="chapter-item" data-chapter="Report Writing">09 · Report Writing</div>
         <div class="h-2"></div>
       </div>
     </aside>
 
     <!-- Content -->
     <main class="content" id="mainContent">
-      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Pre-colonial Era</h1>
+      <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Introduction to Communication</h1>
 
       <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
 
@@ -444,59 +445,64 @@
       const modalClose = document.getElementById('modalCloseBtn');
       const modalWrapper = document.getElementById('modalImgWrapper');
 
-      let currentChapter = 'Pre-colonial Era';
+      let currentChapter = 'Introduction to Communication';
       let scale = 1;
       let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
-        'Pre-colonial Era': [
-          { src: 'image/he1.jpeg', desc: '🏛️ Ruins of ancient Bengal' },
-          { src: 'image/he2.jpeg', desc: '🗺️ 16th century Bengal map' },
-          { src: 'image/he3.jpeg', desc: '📜 Copper plate inscription' }
+        'Introduction to Communication': [
+          { src: 'image/hi1.jpeg', desc: '📡 Communication Process' },
+          { src: 'image/hi2.jpeg', desc: '📊 Models of Communication' },
+          { src: 'image/hi3.jpeg', desc: '🏛️ Scope & Importance' }
         ],
-        'Colonial Era (18th & 19th Century)': [
-          { src: 'image/c1.jpeg', desc: '⚓ British East India Company' },
-          { src: 'image/c2.jpeg', desc: '🏴 Battle of Plassey' },
-          { src: 'image/c3.jpeg', desc: '📯 19th century Calcutta' }
+        'Classification & Methods of Communication': [
+          { src: 'image/c1.jpeg', desc: '📊 Vertical & Horizontal' },
+          { src: 'image/c2.jpeg', desc: '🗣️ Formal & Informal' },
+          { src: 'image/c3.jpeg', desc: '🍇 Grapevine' }
         ],
-        'Colonial Era (First Half of the 20th Century)': [
-          { src: 'image/c4.jpeg', desc: '📰 Swadeshi Movement' },
-          { src: 'image/c5.jpeg', desc: '🎙️ Partition of Bengal 1905' },
-          { src: 'image/c6.jpeg', desc: '🕊️ Gandhi in Bengal' }
+        'Media of Communication': [
+          { src: 'image/c4.jpeg', desc: '🎤 Oral Communication' },
+          { src: 'image/c5.jpeg', desc: '✍️ Written Communication' },
+          { src: 'image/c6.jpeg', desc: '👁️ Visual & Audio-Visual' }
         ],
-        'Post-partition (1947-1971)': [
-          { src: 'image/p1.jpeg', desc: '🇵🇰 1947 Partition' },
-          { src: 'image/p2.jpeg', desc: '🗳️ Language Movement 1952' },
-          { src: 'image/p3.jpeg', desc: '🌾 1960s East Pakistan' }
+        'Principles of Effective Communication': [
+          { src: 'image/p1.jpeg', desc: '7 C\'s of Communication' },
+          { src: 'image/p2.jpeg', desc: '📋 Completeness & Conciseness' },
+          { src: 'image/p3.jpeg', desc: '🎯 Clarity & Courtesy' }
         ],
-        'Changing Bengali Identity': [
-          { src: 'image/i1.jpeg', desc: '🎭 Bengali Renaissance' },
-          { src: 'image/i2.jpeg', desc: '📚 Tagore & Nazrul' },
-          { src: 'image/i3.jpeg', desc: '🖌️ Modern Bengali art' }
+        'Effective Meeting': [
+          { src: 'image/i1.jpeg', desc: '📅 Meeting Preparation' },
+          { src: 'image/i2.jpeg', desc: '📋 Agenda & Minutes' },
+          { src: 'image/i3.jpeg', desc: '⚖️ Effective vs Ineffective Groups' }
         ],
-        'Liberation Movement of 1971 and Mass Uprising till 2024': [
-          { src: 'image/l1.jpeg', desc: '🇧🇩 1971 Liberation War' },
-          { src: 'image/l2.jpeg', desc: '✊ Mass Uprising 1990' },
-          { src: 'image/l3.jpeg', desc: '🌊 2024 protests' }
+        'Technology and Business Communication': [
+          { src: 'image/l1.jpeg', desc: '💻 Email & Instant Messaging' },
+          { src: 'image/l2.jpeg', desc: '📹 Video Conferencing' },
+          { src: 'image/l3.jpeg', desc: '🌐 Social Networking' }
         ],
-        'History of Other Ethnic Groups': [
-          { src: 'image/e1.jpeg', desc: '🏔️ Indigenous communities' },
-          { src: 'image/e2.jpeg', desc: '🎋 Chakma & Marma' },
-          { src: 'image/e3.jpeg', desc: '🌺 Santal culture' }
+        'Communication through Letters': [
+          { src: 'image/e1.jpeg', desc: '📄 Application & Resume' },
+          { src: 'image/e2.jpeg', desc: '📨 Inquiry & Order Letter' },
+          { src: 'image/e3.jpeg', desc: '📩 Complaint & Claim Letter' }
         ],
-        'Cultural Heritage and Modern Transformations': [
-          { src: 'image/t1.jpeg', desc: '🎨 Folk art & music' },
-          { src: 'image/t2.jpeg', desc: '🏙️ Dhaka modern' },
-          { src: 'image/t3.jpeg', desc: '🌐 Digital Bangladesh' }
+        'Communication through Memorandum and Reports': [
+          { src: 'image/t1.jpeg', desc: '📋 Memorandum Format' },
+          { src: 'image/t2.jpeg', desc: '📊 Report Types & Purpose' },
+          { src: 'image/t3.jpeg', desc: '📈 Writing & Interpretation' }
+        ],
+        'Report Writing': [
+          { src: 'image/hi1.jpeg', desc: '📑 Report Format' },
+          { src: 'image/hi2.jpeg', desc: '📊 Visuals in Reports' },
+          { src: 'image/hi3.jpeg', desc: '📝 Steps of Report Writing' }
         ]
       };
 
       // fallback images if chapter not found
       const fallbackImages = [
-        { src: 'image/hi1.jpeg', desc: '📖 Historical image' },
-        { src: 'image/hi2.jpeg', desc: '📜 Archive' },
-        { src: 'image/hi3.jpeg', desc: '🏛️ Heritage' }
+        { src: 'image/hi1.jpeg', desc: '📖 Communication concept' },
+        { src: 'image/hi2.jpeg', desc: '📜 Business communication' },
+        { src: 'image/hi3.jpeg', desc: '🏛️ Effective communication' }
       ];
 
       function showToast(msg) {
@@ -706,7 +712,7 @@
       }
 
       // Init
-      updateChapter('Pre-colonial Era');
+      updateChapter('Introduction to Communication');
     })();
   </script>
 </body>
