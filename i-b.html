@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Introduction to Business · 9 Chapters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -84,6 +84,47 @@
       background: #5b6477;
     }
 
+    /* নতুন ট্যাবে খোলার বাটন */
+    .img-card .open-new-tab {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(15, 31, 63, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid #4f46e5;
+      border-radius: 30px;
+      color: white;
+      padding: 4px 12px 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 5;
+      letter-spacing: 0.3px;
+    }
+    .img-card:hover .open-new-tab {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .img-card .open-new-tab:hover {
+      background: #4f46e5;
+      border-color: #818cf8;
+    }
+    @media (max-width: 640px) {
+      .img-card .open-new-tab {
+        opacity: 1;
+        pointer-events: auto;
+        font-size: 0.65rem;
+        padding: 2px 10px 2px 8px;
+        top: 6px;
+        right: 6px;
+      }
+    }
+
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -112,24 +153,54 @@
       box-shadow: 0 30px 60px rgba(0,0,0,0.9);
       transform: scale(0.95);
       transition: transform 0.25s ease;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .modal-overlay.active .modal-box {
       transform: scale(1);
     }
+    .modal-img-wrapper {
+      flex: 1;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+      min-height: 0;
+      position: relative;
+    }
+    .modal-img-wrapper.zoomed {
+      cursor: zoom-out;
+    }
     .modal-box .modal-img {
       width: 100%;
       height: auto;
-      max-height: 400px;
+      max-height: 60vh;
       object-fit: contain;
       border-radius: 1rem;
       background: #0f1f3f;
-      margin-bottom: 1rem;
+      transition: transform 0.1s ease;
+      transform-origin: center center;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .modal-box .modal-img.zoomed {
+      max-height: none;
+      width: auto;
+      max-width: none;
+      cursor: zoom-out;
     }
     .modal-box .modal-desc {
       font-size: 1.2rem;
       font-weight: 500;
       color: #e2e8f0;
       text-align: center;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
     }
     .modal-close {
       margin-top: 1.5rem;
@@ -142,9 +213,10 @@
       cursor: pointer;
       transition: background 0.2s;
       display: inline-block;
+      flex-shrink: 0;
     }
     .modal-close:hover { background: #6366f1; }
-    .modal-footer { text-align: center; }
+    .modal-footer { text-align: center; flex-shrink: 0; }
 
     .sidebar-toggle {
       display: none;
@@ -253,7 +325,7 @@
       .content { padding: 1rem 0.75rem 2rem; }
       .img-card img { height: 130px; }
       .modal-box { padding: 1.2rem; }
-      .modal-box .modal-img { max-height: 280px; }
+      .modal-box .modal-img { max-height: 50vh; }
       .chapter-item { padding: 0.75rem 1rem !important; font-size: 0.95rem; }
     }
 
@@ -290,9 +362,23 @@
       }
     }
 
-    /* notes section removed completely */
     .notes-section {
       display: none !important;
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 16px;
+      background: rgba(0,0,0,0.6);
+      color: #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      letter-spacing: 0.3px;
+      pointer-events: none;
+      opacity: 0.6;
+      backdrop-filter: blur(4px);
     }
   </style>
 </head>
@@ -300,11 +386,12 @@
 
   <div id="toast" class="toast">✨</div>
 
-  <!-- Image Modal -->
+  <!-- Image Modal (রেখেছি, কিন্তু এখন প্রধান কাজ নতুন ট্যাব) -->
   <div class="modal-overlay" id="imageModal">
     <div class="modal-box">
-      <div class="modal-img-wrapper">
+      <div class="modal-img-wrapper" id="modalImgWrapper">
         <img src="" alt="preview" class="modal-img" id="modalImg">
+        <span class="zoom-hint">🔄 scroll / pinch to zoom</span>
       </div>
       <p class="modal-desc" id="modalDesc">🏛️ ..</p>
       <div class="modal-footer">
@@ -344,7 +431,6 @@
                class="w-full p-3 rounded-xl bg-slate-800/80 border border-slate-700 outline-none text-sm focus:ring-2 focus:ring-indigo-500/60 transition">
       </div>
       <div class="sidebar-inner space-y-2.5">
-        <!-- exactly 9 business chapters -->
         <div class="chapter-item chapter-active" data-chapter="Concepts in Business">01 · Concepts in Business</div>
         <div class="chapter-item" data-chapter="Sole Proprietorship">02 · Sole Proprietorship</div>
         <div class="chapter-item" data-chapter="Partnership">03 · Partnership</div>
@@ -362,17 +448,14 @@
     <main class="content" id="mainContent">
       <h1 id="chapterTitle" class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Concepts in Business</h1>
 
-      <!-- Notes Box - COMPLETELY REMOVED, no notes display -->
-
-      <!-- Images: per chapter we show a dedicated set; updated dynamically by JS -->
       <div class="mt-6">
         <h2 class="text-xl font-bold text-cyan-400 mb-5 flex items-center gap-2">
-          <span>🖼</span> Images <span class="text-sm font-normal text-slate-400">(click to open full view)</span>
+          <span>🖼</span> Images <span class="text-sm font-normal text-slate-400">(click to open in new tab)</span>
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="imageGrid">
-          <!-- images injected by JavaScript based on chapter -->
+          <!-- images injected by JavaScript -->
         </div>
-        <p class="text-xs text-slate-500 mt-3 italic">* click any image to open in full view</p>
+        <p class="text-xs text-slate-500 mt-3 italic">* click any image to open in new tab · double-click for zoom preview</p>
       </div>
 
       <div class="h-6"></div>
@@ -396,15 +479,18 @@
       const modalImg = document.getElementById('modalImg');
       const modalDesc = document.getElementById('modalDesc');
       const modalClose = document.getElementById('modalCloseBtn');
+      const modalWrapper = document.getElementById('modalImgWrapper');
 
       let currentChapter = 'Concepts in Business';
+      let scale = 1;
+      let isZoomed = false;
 
       // ---- per‑chapter image sets (3 images each) ----
       const chapterImages = {
         'Concepts in Business': [
-          { src: 'https://i.ibb.co.com/ccDxyj3L/Whats-App-Image-2026-07-04-at-7-35-20-PM.jpg', desc: '📊 ' },
-          { src: 'https://i.ibb.co.com/dJMf9cKx/Whats-App-Image-2026-07-04-at-7-35-19-PM-2.jpg', desc: '🏛️ ' },
-          { src: 'image/hi3.jpeg', desc: '📈 ' }
+          { src: 'https://i.ibb.co.com/ccDxyj3L/Whats-App-Image-2026-07-04-at-7-35-20-PM.jpg', desc: '📊 Business Concepts' },
+          { src: 'https://i.ibb.co.com/dJMf9cKx/Whats-App-Image-2026-07-04-at-7-35-19-PM-2.jpg', desc: '🏛️ Business Environment' },
+          { src: 'image/hi3.jpeg', desc: '📈 Business Goals' }
         ],
         'Sole Proprietorship': [
           { src: 'image/c1.jpeg', desc: '👤 Sole Proprietorship' },
@@ -448,7 +534,6 @@
         ]
       };
 
-      // fallback images if chapter not found
       const fallbackImages = [
         { src: 'image/hi1.jpeg', desc: '📖 Business concept' },
         { src: 'image/hi2.jpeg', desc: '📜 Business analysis' },
@@ -462,6 +547,16 @@
         toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
       }
 
+      // নতুন ট্যাবে ছবি খোলার ফাংশন
+      function openImageInNewTab(src, desc) {
+        if (!src || src === '#') {
+          showToast('🖼️ ' + (desc || 'Image'));
+          return;
+        }
+        window.open(src, '_blank');
+        showToast('📂 Opened in new tab');
+      }
+
       // render images for a given chapter
       function renderImages(chapterName) {
         const images = chapterImages[chapterName] || fallbackImages;
@@ -469,31 +564,47 @@
         images.forEach(imgData => {
           const card = document.createElement('div');
           card.className = 'img-card';
-          card.dataset.imgdesc = imgData.desc;
           card.dataset.src = imgData.src;
+          card.dataset.desc = imgData.desc;
+
           const img = document.createElement('img');
           img.src = imgData.src;
           img.alt = imgData.desc;
           img.loading = 'lazy';
           card.appendChild(img);
+
           const label = document.createElement('div');
           label.className = 'img-label';
-          // short label (first few words)
           const short = imgData.desc.length > 30 ? imgData.desc.slice(0, 30) + '…' : imgData.desc;
           label.textContent = short;
           card.appendChild(label);
 
-          // click to open modal
+          // নতুন ট্যাব বাটন
+          const newTabBtn = document.createElement('span');
+          newTabBtn.className = 'open-new-tab';
+          newTabBtn.innerHTML = '↗ New Tab';
+          card.appendChild(newTabBtn);
+
+          // ক্লিক → নতুন ট্যাব
           card.addEventListener('click', function(e) {
-            const src = this.dataset.src || img.src;
-            const desc = this.dataset.imgdesc || '🖼️ Image';
+            const src = this.dataset.src;
+            const desc = this.dataset.desc;
             if (src && src !== '#') {
-              modalImg.src = src;
-              modalImg.alt = desc;
-              modalDesc.textContent = desc;
-              modal.classList.add('active');
+              openImageInNewTab(src, desc);
             } else {
-              showToast('🖼️ ' + desc);
+              showToast('🖼️ ' + (desc || 'Image'));
+            }
+          });
+
+          // নতুন ট্যাব বাটনে ক্লিক
+          newTabBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const src = card.dataset.src;
+            const desc = card.dataset.desc;
+            if (src && src !== '#') {
+              openImageInNewTab(src, desc);
+            } else {
+              showToast('🖼️ ' + (desc || 'Image'));
             }
           });
 
@@ -501,12 +612,129 @@
         });
       }
 
+      // --- Modal with zoom (ডাবল-ক্লিক বা জুমের জন্য রাখা) ---
+      function openModal(src, desc) {
+        modalImg.src = src;
+        modalImg.alt = desc;
+        modalDesc.textContent = desc;
+        resetZoom();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        resetZoom();
+      }
+
+      function resetZoom() {
+        scale = 1;
+        isZoomed = false;
+        modalImg.style.transform = 'scale(1)';
+        modalImg.classList.remove('zoomed');
+        modalWrapper.classList.remove('zoomed');
+        modalWrapper.style.cursor = 'zoom-in';
+      }
+
+      // ডাবল-ক্লিক করলে মোডাল খুলবে (জুম দেখার জন্য)
+      document.addEventListener('dblclick', function(e) {
+        const card = e.target.closest('.img-card');
+        if (card) {
+          const src = card.dataset.src;
+          const desc = card.dataset.desc;
+          if (src && src !== '#') {
+            openModal(src, desc);
+          }
+        }
+      });
+
+      // Modal events
+      modalImg.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        scale = Math.min(Math.max(scale + delta, 0.5), 4);
+        modalImg.style.transform = `scale(${scale})`;
+        if (scale > 1.05) {
+          modalImg.classList.add('zoomed');
+          modalWrapper.classList.add('zoomed');
+          modalWrapper.style.cursor = 'zoom-out';
+          isZoomed = true;
+        } else {
+          modalImg.classList.remove('zoomed');
+          modalWrapper.classList.remove('zoomed');
+          modalWrapper.style.cursor = 'zoom-in';
+          isZoomed = false;
+        }
+      }, { passive: false });
+
+      modalImg.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (isZoomed) {
+          resetZoom();
+        } else {
+          scale = 2;
+          modalImg.style.transform = `scale(${scale})`;
+          modalImg.classList.add('zoomed');
+          modalWrapper.classList.add('zoomed');
+          modalWrapper.style.cursor = 'zoom-out';
+          isZoomed = true;
+        }
+      });
+
+      modalImg.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+        resetZoom();
+      });
+
+      let initialPinchDistance = 0;
+      let initialPinchScale = 1;
+
+      modalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+          const touch1 = e.touches[0];
+          const touch2 = e.touches[1];
+          initialPinchDistance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+          initialPinchScale = scale;
+        }
+      }, { passive: true });
+
+      modalImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const touch1 = e.touches[0];
+          const touch2 = e.touches[1];
+          const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+          const delta = distance / initialPinchDistance;
+          scale = Math.min(Math.max(initialPinchScale * delta, 0.5), 4);
+          modalImg.style.transform = `scale(${scale})`;
+          if (scale > 1.05) {
+            modalImg.classList.add('zoomed');
+            modalWrapper.classList.add('zoomed');
+            modalWrapper.style.cursor = 'zoom-out';
+            isZoomed = true;
+          } else {
+            modalImg.classList.remove('zoomed');
+            modalWrapper.classList.remove('zoomed');
+            modalWrapper.style.cursor = 'zoom-in';
+            isZoomed = false;
+          }
+        }
+      }, { passive: false });
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
       function updateChapter(chapterName) {
         if (!chapterName) return;
         currentChapter = chapterName;
         chapterTitle.textContent = chapterName;
 
-        // update active class
         chapterItems.forEach(el => {
           el.classList.remove('chapter-active');
           const dataChapter = el.getAttribute('data-chapter');
@@ -515,7 +743,6 @@
           }
         });
 
-        // render images for this chapter
         renderImages(chapterName);
         showToast(`📖 ${chapterName}`);
         closeSidebar();
@@ -537,7 +764,6 @@
         sidebarOverlay.addEventListener('click', closeSidebar);
       }
 
-      // Chapter click: use data-chapter attribute
       chapterItems.forEach(item => {
         item.addEventListener('click', function() {
           const chapter = this.getAttribute('data-chapter');
@@ -549,19 +775,6 @@
         });
       });
 
-      // Modal close
-      function closeModal() {
-        modal.classList.remove('active');
-      }
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-      });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-      });
-
-      // Search
       const searchInput = document.querySelector('input[placeholder="Search chapter..."]');
       if (searchInput) {
         searchInput.addEventListener('input', function() {
@@ -573,7 +786,7 @@
         });
       }
 
-      // Init: Concepts in Business
+      // Init
       updateChapter('Concepts in Business');
     })();
   </script>
