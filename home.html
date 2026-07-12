@@ -6,14 +6,16 @@
   <title>HBUC · ইউনিভার্সিটি</title>
 
   <!-- Tailwind + Font Awesome -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/firebase.js">
+  </script>
   <style>
     /* === global reset & base === */
     * {
@@ -21,77 +23,85 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      background: #ffffff;
+      background: #f6f8fc;
       font-family: 'Poppins', sans-serif;
       scroll-behavior: smooth;
     }
+
     .font-serif-luxury {
       font-family: 'Cormorant Garamond', serif;
     }
-    .gold-text {
-      color: #2563eb;
-    }
-    .bg-gold {
-      background: #2563eb;
+
+    /* ===== glass morphism utilities ===== */
+    .glass {
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.50);
     }
 
-    /* ===== MOBILE FIRST (app-container) ===== */
+    .glass-dark {
+      background: rgba(26, 35, 126, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* ===== APP CONTAINER ===== */
     .app-container {
       max-width: 480px;
       margin: 0 auto;
-      background: #daecd3;
+      background: #f6f8fc;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
       padding-bottom: 80px;
     }
 
-    /* ===== DESKTOP STYLES (>=768px) ===== */
+    /* ===== DESKTOP (>=768px) ===== */
     @media (min-width: 768px) {
       body {
-        background: #f0f2f5;
-        padding: 20px;
+        background: #eef1f7;
+        padding: 24px;
       }
+
       .app-container {
-        max-width: 1200px;
-        padding: 0 30px 30px;
-        background: #f0f2f5;
-        border-radius: 24px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+        max-width: 1280px;
+        padding: 0 32px 32px;
+        background: #f6f8fc;
+        border-radius: 32px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+        padding-bottom: 32px;
       }
-      
-      /* Hide mobile-only elements on desktop */
+
       .status-bar,
       .bottom-nav,
       .mobile-only {
         display: none !important;
       }
 
-      /* Show desktop navigation */
       .desktop-nav {
         display: flex !important;
       }
 
-      /* Desktop Header */
       .app-header {
-        border-radius: 16px 16px 0 0;
+        border-radius: 20px 20px 0 0;
         margin-top: 0;
-        padding: 16px 28px;
+        padding: 18px 32px;
       }
 
-      /* Desktop Grid Layout */
       .desktop-grid-2 {
         display: grid !important;
         grid-template-columns: 1fr 1fr;
-        gap: 24px;
+        gap: 28px;
       }
 
       .desktop-full {
         grid-column: 1 / -1;
       }
 
-      /* Quick Access - 6 columns on desktop */
       .quick-grid {
         grid-template-columns: repeat(6, 1fr) !important;
         gap: 16px;
@@ -99,33 +109,41 @@
 
       .quick-item {
         padding: 20px 12px;
-        border-radius: 16px;
-        transition: all 0.3s;
+        border-radius: 18px;
+        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.60);
       }
       .quick-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        transform: translateY(-6px);
+        box-shadow: 0 16px 48px rgba(26, 35, 126, 0.08);
+        background: white;
       }
+
       .quick-item .icon-wrap {
-        width: 56px;
-        height: 56px;
-        font-size: 24px;
-        border-radius: 16px;
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+        border-radius: 18px;
       }
+
       .quick-item .label {
         font-size: 13px;
+        font-weight: 600;
       }
 
-      /* Slider - Bigger on desktop */
       .slider-container {
-        height: 400px !important;
-        border-radius: 20px;
+        height: 420px !important;
+        border-radius: 24px;
       }
 
-      /* Counter Cards - Larger */
       .counter-card-app {
         padding: 20px 24px;
         border-radius: 20px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.60);
       }
       .counter-card-app .num {
         font-size: 36px;
@@ -140,16 +158,18 @@
         border-radius: 16px;
       }
 
-      /* Notice Card */
       .notice-card {
         padding: 24px;
         border-radius: 20px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.60);
       }
+
       .notice-item .content p {
         font-size: 15px;
       }
 
-      /* Gallery */
       .gallery-grid-desktop {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -159,33 +179,35 @@
         grid-column: 1 / -1;
       }
 
-      /* About Section */
       .about-grid-desktop {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        gap: 40px;
         align-items: center;
       }
 
-      /* Footer - Desktop */
       .app-footer {
-        border-radius: 20px;
-        padding: 30px 32px;
-        margin-top: 24px;
+        border-radius: 24px;
+        padding: 36px 40px;
+        margin-top: 28px;
+        background: rgba(255, 255, 255, 0.80);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.60);
       }
+
       .footer-grid-desktop {
         display: grid;
         grid-template-columns: 2fr 1fr 1fr 1.5fr;
-        gap: 40px;
+        gap: 48px;
       }
     }
 
     @media (min-width: 1024px) {
       .app-container {
-        padding: 0 40px 40px;
+        padding: 0 48px 48px;
       }
       .slider-container {
-        height: 480px !important;
+        height: 500px !important;
       }
       .quick-grid {
         gap: 20px !important;
@@ -195,34 +217,38 @@
     /* ===== DESKTOP NAV ===== */
     .desktop-nav {
       display: none;
-      background: white;
-      padding: 14px 28px;
-      border-radius: 16px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      padding: 8px 20px;
+      border-radius: 60px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
       margin: 16px 0 20px;
-      gap: 4px;
+      gap: 2px;
       flex-wrap: wrap;
       justify-content: center;
-      border: 1px solid rgba(0,0,0,0.03);
+      border: 1px solid rgba(255, 255, 255, 0.50);
     }
+
     .desktop-nav a {
       color: #4a5568;
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      padding: 10px 22px;
-      border-radius: 10px;
-      transition: all 0.25s;
+      padding: 10px 24px;
+      border-radius: 40px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
     }
+
     .desktop-nav a:hover {
-      background: #e8edff;
+      background: rgba(26, 35, 126, 0.06);
       color: #1a237e;
     }
+
     .desktop-nav a.active {
       background: #1a237e;
       color: white;
-      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.25);
+      box-shadow: 0 6px 20px rgba(26, 35, 126, 0.25);
     }
 
     /* ===== STATUS BAR (Mobile) ===== */
@@ -231,42 +257,84 @@
       padding: 8px 20px 6px;
       display: flex;
       justify-content: space-between;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 11px;
       font-weight: 500;
     }
 
     /* ===== APP HEADER ===== */
-   .app-header {
-    background: #98b3a0;
-    background-image: url("https://hbuc.edu.bd/admin/uploads/nu-theme-1/website-banner6.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    .app-header {
+      background: linear-gradient(135deg, #0f1a3a 0%, #1a237e 60%, #2a3a9e 100%);
+      padding: 14px 20px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
 
-    padding: 12px 20px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: white;
-}
+    .app-header::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
     .app-header .back-btn {
       font-size: 22px;
       cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.3s;
     }
+    .app-header .back-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
     .app-header .title {
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
     }
+
     .app-header .title span {
       font-weight: 300;
       opacity: 0.8;
     }
+
     .app-header .action-icons {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       font-size: 18px;
+    }
+
+    .app-header .action-icons i {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .app-header .action-icons i:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.15);
     }
 
     /* ===== QUICK ACCESS ===== */
@@ -275,96 +343,151 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
+
     .quick-item {
-      background: white;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
       padding: 14px 8px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: all 0.2s;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       cursor: pointer;
-      border: 1px solid rgba(0,0,0,0.02);
+      border: 1px solid rgba(255, 255, 255, 0.50);
     }
+
     .quick-item:active {
       transform: scale(0.95);
-      background: #f8f9ff;
     }
+
     .quick-item .icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 6px;
-      font-size: 18px;
+      margin: 0 auto 8px;
+      font-size: 20px;
+      transition: all 0.3s;
     }
-    .quick-item .icon-wrap.blue { background: #e8edff; color: #1a237e; }
-    .quick-item .icon-wrap.green { background: #e6f7ed; color: #0d7a3e; }
-    .quick-item .icon-wrap.purple { background: #f0e8ff; color: #6c3cb0; }
-    .quick-item .icon-wrap.orange { background: #fff3e0; color: #e65100; }
-    .quick-item .icon-wrap.red { background: #fde8e8; color: #c62828; }
-    .quick-item .icon-wrap.teal { background: #e0f7fa; color: #00695c; }
+
+    .quick-item:hover .icon-wrap {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .quick-item .icon-wrap.blue {
+      background: linear-gradient(135deg, #e8edff, #d4dcff);
+      color: #1a237e;
+    }
+    .quick-item .icon-wrap.green {
+      background: linear-gradient(135deg, #e6f7ed, #c8f0da);
+      color: #0d7a3e;
+    }
+    .quick-item .icon-wrap.purple {
+      background: linear-gradient(135deg, #f0e8ff, #e0d0ff);
+      color: #6c3cb0;
+    }
+    .quick-item .icon-wrap.orange {
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      color: #e65100;
+    }
+    .quick-item .icon-wrap.red {
+      background: linear-gradient(135deg, #fde8e8, #fccccc);
+      color: #c62828;
+    }
+    .quick-item .icon-wrap.teal {
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      color: #00695c;
+    }
+
     .quick-item .label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       color: #1a2332;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
     /* ===== NOTICE CARD ===== */
     .notice-card {
-      background: white;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.50);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
     }
+
     .notice-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
+
     .notice-header h3 {
       font-size: 15px;
       font-weight: 700;
       color: #1a2332;
     }
+
     .notice-header a {
       font-size: 12px;
       color: #1a237e;
       font-weight: 600;
       text-decoration: none;
+      padding: 4px 12px;
+      border-radius: 40px;
+      background: rgba(26, 35, 126, 0.06);
+      transition: all 0.3s;
     }
+
+    .notice-header a:hover {
+      background: rgba(26, 35, 126, 0.12);
+    }
+
     .notice-item {
-      padding: 10px 0;
-      border-bottom: 1px solid #f0f2f5;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: flex-start;
     }
+
     .notice-item:last-child {
       border-bottom: none;
     }
+
     .notice-item .badge {
       background: #1a237e;
       color: white;
       font-size: 8px;
-      padding: 2px 10px;
-      border-radius: 12px;
+      padding: 2px 12px;
+      border-radius: 40px;
       font-weight: 600;
       white-space: nowrap;
       margin-top: 2px;
+      letter-spacing: 0.3px;
     }
+
+    .notice-item .badge.green {
+      background: linear-gradient(135deg, #0d7a3e, #0f9d4e);
+    }
+    .notice-item .badge.orange {
+      background: linear-gradient(135deg, #e65100, #f57c00);
+    }
+
     .notice-item .content {
       flex: 1;
     }
+
     .notice-item .content p {
       font-size: 13px;
       color: #1a2332;
       font-weight: 500;
       line-height: 1.4;
     }
+
     .notice-item .content .meta {
       font-size: 10px;
       color: #8a94a6;
@@ -375,54 +498,78 @@
 
     /* ===== SLIDER ===== */
     .slider-container {
-      height: 200px !important;
-      border-radius: 16px;
+      height: 200px;
+      border-radius: 18px;
       overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
     }
+
     .slide-img {
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
+
     .dot-active {
-      background-color: #1a237e !important;
+      background: #1a237e !important;
       opacity: 1 !important;
-      transform: scale(1.2);
+      transform: scale(1.3);
+      box-shadow: 0 0 12px rgba(26, 35, 126, 0.25);
     }
+
     .dot-inactive {
-      background-color: rgba(26, 35, 126, 0.3) !important;
+      background: rgba(26, 35, 126, 0.25) !important;
+      opacity: 0.6 !important;
+    }
+
+    .dot {
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* ===== COUNTER CARDS ===== */
     .counter-card-app {
-      background: white;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
       padding: 14px 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.50);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
       display: flex;
       align-items: center;
       gap: 12px;
       flex: 1;
+      transition: all 0.3s;
     }
+
+    .counter-card-app:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+
     .counter-card-app .num {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
       color: #1a2332;
+      line-height: 1.1;
     }
+
     .counter-card-app .lbl {
-      font-size: 10px;
+      font-size: 11px;
       color: #8a94a6;
       font-weight: 500;
     }
+
     .counter-card-app .icon-bg {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
+      flex-shrink: 0;
     }
 
     /* ===== BOTTOM NAV (Mobile) ===== */
@@ -433,120 +580,161 @@
       transform: translateX(-50%);
       width: 100%;
       max-width: 480px;
-      background: white;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 6px 0 12px;
-      border-top: 1px solid #e8eaed;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
+      padding: 4px 0 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.50);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.03);
       z-index: 100;
-      border-radius: 20px 20px 0 0;
+      border-radius: 24px 24px 0 0;
     }
+
     .bottom-nav .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       font-size: 9px;
       color: #8a94a6;
-      transition: all 0.2s;
-      padding: 4px 10px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      padding: 4px 12px;
       border-radius: 20px;
       position: relative;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      text-decoration: none;
     }
+
     .bottom-nav .nav-item i {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 1px;
+      transition: all 0.3s;
     }
+
     .bottom-nav .nav-item.active {
       color: #1a237e;
       font-weight: 600;
     }
+
     .bottom-nav .nav-item.active i {
-      background: #e8edff;
+      background: rgba(26, 35, 126, 0.08);
       padding: 4px 10px;
-      border-radius: 10px;
+      border-radius: 12px;
+    }
+
+    .bottom-nav .nav-item:active {
+      transform: scale(0.92);
     }
 
     /* ===== FOOTER ===== */
     .app-footer {
-      background: white;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 16px 24px;
-      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 24px 24px 0 0;
+      padding: 24px 18px 28px;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.50);
     }
 
     /* ===== MOBILE RESPONSIVE ===== */
     @media (max-width: 430px) {
-      .quick-grid { gap: 8px; }
-      .quick-item { padding: 10px 4px; }
-      .quick-item .icon-wrap { width: 36px; height: 36px; font-size: 15px; }
-      .quick-item .label { font-size: 9px; }
+      .quick-grid {
+        gap: 8px;
+      }
+      .quick-item {
+        padding: 10px 4px;
+        border-radius: 14px;
+      }
+      .quick-item .icon-wrap {
+        width: 40px;
+        height: 40px;
+        font-size: 17px;
+        border-radius: 12px;
+      }
+      .quick-item .label {
+        font-size: 9px;
+      }
+      .app-header .title {
+        font-size: 16px;
+      }
     }
 
-    /* touch feedback */
+    /* ===== touch feedback ===== */
     .touch-btn {
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* about section image style */
+    /* ===== about image ===== */
     .about-img {
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease;
-    }
-    .about-img:hover {
-      transform: scale(1.02);
+      border-radius: 24px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Footer extra styles */
+    .about-img:hover {
+      transform: scale(1.02) rotate(-1deg);
+    }
+
+    /* ===== footer contact chips ===== */
     .contact-chip {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #f1f5f9;
-      padding: 8px 12px;
+      background: rgba(241, 245, 249, 0.60);
+      padding: 8px 14px;
       border-radius: 40px;
-      border: 1px solid #e2e8f0;
-      transition: all 0.2s;
+      border: 1px solid rgba(226, 232, 240, 0.40);
+      transition: all 0.3s;
+      backdrop-filter: blur(4px);
     }
+
     .contact-chip:hover {
-      background: #e8edff;
-      border-color: #1a237e;
+      background: rgba(232, 237, 255, 0.80);
+      border-color: rgba(26, 35, 126, 0.20);
+      transform: translateX(4px);
     }
+
     .contact-chip-icon {
       width: 28px;
       height: 28px;
-      background: #1a237e10;
+      background: rgba(26, 35, 126, 0.06);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #1a237e;
       font-size: 12px;
+      flex-shrink: 0;
     }
+
+    /* ===== newsletter ===== */
     .newsletter-wrap {
       display: flex;
       align-items: center;
-      background: #f1f5f9;
+      background: rgba(241, 245, 249, 0.60);
       border-radius: 40px;
       padding: 4px 4px 4px 16px;
-      border: 1px solid #e2e8f0;
-      transition: all 0.2s;
+      border: 1px solid rgba(226, 232, 240, 0.40);
+      transition: all 0.3s;
+      backdrop-filter: blur(4px);
     }
+
     .newsletter-wrap:focus-within {
       border-color: #1a237e;
       background: white;
-      box-shadow: 0 0 0 3px #1a237e20;
+      box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.06);
     }
+
     .newsletter-icon {
       color: #1a237e;
       font-size: 14px;
       margin-right: 8px;
     }
+
     .newsletter-input {
       flex: 1;
       border: none;
@@ -557,36 +745,44 @@
       color: #1a2332;
       font-family: 'Poppins', sans-serif;
     }
+
     .newsletter-input::placeholder {
       color: #94a3b8;
       font-weight: 300;
     }
+
     .subscribe-btn {
-      background: #1a237e;
+      background: linear-gradient(135deg, #1a237e, #2a3a9e);
       color: white;
       border: none;
-      padding: 10px 22px;
+      padding: 10px 24px;
       border-radius: 40px;
       font-weight: 600;
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       width: 100%;
-      box-shadow: 0 4px 12px #1a237e30;
+      box-shadow: 0 6px 24px rgba(26, 35, 126, 0.20);
     }
+
     .subscribe-btn:hover {
-      background: #0f1a5e;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px #1a237e40;
+      box-shadow: 0 12px 32px rgba(26, 35, 126, 0.25);
     }
+
+    .subscribe-btn:active {
+      transform: scale(0.96);
+    }
+
     .footer-divider {
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(226, 232, 240, 0.50);
       width: 100%;
     }
+
     .bottom-link {
       color: #64748b;
       transition: color 0.2s;
@@ -594,457 +790,563 @@
       font-weight: 500;
       text-decoration: none;
     }
+
     .bottom-link:hover {
       color: #1a237e;
+    }
+
+    /* ===== welcome banner ===== */
+    .welcome-banner {
+      background: linear-gradient(135deg, #0f1a3a 0%, #1a237e 60%, #2a3a9e 100%);
+      border-radius: 20px;
+      padding: 20px 24px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-banner::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .welcome-banner .sub {
+      font-size: 12px;
+      opacity: 0.7;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    .welcome-banner h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 2px;
+      letter-spacing: -0.3px;
+    }
+
+    .welcome-banner p {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-top: 4px;
+      line-height: 1.5;
+      max-width: 80%;
+    }
+
+    /* ===== gallery overlay ===== */
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.50));
+      color: white;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 6px 0;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* smooth scroll */
+    .scroll-smooth {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== feature chips in about ===== */
+    .feature-chip {
+      background: rgba(241, 245, 249, 0.60);
+      backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid rgba(226, 232, 240, 0.30);
+      transition: all 0.3s;
+    }
+
+    .feature-chip:hover {
+      transform: translateY(-2px);
+      background: white;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .feature-chip i {
+      color: #1a237e;
+      font-size: 18px;
+    }
+
+    .feature-chip p {
+      font-size: 10px;
+      font-weight: 600;
+      color: #1a2332;
+      margin-top: 4px;
+    }
+
+    /* ===== brand logo in footer ===== */
+    .brand-logo-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a237e, #2a3a9e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.15);
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
-<div class="app-container">
+  <div class="app-container">
 
-  <!-- ===== STATUS BAR (Mobile Only) ===== -->
-
-
-  <!-- ===== APP HEADER ===== -->
-  <div class="app-header">
-    <div class="back-btn"><i class="fas fa-arrow-left"></i></div>
-    <div class="title"><span></span></div>
-    <div class="action-icons">
-      <i class="fas fa-bell"></i>
+    <!-- ===== STATUS BAR (Mobile Only) ===== -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-three-quarters"></i></span>
     </div>
-  </div>
 
-  <!-- ===== DESKTOP NAV (Hidden on Mobile) ===== -->
-  <div class="desktop-nav">
-    <a href="#" class="active">Home</a>
-    <a href="teacher.html">Teachers</a> 
-    <a href="student.html">Students</a>
-    <a href="subject.html">Subjects</a>
-    <a href="notice.html">Notices</a>
-    <a href="#about">About Us</a>
-    <a href="#contact">Contact Us</a>
-  </div>
-
-  <!-- ===== WELCOME BANNER ===== -->
-  <div class="px-4 py-3">
-    <div class="bg-gradient-to-r from-[#262e22] to-[#2f7446] rounded-2xl p-5 text-white">
-      <p class="text-sm opacity-80">Welcome to</p>
-      <h2 class="text-xl font-bold">Finance Department</h2>
-      <p class="text-xs opacity-80 mt-1 leading-relaxed">We are committed to quality education and to building a better future.</p>
-    </div>
-  </div>
-
-  <!-- ===== QUICK ACCESS ===== -->
-  <div class="px-4">
-    <div class="quick-grid">
-      <div class="quick-item">
-       <a href="notice.html"> <div class="icon-wrap blue"><i class="fas fa-bullhorn"></i></div>
-        <div class="label">Notice</div></a>
-      </div>
-      <div class="quick-item">
-        <a href="#about"><div class="icon-wrap green"><i class="fas fa-calendar-alt"></i></div>
-        <div class="label">About Us</div></a>
-      </div>
-      <div class="quick-item">
-        <a href="teacher.html"><div class="icon-wrap purple"><i class="fas fa-chalkboard-teacher"></i></div>
-        <div class="label">Teachers</div></a>
-      </div>
-      <div class="quick-item">
-       <a href="student.html"> <div class="icon-wrap orange"><i class="fas fa-user-graduate"></i></div>
-        <div class="label">Students</div></a>
-      </div>
-      <div class="quick-item">
-       <a href="subject.html"> <div class="icon-wrap red"><i class="fas fa-images"></i></div>
-        <div class="label">Subjects</div></a>
-      </div>
-      <div class="quick-item">
-        <a href="#contact"><div class="icon-wrap teal"><i class="fas fa-phone-alt"></i></div>
-        <div class="label">Contact</div></a>
+    <!-- ===== APP HEADER ===== -->
+    <div class="app-header">
+      <div class="back-btn"><i class="fas fa-arrow-left"></i></div>
+      <div class="title">HBUC <span>· Finance</span></div>
+      <div class="action-icons">
+        <i class="fas fa-bell"></i>
       </div>
     </div>
-  </div>
 
-  <!-- ===== SLIDER ===== -->
-  <div class="px-4 mt-4 relative">
-    <div class="relative w-full slider-container">
-      <img id="slide1" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/66b352033738c2985.jpg" 
-           class="slide-img absolute w-full h-full object-cover opacity-100" alt="campus 1">
-      <img id="slide2" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00dc3622f21802.jpg" 
-           class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 2">
-      <img id="slide3" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00ef0934149645.jpg" 
-           class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 3">
+    <!-- ===== DESKTOP NAV (Hidden on Mobile) ===== -->
+    <div class="desktop-nav">
+      <a href="#" class="active">Home</a>
+      <a href="teacher.html">Teachers</a>
+      <a href="student.html">Students</a>
+      <a href="subject.html">Subjects</a>
+      <a href="notice.html">Notices</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact Us</a>
     </div>
-    <button id="prevBtn" class="absolute left-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn">
-      &#10094;
-    </button>
-    <button id="nextBtn" class="absolute right-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn">
-      &#10095;
-    </button>
-    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-      <button data-index="0" class="dot w-2.5 h-2.5 rounded-full transition-all dot-active touch-btn"></button>
-      <button data-index="1" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
-      <button data-index="2" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
+
+    <!-- ===== WELCOME BANNER ===== -->
+    <div class="px-4 pt-3">
+      <div class="welcome-banner">
+        <p class="sub"><i class="fas fa-graduation-cap mr-1.5"></i>Finance Department</p>
+        <h2>Welcome to HBUC</h2>
+        <p>We are committed to quality education and building a better future.</p>
+      </div>
     </div>
-  </div>
 
-  <!-- ===== DESKTOP GRID (2 Columns on Desktop) ===== -->
-  <div class="desktop-grid-2" style="display:block;">
+    <!-- ===== QUICK ACCESS ===== -->
+    <div class="px-4 mt-4">
+      <div class="quick-grid">
+        <a href="notice.html" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap blue"><i class="fas fa-bullhorn"></i></div>
+          <div class="label">Notice</div>
+        </a>
+        <a href="#about" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap green"><i class="fas fa-calendar-alt"></i></div>
+          <div class="label">About Us</div>
+        </a>
+        <a href="teacher.html" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap purple"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div class="label">Teachers</div>
+        </a>
+        <a href="student.html" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap orange"><i class="fas fa-user-graduate"></i></div>
+          <div class="label">Students</div>
+        </a>
+        <a href="subject.html" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap red"><i class="fas fa-images"></i></div>
+          <div class="label">Subjects</div>
+        </a>
+        <a href="#contact" class="quick-item" style="text-decoration:none;">
+          <div class="icon-wrap teal"><i class="fas fa-phone-alt"></i></div>
+          <div class="label">Contact</div>
+        </a>
+      </div>
+    </div>
 
-    <!-- Left Column -->
-    <div>
+    <!-- ===== SLIDER ===== -->
+    <div class="px-4 mt-4 relative">
+      <div class="relative w-full slider-container">
+        <img id="slide1" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/66b352033738c2985.jpg" class="slide-img absolute w-full h-full object-cover opacity-100" alt="campus 1">
+        <img id="slide2" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00dc3622f21802.jpg" class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 2">
+        <img id="slide3" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00ef0934149645.jpg" class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 3">
+      </div>
+      <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn backdrop-blur-sm">
+        &#10094;
+      </button>
+      <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn backdrop-blur-sm">
+        &#10095;
+      </button>
+      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2.5 z-10">
+        <button data-index="0" class="dot w-2.5 h-2.5 rounded-full transition-all dot-active touch-btn"></button>
+        <button data-index="1" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
+        <button data-index="2" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
+      </div>
+    </div>
 
-      <!-- ===== NOTICE SECTION ===== -->
-      <div class="px-4 mt-4">
-        <div class="notice-card">
-          <div class="notice-header">
-            <h3><i class="fas fa-bullhorn text-[#1a237e] mr-2"></i>Latest Notice</h3>
-            <a href="notice.html">View All <i class="fas fa-chevron-right text-[10px]"></i></a>
-          </div>
-          <div class="notice-item">
-            <span class="badge">NEW</span>
-            <div class="content">
-              <p>Go to notice board</p>
-              
+    <!-- ===== DESKTOP GRID (2 Columns on Desktop) ===== -->
+    <div class="desktop-grid-2" style="display:block;">
+
+      <!-- Left Column -->
+      <div>
+
+        <!-- ===== NOTICE SECTION ===== -->
+        <div class="px-4 mt-4">
+          <div class="notice-card">
+            <div class="notice-header">
+              <h3><i class="fas fa-bullhorn text-[#1a237e] mr-2"></i>Latest Notice</h3>
+              <a href="notice.html">View All <i class="fas fa-chevron-right text-[10px]"></i></a>
             </div>
-          </div>
-          <div class="notice-item">
-            <span class="badge" style="background:#0d7a3e;">UPDATE</span>
-            <div class="content">
-              <p>Go to notice board</p>
-              
+            <div class="notice-item">
+              <span class="badge">NEW</span>
+              <div class="content">
+                <p>Go to notice board</p>
+              </div>
             </div>
-          </div>
-          <div class="notice-item">
-            <span class="badge" style="background:#e65100;">URGENT</span>
-            <div class="content">
-              <p>Go to notice board</p>
-              
+            <div class="notice-item">
+              <span class="badge green">UPDATE</span>
+              <div class="content">
+                <p>Go to notice board</p>
+              </div>
+            </div>
+            <div class="notice-item">
+              <span class="badge orange">URGENT</span>
+              <div class="content">
+                <p>Go to notice board</p>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- ===== COUNTER CARDS ===== -->
+        <div class="px-4 mt-4 flex gap-3">
+          <div class="counter-card-app">
+            <div class="icon-bg" style="background:linear-gradient(135deg,#e8edff,#d4dcff); color:#1a237e;"><i class="fas fa-user-graduate"></i></div>
+            <div>
+              <div class="counter num" data-target="19">0</div>
+              <div class="lbl">Students</div>
+            </div>
+          </div>
+          <div class="counter-card-app">
+            <div class="icon-bg" style="background:linear-gradient(135deg,#f0e8ff,#e0d0ff); color:#6c3cb0;"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div>
+              <div class="counter num" data-target="7">0</div>
+              <div class="lbl">Teachers</div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- ===== COUNTER CARDS ===== -->
-      <div class="px-4 mt-4 flex gap-3">
-        <div class="counter-card-app">
-          <div class="icon-bg" style="background:#e8edff; color:#1a237e;"><i class="fas fa-user-graduate"></i></div>
+      <!-- Right Column -->
+      <div>
+
+        <!-- ===== OUR JOURNEY (Gallery) ===== -->
+        <div class="px-4 mt-4">
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-sm">
+            <h3 class="text-base font-bold text-[#1a2332] mb-3"><i class="fas fa-images text-[#1a237e] mr-2"></i>Our Journey</h3>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="rounded-xl overflow-hidden shadow-sm">
+                <a href="image/h1.jpeg" target="_blank"><img src="image/h1.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
+              </div>
+              <div class="rounded-xl overflow-hidden shadow-sm">
+                <a href="image/h2.jpeg" target="_blank"><img src="image/h2.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
+              </div>
+              <div class="col-span-2 rounded-xl overflow-hidden shadow-sm">
+                <video controls class="w-full max-h-44 object-cover">
+                  <source src="image/hv1.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="rounded-xl overflow-hidden relative shadow-sm group">
+                <a href="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" target="_blank">
+                  <img src="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="routine">
+                </a>
+                <div class="gallery-overlay">Class Routine</div>
+              </div>
+              <div class="rounded-xl overflow-hidden relative shadow-sm group">
+                <a href="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" target="_blank">
+                  <img src="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="holiday">
+                </a>
+                <div class="gallery-overlay">ছুটির দিনসমূহ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== ABOUT SECTION (Full Width) ===== -->
+    <section id="about" class="px-4 mt-4 desktop-full">
+      <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-sm">
+        <span class="text-[#1a237e] uppercase text-[10px] tracking-[0.2em] font-semibold"><i class="fas fa-info-circle mr-1.5"></i>Educational Platform</span>
+        <h2 class="text-xl font-bold text-[#1a2332] mt-1">আমাদের ওয়েবসাইট সম্পর্কে</h2>
+        <div class="w-12 h-1 bg-gradient-to-r from-[#1a237e] to-[#2a3a9e] mt-2 mb-4 rounded-full"></div>
+
+        <div class="about-grid-desktop">
+          <!-- Left: Text -->
           <div>
-            <div class="counter num" data-target="19">0</div>
-            <div class="lbl">Students</div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              আমাদের কলেজের সকল শিক্ষার্থী ও শিক্ষকদের জন্য একটি আধুনিক, তথ্যসমৃদ্ধ এবং সহজে ব্যবহারযোগ্য প্ল্যাটফর্ম তৈরির লক্ষ্য নিয়ে এই ওয়েবসাইটটি তৈরি করা হয়েছে।
+            </p>
+            <p class="text-gray-600 text-sm leading-relaxed mt-3">
+              শিক্ষার্থীদের সুবিধার কথা বিবেচনা করে এই প্ল্যাটফর্মে কলেজ জীবনের চার বছরের সকল বিষয়ভিত্তিক নোট, গুরুত্বপূর্ণ ক্লাস ম্যাটেরিয়াল, সাজেশন এবং প্রয়োজনীয় শিক্ষাসামগ্রী সংরক্ষণ ও আপলোড করা হবে।
+            </p>
+            <p class="text-gray-600 text-sm leading-relaxed mt-3">
+              নিয়মিত নতুন নোট, অ্যাসাইনমেন্ট, পরীক্ষার আপডেট, রুটিন, শিক্ষক ও শিক্ষার্থীদের তথ্য এবং কলেজের বিভিন্ন অনুষ্ঠানের তথ্য প্রকাশ করা হবে। আমাদের লক্ষ্য হলো শিক্ষার্থীদের পড়াশোনাকে আরও সহজ, দ্রুত এবং কার্যকর করে তোলা।
+            </p>
+
+            <!-- Features -->
+            <div class="grid grid-cols-2 gap-2.5 mt-4">
+              <div class="feature-chip">
+                <i class="fas fa-book-open"></i>
+                <p>Study Notes</p>
+              </div>
+              <div class="feature-chip">
+                <i class="fas fa-calendar-check"></i>
+                <p>Exam Updates</p>
+              </div>
+              <div class="feature-chip">
+                <i class="fas fa-pen-fancy"></i>
+                <p>Assignments</p>
+              </div>
+              <div class="feature-chip">
+                <i class="fas fa-users"></i>
+                <p>Support</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="counter-card-app">
-          <div class="icon-bg" style="background:#f0e8ff; color:#6c3cb0;"><i class="fas fa-chalkboard-teacher"></i></div>
-          <div>
-            <div class="counter num" data-target="7">0</div>
-            <div class="lbl">Teachers</div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-
-    <!-- Right Column -->
-    <div>
-
-      <!-- ===== OUR JOURNEY (Gallery) ===== -->
-      <div class="px-4 mt-4">
-        <div class="bg-white rounded-2xl p-4 shadow-sm">
-          <h3 class="text-base font-bold text-[#1a2332] mb-3"><i class="fas fa-images text-[#1a237e] mr-2"></i>Our Journey</h3>
-          <div class="grid grid-cols-2 gap-2">
-            <div class="rounded-xl overflow-hidden"><a href="image/h1.jpeg" target="_blank"><img src="image/h1.jpeg" class="w-full h-28 object-cover" alt="gallery"></a></div>
-            <div class="rounded-xl overflow-hidden"> <a href="image/h2.jpeg" target="_blank"><img src="image/h2.jpeg" class="w-full h-28 object-cover" alt="gallery"></a></div>
-            <div class="col-span-2 rounded-xl overflow-hidden">
-              <video controls class="w-full max-h-44 object-cover">
-                <source src="image/hv1.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="rounded-xl overflow-hidden relative">
-             <a href="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" target="_blank">
-    <img src="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg"
-         class="w-full h-28 object-cover cursor-pointer"
-         alt="routine">
-</a>
-              <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[9px] font-medium py-1 text-center">Class Routine</div>
-            </div>
-            <div class="rounded-xl overflow-hidden relative">
-
-              <a href="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" target="_blank">
-              <img src="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" class="w-full h-28 object-cover" alt="holiday"></a>
-              <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[9px] font-medium py-1 text-center">ছুটির দিনসমূহ</div>
-            </div>
+          <!-- Right: Image -->
+          <div class="flex justify-center mt-4 md:mt-0">
+            <img src="image/pic4.jpeg" alt="About Us" class="about-img w-full max-w-xs md:max-w-sm object-cover">
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
-
-  <!-- ===== ABOUT SECTION (Full Width) with Image ===== -->
-  <section id="about" class="px-4 mt-4 desktop-full">
-    <div class="bg-white rounded-2xl p-4 shadow-sm">
-      <span class="text-[#1a237e] uppercase text-[10px] tracking-[0.2em] font-semibold">Educational Platform</span>
-      <h2 class="text-xl font-bold text-[#1a2332] mt-1">আমাদের ওয়েবসাইট সম্পর্কে</h2>
-      <div class="w-12 h-1 bg-[#1a237e] mt-2 mb-3 rounded-full"></div>
-      
-      <div class="about-grid-desktop">
-        <!-- Left: Text -->
+    <!-- ===== FOOTER (Contact Us) ===== -->
+    <footer class="app-footer" id="contact">
+      <div class="footer-grid-desktop">
+        <!-- COL 1: Brand -->
         <div>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            আমাদের কলেজের সকল শিক্ষার্থী ও শিক্ষকদের জন্য একটি আধুনিক, তথ্যসমৃদ্ধ এবং সহজে ব্যবহারযোগ্য প্ল্যাটফর্ম তৈরির লক্ষ্য নিয়ে এই ওয়েবসাইটটি তৈরি করা হয়েছে।
+          <div class="flex items-center gap-3 mb-3">
+            <div class="brand-logo-circle">HB</div>
+            <span class="text-lg font-extrabold text-[#1a2332]">HBUC</span>
+          </div>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            "এখানে একাডেমি-সম্পর্কিত সকল গ্রুপের লিংক দেওয়া হয়েছে, যাতে সবাই সহজেই পড়াশোনার তথ্য, নোটিশ এবং গুরুত্বপূর্ণ আপডেট জানতে পারে।" 📚✨
           </p>
-          <p class="text-gray-600 text-sm leading-relaxed mt-2">
-            শিক্ষার্থীদের সুবিধার কথা বিবেচনা করে এই প্ল্যাটফর্মে কলেজ জীবনের চার বছরের সকল বিষয়ভিত্তিক নোট, গুরুত্বপূর্ণ ক্লাস ম্যাটেরিয়াল, সাজেশন এবং প্রয়োজনীয় শিক্ষাসামগ্রী সংরক্ষণ ও আপলোড করা হবে।
+          <div class="flex gap-3 mt-4">
+            <span class="text-xs text-gray-500 font-medium flex items-center">Friends</span>
+            <a href="https://m.me/j/AbbqkhQcpepfV0eT/" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
+              <i class="fab fa-facebook-messenger"></i>
+            </a>
+            <span class="text-xs text-gray-500 font-medium flex items-center ml-1">Main</span>
+            <a href="https://chat.whatsapp.com/E2dTp1AvVuhIb6KKTeGQbV" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <span class="text-xs text-gray-500 font-medium flex items-center ml-1">History</span>
+            <a href="https://chat.whatsapp.com/C8gqmXhhXmn5o1OumpEfEK" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- COL 2: Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
+            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Quick Links
+          </h4>
+          <ul class="space-y-2.5 text-sm text-gray-500">
+            <li><a href="#" class="hover:text-[#1a237e] transition">Home</a></li>
+            <li><a href="teacher.html" class="hover:text-[#1a237e] transition">Teachers</a></li>
+            <li><a href="student.html" class="hover:text-[#1a237e] transition">Students</a></li>
+            <li><a href="subject.html" class="hover:text-[#1a237e] transition">Subjects</a></li>
+            <li><a href="notice.html" class="hover:text-[#1a237e] transition">Notices</a></li>
+            <li><a href="#about" class="hover:text-[#1a237e] transition">About Us</a></li>
+            <li><a href="#contact" class="hover:text-[#1a237e] transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 3: CONTACT -->
+        <div>
+          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
+            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Contact Info
+          </h4>
+          <div class="space-y-3">
+            <div class="contact-chip">
+              <div class="contact-chip-icon"><i class="fas fa-map-pin"></i></div>
+              <span class="text-gray-600 text-sm">Mizan road, rampura, Dhaka-1000</span>
+            </div>
+            <div class="contact-chip">
+              <div class="contact-chip-icon"><i class="fas fa-phone"></i></div>
+              <span class="text-gray-600 text-sm">+880 01621183068</span>
+            </div>
+            <div class="contact-chip">
+              <div class="contact-chip-icon"><i class="fas fa-envelope"></i></div>
+              <span class="text-gray-600 text-sm">rsiyam548@gmail.com</span>
+            </div>
+            <div class="contact-chip">
+              <div class="contact-chip-icon"><i class="fas fa-clock"></i></div>
+              <span class="text-gray-600 text-sm">Sat–Thu: 8AM – 6PM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL 4: NEWSLETTER -->
+        <div>
+          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
+            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Stay Updated
+          </h4>
+          <p class="text-gray-500 text-sm mb-4">
+            Get latest news, events & updates directly in your inbox.
           </p>
-          <p class="text-gray-600 text-sm leading-relaxed mt-2">
-            নিয়মিত নতুন নোট, অ্যাসাইনমেন্ট, পরীক্ষার আপডেট, রুটিন, শিক্ষক ও শিক্ষার্থীদের তথ্য এবং কলেজের বিভিন্ন অনুষ্ঠানের তথ্য প্রকাশ করা হবে। আমাদের লক্ষ্য হলো শিক্ষার্থীদের পড়াশোনাকে আরও সহজ, দ্রুত এবং কার্যকর করে তোলা।
+          <div class="space-y-3">
+            <div class="newsletter-wrap">
+              <i class="fas fa-envelope newsletter-icon"></i>
+              <input type="email" placeholder="Enter your email" class="newsletter-input">
+            </div>
+            <button class="subscribe-btn">
+              <span><i class="fas fa-arrow-right mr-2"></i> Subscribe</span>
+            </button>
+          </div>
+          <p class="text-gray-600 text-xs mt-3 flex items-center gap-1.5">
+            <i class="fas fa-check-circle text-[#1a237e] text-xs"></i>
+            Remember Me •
           </p>
-          <!-- Features -->
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <div class="bg-gray-50 rounded-xl p-3 text-center">
-              <i class="fas fa-book-open text-[#1a237e] text-lg"></i>
-              <p class="text-[10px] font-semibold text-[#1a2332] mt-1">Study Notes</p>
-            </div>
-            <div class="bg-gray-50 rounded-xl p-3 text-center">
-              <i class="fas fa-calendar-check text-[#1a237e] text-lg"></i>
-              <p class="text-[10px] font-semibold text-[#1a2332] mt-1">Exam Updates</p>
-            </div>
-            <div class="bg-gray-50 rounded-xl p-3 text-center">
-              <i class="fas fa-pen-fancy text-[#1a237e] text-lg"></i>
-              <p class="text-[10px] font-semibold text-[#1a2332] mt-1">Assignments</p>
-            </div>
-            <div class="bg-gray-50 rounded-xl p-3 text-center">
-              <i class="fas fa-users text-[#1a237e] text-lg"></i>
-              <p class="text-[10px] font-semibold text-[#1a2332] mt-1">Support</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Image (same as before) -->
-        <div class="flex justify-center">
-          <img src="image/pic4.jpeg" alt="About Us" class="about-img w-full max-w-xs md:max-w-sm object-cover">
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===== FOOTER (Contact Us updated) ===== -->
-  <footer class="app-footer" id="contact">
-    <div class="footer-grid-desktop">
-      <!-- COL 1: Brand -->
-      <div>
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-10 h-10 rounded-full bg-[#1a237e] flex items-center justify-center">
-           <img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/logo.svg" alt="">
-          </div>
-          <span class="text-lg font-extrabold text-[#1a2332]">HBUC</span>
-        </div>
-        <p class="text-gray-500 text-xs leading-relaxed">
-      "এখানে একাডেমি-সম্পর্কিত সকল গ্রুপের লিংক দেওয়া হয়েছে, যাতে সবাই সহজেই পড়াশোনার তথ্য, নোটিশ এবং গুরুত্বপূর্ণ আপডেট জানতে পারে।" 📚✨
+      <!-- Divider -->
+      <div class="footer-divider my-8"></div>
+
+      <!-- Bottom Bar -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-600 text-sm">
+          © 2026 <span class="text-gray-800 font-medium">HBUC</span> · Made by Samiur Rahman (Siyam)
         </p>
-        <div class="flex gap-3 mt-3">
-          Friends
-          <a href="https://m.me/j/AbbqkhQcpepfV0eT/" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[#1a237e] border border-gray-200 text-sm hover:bg-[#1a237e] hover:text-white transition">
-            <i class="fab fa-facebook-messenger"></i>
-          </a>
-          Main group
-          <a href="https://chat.whatsapp.com/E2dTp1AvVuhIb6KKTeGQbV" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[#1a237e] border border-gray-200 text-sm hover:bg-[#1a237e] hover:text-white transition">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-          History
-          <a href="https://chat.whatsapp.com/C8gqmXhhXmn5o1OumpEfEK" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[#1a237e] border border-gray-200 text-sm hover:bg-[#1a237e] hover:text-white transition">
-            <i class="fab fa-whatsapp"></i>
-          </a>
+        <div class="flex items-center gap-5 text-sm">
+          <a href="#" class="bottom-link">Privacy</a>
+          <span class="text-gray-300">•</span>
+          <a href="#" class="bottom-link">Terms</a>
+          <span class="text-gray-300">•</span>
+          <a href="#" class="bottom-link">Cookies</a>
+          <span class="text-gray-300">•</span>
+          <a href="#" class="bottom-link">Support</a>
         </div>
       </div>
+    </footer>
+  </div>
 
-      <br>
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    (function() {
+      // Slider
+      const slides = [
+        document.getElementById('slide1'),
+        document.getElementById('slide2'),
+        document.getElementById('slide3')
+      ];
+      const dots = document.querySelectorAll('.dot');
+      let currentIndex = 0;
+      let autoInterval = null;
 
-      <!-- COL 2: Quick Links -->
-      <div>
-        <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-3">Quick Links</h4>
-        <ul class="space-y-2 text-xs text-gray-500">
-          <li><a href="#" class="hover:text-[#1a237e]">Home</a></li>
-          <li><a href="teacher.html" class="hover:text-[#1a237e]">Teachers</a></li>
-          <li><a href="student.html" class="hover:text-[#1a237e]">Students</a></li>
-          <li><a href="subject.html" class="hover:text-[#1a237e]">Subjects</a></li>
-          <li><a href="notice.html" class="hover:text-[#1a237e]">Notices</a></li>
-          <li><a href="#about" class="hover:text-[#1a237e]">About Us</a></li>
-          <li><a href="#contact" class="hover:text-[#1a237e]">Contact</a></li>
-        </ul>
-      </div>
-      <br><br>
-
-      <!-- COL 3: CONTACT (updated with details) -->
-      <div>
-        <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-3 flex items-center gap-2">
-          <span class="w-6 h-0.5 bg-[#1a237e]/50"></span>
-          Contact Info
-        </h4>
-        <div class="space-y-3">
-          <div class="contact-chip">
-            <div class="contact-chip-icon"><i class="fas fa-map-pin"></i></div>
-            <span class="text-gray-600 text-sm">Mizan road, rampura, Dhaka-1000</span>
-          </div>
-          <div class="contact-chip">
-            <div class="contact-chip-icon"><i class="fas fa-phone"></i></div>
-            <span class="text-gray-600 text-sm">+880 01621183068</span>
-          </div>
-          <div class="contact-chip">
-            <div class="contact-chip-icon"><i class="fas fa-envelope"></i></div>
-            <span class="text-gray-600 text-sm">rsiyam548@gmail.com</span>
-          </div>
-          <div class="contact-chip">
-            <div class="contact-chip-icon"><i class="fas fa-clock"></i></div>
-            <span class="text-gray-600 text-sm">Sat–Thu: 8AM – 6PM</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- COL 4: NEWSLETTER -->
-      <div>
-        <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-3 flex items-center gap-2">
-          <span class="w-6 h-0.5 bg-[#1a237e]/50"></span>
-          Stay Updated
-        </h4>
-        <p class="text-gray-500 text-sm mb-4">
-          Get latest news, events & updates directly in your inbox.
-        </p>
-        <div class="space-y-3">
-          <div class="newsletter-wrap">
-            <i class="fas fa-envelope newsletter-icon"></i>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              class="newsletter-input"
-            />
-          </div>
-          <button class="subscribe-btn">
-            <span><i class="fas fa-arrow-right mr-2"></i> Subscribe</span>
-          </button>
-        </div>
-        <p class="text-gray-600 text-xs mt-3 flex items-center gap-1.5">
-          <i class="fas0 fa-check-circle text-[#1a237e] text-xs"></i>
-          Remember Me • 
-        </p>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="footer-divider my-10"></div>
-
-    <!-- Bottom Bar -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-gray-600 text-sm">
-        © 2026 <span class="text-gray-800 font-medium">HBUC</span>......
-        Made by Samiur Rahman (Siyam).
-      </p>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="#" class="bottom-link">Privacy</a>
-        <span class="text-gray-700">•</span>
-        <a href="#" class="bottom-link">Terms</a>
-        <span class="text-gray-700">•</span>
-        <a href="#" class="bottom-link">Cookies</a>
-        <span class="text-gray-700">•</span>
-        <a href="#" class="bottom-link">Support</a>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- ===== JAVASCRIPT ===== -->
-<script>
-  (function() {
-    // Slider
-    const slides = [
-      document.getElementById('slide1'),
-      document.getElementById('slide2'),
-      document.getElementById('slide3')
-    ];
-    const dots = document.querySelectorAll('.dot');
-    let currentIndex = 0;
-    let autoInterval = null;
-
-    function changeSlide(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      slides.forEach((img, i) => {
-        img.style.opacity = '0';
-      });
-      slides[index].style.opacity = '1';
-      dots.forEach((dot, i) => {
-        if (i === index) {
-          dot.classList.remove('dot-inactive');
-          dot.classList.add('dot-active');
-        } else {
-          dot.classList.remove('dot-active');
-          dot.classList.add('dot-inactive');
-        }
-      });
-      currentIndex = index;
-    }
-
-    function nextSlide() { changeSlide(currentIndex + 1); resetAutoPlay(); }
-    function prevSlide() { changeSlide(currentIndex - 1); resetAutoPlay(); }
-
-    function resetAutoPlay() {
-      if (autoInterval) { clearInterval(autoInterval); autoInterval = null; }
-      autoInterval = setInterval(nextSlide, 4500);
-    }
-
-    document.getElementById('nextBtn').addEventListener('click', nextSlide);
-    document.getElementById('prevBtn').addEventListener('click', prevSlide);
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', function() { changeSlide(idx); resetAutoPlay(); });
-    });
-    resetAutoPlay();
-
-    // Counters
-    const counters = document.querySelectorAll('.counter');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          if (!counter.dataset.started) {
-            counter.dataset.started = true;
-            animateCounter(counter);
+      function changeSlide(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        slides.forEach((img, i) => {
+          img.style.opacity = '0';
+        });
+        slides[index].style.opacity = '1';
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove('dot-inactive');
+            dot.classList.add('dot-active');
+          } else {
+            dot.classList.remove('dot-active');
+            dot.classList.add('dot-inactive');
           }
-        }
-      });
-    }, { threshold: 0.3 });
-    counters.forEach(counter => observer.observe(counter));
+        });
+        currentIndex = index;
+      }
 
-    function animateCounter(counter) {
-      const target = parseInt(counter.dataset.target, 10);
-      let current = 0;
-      const increment = Math.max(1, Math.ceil(target / 80));
-      function update() {
-        current += increment;
-        if (current >= target) { counter.innerText = target; return; }
-        counter.innerText = Math.ceil(current);
+      function nextSlide() { changeSlide(currentIndex + 1);
+        resetAutoPlay(); }
+
+      function prevSlide() { changeSlide(currentIndex - 1);
+        resetAutoPlay(); }
+
+      function resetAutoPlay() {
+        if (autoInterval) { clearInterval(autoInterval);
+          autoInterval = null; }
+        autoInterval = setInterval(nextSlide, 4500);
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', nextSlide);
+      document.getElementById('prevBtn').addEventListener('click', prevSlide);
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', function() { changeSlide(idx);
+          resetAutoPlay(); });
+      });
+      resetAutoPlay();
+
+      // Counters
+      const counters = document.querySelectorAll('.counter');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            if (!counter.dataset.started) {
+              counter.dataset.started = true;
+              animateCounter(counter);
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      counters.forEach(counter => observer.observe(counter));
+
+      function animateCounter(counter) {
+        const target = parseInt(counter.dataset.target, 10);
+        let current = 0;
+        const increment = Math.max(1, Math.ceil(target / 80));
+
+        function update() {
+          current += increment;
+          if (current >= target) { counter.innerText = target; return; }
+          counter.innerText = Math.ceil(current);
+          requestAnimationFrame(update);
+        }
         requestAnimationFrame(update);
       }
-      requestAnimationFrame(update);
-    }
 
-    // Bottom nav active
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-      item.addEventListener('click', function() {
-        document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
-        this.classList.add('active');
+      // Bottom nav active
+      document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+          document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+        });
       });
-    });
 
-    // Desktop nav active
-    document.querySelectorAll('.desktop-nav a').forEach(item => {
-      item.addEventListener('click', function() {
-        document.querySelectorAll('.desktop-nav a').forEach(n => n.classList.remove('active'));
-        this.classList.add('active');
+      // Desktop nav active
+      document.querySelectorAll('.desktop-nav a').forEach(item => {
+        item.addEventListener('click', function() {
+          document.querySelectorAll('.desktop-nav a').forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+        });
       });
-    });
-  })();
-</script>
+    })();
+  </script>
 
 </body>
 </html>
