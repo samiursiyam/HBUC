@@ -1,297 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All subjects</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All subjects · Live</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      position: relative;
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.18), transparent 40%),
+                radial-gradient(circle at 80% 30%, rgba(249, 115, 22, 0.15), transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.10), transparent 40%),
+                linear-gradient(135deg, #fefcfb, #f1f5f9);
+        }
 
-      /* ===== NEW PREMIUM TEAL + ORANGE WHITE BACKGROUND ===== */
-      background:
-        radial-gradient(circle at 20% 20%, rgba(20,184,166,0.18), transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(249,115,22,0.15), transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(59,130,246,0.10), transparent 40%),
-        linear-gradient(135deg, #fefcfb, #f1f5f9);
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.18), transparent 70%);
+            top: -150px;
+            left: -150px;
+            filter: blur(55px);
+            animation: float 10s infinite alternate;
+            z-index: 0;
+        }
 
-    /* soft glow */
-    body::before{
-      content:"";
-      position:fixed;
-      width:500px;
-      height:500px;
-      background:radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%);
-      top:-150px;
-      left:-150px;
-      filter:blur(55px);
-      animation:float 10s infinite alternate;
-    }
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15), transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            filter: blur(55px);
+            animation: float2 12s infinite alternate;
+            z-index: 0;
+        }
 
-    body::after{
-      content:"";
-      position:fixed;
-      width:500px;
-      height:500px;
-      background:radial-gradient(circle, rgba(249,115,22,0.15), transparent 70%);
-      bottom:-150px;
-      right:-150px;
-      filter:blur(55px);
-      animation:float2 12s infinite alternate;
-    }
+        @keyframes float {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(70px, 50px);
+            }
+        }
+        @keyframes float2 {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(-70px, -50px);
+            }
+        }
 
-    @keyframes float{
-      from{transform:translate(0,0);}
-      to{transform:translate(70px,50px);}
-    }
+        .dashboard {
+            max-width: 1400px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
 
-    @keyframes float2{
-      from{transform:translate(0,0);}
-      to{transform:translate(-70px,-50px);}
-    }
+        /* ---- HEADER ---- */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(20, 184, 166, 0.15);
+        }
 
-    .dashboard {
-      max-width: 1400px;
-      width: 100%;
-      position: relative;
-      z-index: 10;
-    }
+        .header h1 {
+            font-weight: 700;
+            font-size: 1.9rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    /* HEADER */
-    .header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.5rem;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(10px);
-      padding: 1.2rem 2rem;
-      border-radius: 32px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      border: 1px solid rgba(20,184,166,0.15);
-    }
+        .header h1 i {
+            color: #14b8a6;
+            font-size: 2rem;
+        }
 
-    .header h1 {
-      font-weight: 700;
-      font-size: 1.9rem;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .header .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+        }
 
-    .header h1 i {
-      color: #14b8a6;
-      font-size: 2rem;
-    }
+        .header .badge {
+            background: rgba(249, 115, 22, 0.12);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #f97316;
+            font-size: 0.95rem;
+        }
 
-    .header .badge {
-      background: rgba(249,115,22,0.12);
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      color: #f97316;
-      font-size: 0.95rem;
-    }
+        .header .badge a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    .header .badge a {
-      color: inherit;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .header .badge a:hover {
+            text-decoration: underline;
+        }
 
-    .header .badge a:hover {
-      text-decoration: underline;
-    }
+        .header .live-badge {
+            background: rgba(20, 184, 166, 0.15);
+            color: #14b8a6;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
 
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 2rem;
-    }
+        .header .live-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #14b8a6;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            display: inline-block;
+        }
 
-    /* CARD — now clickable as a link */
-    .subject-card {
-      display: block;             /* make the whole card clickable */
-      text-decoration: none;
-      color: inherit;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      transition: 0.25s ease;
-      border: 1px solid rgba(20,184,166,0.15);
-      cursor: pointer;
-    }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+        }
 
-    .subject-card:hover {
-      transform: translateY(-5px);
-      border-color: #f97316;
-      box-shadow: 0 18px 40px rgba(249,115,22,0.12);
-    }
+        .header .visit-counter {
+            background: rgba(15, 23, 42, 0.06);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #0f172a;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    /* IMAGE */
-    .image-wrapper {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      background: #e3f2f1;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 2px solid rgba(20,184,166,0.15);
-    }
+        .header .visit-counter i {
+            color: #f97316;
+        }
 
-    .image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        /* ---- GRID ---- */
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
 
-    .image-wrapper .fallback-icon {
-      font-size: 3.5rem;
-      color: #14b8a6;
-      opacity: 0.3;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+        /* ---- CARD ---- */
+        .subject-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            transition: 0.25s ease;
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            cursor: pointer;
+            position: relative;
+        }
 
-    /* CONTENT */
-    .card-content {
-      padding: 1.2rem;
-    }
+        .subject-card:hover {
+            transform: translateY(-5px);
+            border-color: #f97316;
+            box-shadow: 0 18px 40px rgba(249, 115, 22, 0.12);
+        }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .subject-card .card-views {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 5;
+            pointer-events: none;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-    .card-header h3 {
-      font-size: 1.1rem;
-      color: #0f172a;
-      font-weight: 700;
-    }
+        .subject-card .card-views i {
+            font-size: 0.6rem;
+            opacity: 0.7;
+        }
 
-    .subject-code {
-      margin-left: auto;
-      background: rgba(20,184,166,0.12);
-      color: #14b8a6;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
+        /* ---- IMAGE ---- */
+        .image-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #e3f2f1;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(20, 184, 166, 0.15);
+        }
 
-    .card-footer {
-      margin-top: 10px;
-      border-top: 1px solid rgba(0,0,0,0.05);
-      padding-top: 10px;
-      display: flex;
-      justify-content: flex-end;
-    }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .pic-label {
-      font-size: 0.7rem;
-      color: #f97316;
-      background: rgba(249,115,22,0.10);
-      padding: 0.25rem 1rem;
-      border-radius: 30px;
-    }
+        .image-wrapper .fallback-icon {
+            font-size: 3.5rem;
+            color: #14b8a6;
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-    @media (max-width: 680px) {
-      .subject-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        /* ---- CONTENT ---- */
+        .card-content {
+            padding: 1.2rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .subject-code {
+            margin-left: auto;
+            background: rgba(20, 184, 166, 0.12);
+            color: #14b8a6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .card-footer {
+            margin-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .pic-label {
+            font-size: 0.7rem;
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.10);
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+        }
+
+        /* ---- EMPTY STATE ---- */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            border: 2px dashed rgba(20, 184, 166, 0.25);
+        }
+
+        .empty-state i {
+            font-size: 3.5rem;
+            color: #14b8a6;
+            opacity: 0.4;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .empty-state p {
+            color: #64748b;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 680px) {
+            .subject-grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding: 1.2rem 1.2rem;
+            }
+            .header .badge-group {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-  <div class="header">
-    <h1><i class="fas fa-images"></i> Subjects</h1>
-    <span class="badge"><i class="fa fa-book"></i> <a href="https://www.nu.ac.bd/Syllabus/Syllabus_Honours/BBA_Honours/Finance_and_Banking_First_Year_Pub_Date_12112025.pdf" target="_blank">Syllabus</a></span>
-  </div>
+        <!-- HEADER -->
+        <div class="header">
+            <h1><i class="fas fa-images"></i> Subjects</h1>
 
-  <div class="subject-grid" id="subjectGrid"></div>
+            <div class="badge-group">
+                <!-- Live indicator -->
+                <span class="live-badge">
+                    <span class="dot"></span> LIVE
+                </span>
 
-</div>
+                <!-- Visit counter from Realtime DB -->
+                <span class="visit-counter" id="totalVisits">
+                    <i class="fas fa-eye"></i>
+                    <span id="visitCountDisplay">0</span>
+                </span>
 
-<script>
-(function() {
-
-  // -------------------- SUBJECT DATA WITH LINKS --------------------
-  // Each subject gets a unique page (could be real URL, or #demo)
-  // Clicking the card opens the link (subject.page) in same tab.
-  // You can replace these with actual URLs.
-  const SUBJECTS = [
-    { name: 'History of Bangladesh (see notes)', icon: 'fa-landmark', code: '1st year', img: '', page: 'history.html'},
-    { name: 'Business Communication (see notes)', icon: 'fa-landmark', code: '1st year', img: '', page: 'c-b.html' },
-    { name: 'Finance (see notes)', icon: 'fa-coins', code: '1st year', img: 'fi.jpg', page: 'finance.html' },
-    { name: 'Business Intro (see notes)', icon: 'fa-briefcase', code: '1st year', img: 'https://i.ibb.co.com/20tcxSXm/Whats-App-Image-2026-07-04-at-7-35-20-PM-1.jpg', page: 'i-b.html' },
-    { name: 'Accounting (see notes)', icon: 'fa-calculator', code: '1st year', img: 'acc.jpg', page: 'acc.html' },
-    { name: 'Business Math (see notes)', icon: 'fa-square-root-variable', code: '1st year', img: 'math.jpg', page: 'math.html' },
-    { name: 'Microeconomics (see notes)', icon: 'fa-chart-line', code: '1st year', img: 'rco.jpg', page: 'mic-eco.html' },
-    { name: 'ICT Lab (see notes)', icon: 'fa-desktop', code: '1st year', img: 'L-i.jpg', page: 'lab-ict.html' },
-    { name: 'ICT (see notes)', icon: 'fa-microchip', code: '1st year', img: 'ict.jpg', page: 'ict.html' },
-  ];
-
-  const grid = document.getElementById('subjectGrid');
-
-  SUBJECTS.forEach(sub => {
-
-    // Create an anchor element that wraps the whole card
-    const cardLink = document.createElement('a');
-    cardLink.className = 'subject-card';
-    cardLink.href = sub.page;            // link destination
-    cardLink.setAttribute('role', 'button');
-
-    // Build the inner HTML (identical to before, but inside <a>)
-    cardLink.innerHTML = `
-      <div class="image-wrapper">
-        <img src="${sub.img}" onerror="this.style.display='none'">
-        <i class="fas ${sub.icon} fallback-icon"></i>
-      </div>
-
-      <div class="card-content">
-        <div class="card-header">
-          <h3>${sub.name}</h3>
-          <span class="subject-code">${sub.code}</span>
+                <!-- Syllabus link -->
+                <span class="badge">
+                    <i class="fa fa-book"></i>
+                    <a href="https://www.nu.ac.bd/Syllabus/Syllabus_Honours/BBA_Honours/Finance_and_Banking_First_Year_Pub_Date_12112025.pdf" target="_blank">Syllabus</a>
+                </span>
+            </div>
         </div>
 
-        <div class="card-footer">
-          <span class="pic-label">Subject</span>
-        </div>
-      </div>
-    `;
+        <!-- GRID -->
+        <div class="subject-grid" id="subjectGrid"></div>
 
-    grid.appendChild(cardLink);
-  });
+    </div>
 
-})();
-</script>
+    <!-- ============ FIREBASE MODULE ============ -->
+    <script type="module">
+        // --------------------------------------------------------------
+        // 1. IMPORTS
+        // --------------------------------------------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            onSnapshot,
+            doc,
+            setDoc,
+            getDocs,
+            query,
+            limit
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            set,
+            increment,
+            get,
+            child
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+        // --------------------------------------------------------------
+        // 2. FIREBASE CONFIG
+        // --------------------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "AIzaSyC24LVqirCNOAFOZIvzl-6Cq9LSpw8tHKY",
+            authDomain: "hbuc-subject.firebaseapp.com",
+            projectId: "hbuc-subject",
+            storageBucket: "hbuc-subject.firebasestorage.app",
+            messagingSenderId: "142076909039",
+            appId: "1:142076909039:web:86971841d6af70ad51121a",
+            measurementId: "G-7M8CNPPBY7"
+        };
+
+        // --------------------------------------------------------------
+        // 3. INIT
+        // --------------------------------------------------------------
+        const app = initializeApp(firebaseConfig);
+        const firestore = getFirestore(app);
+        const rtdb = getDatabase(app);
+
+        // References
+        const subjectsCollection = collection(firestore, "subjects");
+        const grid = document.getElementById("subjectGrid");
+        const visitCountSpan = document.getElementById("visitCountDisplay");
+
+        // --------------------------------------------------------------
+        // 4. DEFAULT SUBJECTS (used for seeding if Firestore is empty)
+        // --------------------------------------------------------------
+        const DEFAULT_SUBJECTS = [
+            { name: 'History of Bangladesh (see notes)', icon: 'fa-landmark', code: '1st year', img: '',
+            page: 'history.html' },
+            { name: 'Business Communication (see notes)', icon: 'fa-landmark', code: '1st year', img: '',
+            page: 'c-b.html' },
+            { name: 'Finance (see notes)', icon: 'fa-coins', code: '1st year', img: 'fi.jpg', page: 'finance.html' },
+            { name: 'Business Intro (see notes)', icon: 'fa-briefcase', code: '1st year', img: 'https://i.ibb.co.com/20tcxSXm/Whats-App-Image-2026-07-04-at-7-35-20-PM-1.jpg',
+                page: 'i-b.html' },
+            { name: 'Accounting (see notes)', icon: 'fa-calculator', code: '1st year', img: 'acc.jpg', page: 'acc.html' },
+            { name: 'Business Math (see notes)', icon: 'fa-square-root-variable', code: '1st year', img: 'math.jpg',
+                page: 'math.html' },
+            { name: 'Microeconomics (see notes)', icon: 'fa-chart-line', code: '1st year', img: 'rco.jpg',
+                page: 'mic-eco.html' },
+            { name: 'ICT Lab (see notes)', icon: 'fa-desktop', code: '1st year', img: 'L-i.jpg', page: 'lab-ict.html' },
+            { name: 'ICT (see notes)', icon: 'fa-microchip', code: '1st year', img: 'ict.jpg', page: 'ict.html' },
+        ];
+
+        // --------------------------------------------------------------
+        // 5. SEED FIRESTORE (only if empty)
+        // --------------------------------------------------------------
+        async function seedIfEmpty() {
+            try {
+                const snapshot = await getDocs(query(subjectsCollection, limit(1)));
+                if (!snapshot.empty) return; // already has data
+
+                console.log('🔥 Firestore is empty — seeding default subjects...');
+
+                for (const sub of DEFAULT_SUBJECTS) {
+                    // Use a slug as document ID for predictable names
+                    const slug = sub.name
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '');
+                    const docRef = doc(subjectsCollection, slug);
+                    await setDoc(docRef, {
+                        name: sub.name,
+                        icon: sub.icon,
+                        code: sub.code,
+                        img: sub.img || '',
+                        page: sub.page || '#',
+                        createdAt: new Date().toISOString()
+                    });
+                }
+                console.log('✅ Seeded', DEFAULT_SUBJECTS.length, 'subjects.');
+            } catch (err) {
+                console.warn('⚠️ Seed skipped or failed:', err.message);
+            }
+        }
+
+        // --------------------------------------------------------------
+        // 6. RENDER CARDS FROM FIRESTORE (real‑time)
+        // --------------------------------------------------------------
+        function renderSubjects(snapshot) {
+            const docs = snapshot.docs;
+
+            if (docs.length === 0) {
+                grid.innerHTML = `
+              <div class="empty-state">
+                <i class="fas fa-database"></i>
+                <h3>No subjects found</h3>
+                <p>Add subjects to Firestore or check your connection.</p>
+              </div>
+            `;
+                return;
+            }
+
+            let html = '';
+            for (const docSnap of docs) {
+                const data = docSnap.data();
+                const id = docSnap.id;
+                const name = data.name || 'Untitled';
+                const icon = data.icon || 'fa-book';
+                const code = data.code || '';
+                const img = data.img || '';
+                const page = data.page || '#';
+
+                // Build card
+                html += `
+              <a class="subject-card" href="${page}" data-subject-id="${id}" data-subject-name="${name}">
+                <div class="image-wrapper">
+                  ${img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'" />` : ''}
+                  <i class="fas ${icon} fallback-icon"></i>
+                </div>
+                <div class="card-content">
+                  <div class="card-header">
+                    <h3>${name}</h3>
+                    <span class="subject-code">${code}</span>
+                  </div>
+                  <div class="card-footer">
+                    <span class="pic-label">Subject</span>
+                  </div>
+                </div>
+                <!-- views badge will be injected by Realtime DB listener -->
+                <div class="card-views" id="views-${id}">
+                  <i class="fas fa-eye"></i> <span>0</span>
+                </div>
+              </a>
+            `;
+            }
+
+            grid.innerHTML = html;
+
+            // After rendering, attach click listeners to increment RTDB views
+            document.querySelectorAll('.subject-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Let the navigation happen, but we also increment view count
+                    const id = this.dataset.subjectId;
+                    const name = this.dataset.subjectName || id;
+                    if (id) {
+                        incrementViewCount(id, name);
+                    }
+                });
+            });
+
+            // Now sync RTDB views for each subject
+            syncViewsWithRTDB(docs);
+        }
+
+        // --------------------------------------------------------------
+        // 7. REALTIME DATABASE — VIEWS
+        // --------------------------------------------------------------
+        function incrementViewCount(subjectId, subjectName) {
+            // Use Realtime Database to increment views
+            const viewsRef = ref(rtdb, `views/${subjectId}`);
+            // We use set + transaction-like approach with increment
+            // But increment() is not available in the JS SDK like this,
+            // so we do a read-then-write with a simple counter.
+            // For better atomicity, we'd use a transaction, but for simplicity:
+            get(viewsRef).then((snapshot) => {
+                const current = snapshot.val() || 0;
+                set(viewsRef, current + 1).catch(err => console.warn('RTDB increment error:', err));
+            }).catch(err => console.warn('RTDB read error:', err));
+
+            // Also track total visits
+            const totalRef = ref(rtdb, 'totalVisits');
+            get(totalRef).then((snap) => {
+                const total = snap.val() || 0;
+                set(totalRef, total + 1).catch(err => console.warn('RTDB total error:', err));
+            }).catch(err => console.warn('RTDB total read error:', err));
+        }
+
+        function syncViewsWithRTDB(docs) {
+            // For each subject, listen to RTDB view count
+            for (const docSnap of docs) {
+                const id = docSnap.id;
+                const viewsRef = ref(rtdb, `views/${id}`);
+                const badgeEl = document.getElementById(`views-${id}`);
+
+                onValue(viewsRef, (snapshot) => {
+                    const count = snapshot.val() || 0;
+                    if (badgeEl) {
+                        const span = badgeEl.querySelector('span');
+                        if (span) span.textContent = count;
+                    }
+                }, (error) => {
+                    // silent fail — RTDB might not have data yet
+                });
+            }
+        }
+
+        // --------------------------------------------------------------
+        // 8. REALTIME DATABASE — TOTAL VISITS
+        // --------------------------------------------------------------
+        function listenTotalVisits() {
+            const totalRef = ref(rtdb, 'totalVisits');
+            onValue(totalRef, (snapshot) => {
+                const total = snapshot.val() || 0;
+                visitCountSpan.textContent = total;
+            }, (error) => {
+                // silent
+            });
+        }
+
+        // --------------------------------------------------------------
+        // 9. START: Seed + Firestore listener + RTDB listener
+        // --------------------------------------------------------------
+        async function init() {
+            // Seed Firestore if empty (runs once)
+            await seedIfEmpty();
+
+            // Listen to Firestore real-time updates
+            onSnapshot(subjectsCollection, (snapshot) => {
+                renderSubjects(snapshot);
+            }, (error) => {
+                console.error('Firestore listener error:', error);
+                grid.innerHTML = `
+              <div class="empty-state">
+                <i class="fas fa-exclamation-triangle" style="color:#f97316;"></i>
+                <h3>Connection error</h3>
+                <p>${error.message}</p>
+              </div>
+            `;
+            });
+
+            // Listen to total visits from Realtime DB
+            listenTotalVisits();
+
+            console.log('🚀 Firebase connected — Firestore + Realtime DB live.');
+        }
+
+        init();
+    </script>
 
 </body>
 </html>

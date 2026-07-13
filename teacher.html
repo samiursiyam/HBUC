@@ -1,430 +1,692 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Teachers</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Teachers</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-<style>
+    <style>
+        /* ── Reset & Base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
+        body {
+            background: #f5f7fb;
+        }
 
-body{
-background:#f5f7fb;
-}
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(rgba(0, 20, 70, .85), rgba(0, 20, 70, .85)),
+                url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+            background-size: cover;
+            background-position: center;
+            padding: 70px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
 
-/* Header */
+        .hero h1 {
+            font-size: 60px;
+            font-family: Georgia, serif;
+        }
 
-.hero{
-background:linear-gradient(rgba(0,20,70,.85),
-rgba(0,20,70,.85)),
-url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
-background-size:cover;
-background-position:center;
-padding:70px 20px;
-text-align:center;
-color:white;
-}
+        .hero span {
+            color: #f7c948;
+        }
 
-.hero h1{
-font-size:60px;
-font-family:Georgia,serif;
-}
+        .line {
+            width: 120px;
+            height: 3px;
+            background: #f7c948;
+            margin: 15px auto;
+        }
 
-.hero span{
-color:#f7c948;
-}
+        .hero p {
+            font-size: 18px;
+            opacity: .9;
+        }
 
-.line{
-width:120px;
-height:3px;
-background:#f7c948;
-margin:15px auto;
-}
+        /* ── Visitor Badge ── */
+        .visitor-badge {
+            display: inline-block;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(4px);
+            padding: 10px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            font-size: 16px;
+            letter-spacing: .5px;
+        }
+        .visitor-badge i {
+            color: #f7c948;
+            margin-right: 10px;
+        }
+        .visitor-badge span {
+            font-weight: 700;
+            font-size: 20px;
+            color: #f7c948;
+        }
 
-.hero p{
-font-size:18px;
-opacity:.9;
-}
+        /* ── Cards Grid ── */
+        .container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 70px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
 
-/* Cards */
+        /* ── Card ── */
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+            transition: .4s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
 
-.container{
-max-width:1400px;
-margin:50px auto;
-padding:0 70px;
+        /* ── Image Wrapper ── */
+        .img-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            /* ⬅️ fixed square ratio – scales perfectly on all screens */
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0e0840, #1f1266);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
+        .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* ✅ full cover, no distortion */
+            display: block;
+            position: relative;
+            z-index: 2;
+            transition: opacity .3s;
+            background: transparent;
+        }
 
-.card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:.4s;
-}
+        /* ── Fallback (shown when img fails or missing) ── */
+        .img-wrap .img-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, .25);
+            background: linear-gradient(135deg, #0e0840, #1f1266);
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+            font-size: 14px;
+            gap: 6px;
+        }
+        .img-wrap .img-fallback i {
+            font-size: 52px;
+            color: rgba(255, 255, 255, .12);
+        }
+        .img-wrap .img-fallback span {
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: .5px;
+            color: rgba(255, 255, 255, .2);
+            max-width: 80%;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-.card:hover{
-transform:translateY(-10px);
-}
+        .img-wrap.img-error .img-fallback {
+            z-index: 3;
+        }
 
-.card img{
-width:100%;
-height:320px;
-object-fit:cover;
-}
+        /* ── Info (bottom part) ── */
+        .info {
+            background: #26166f;
+            color: white;
+            padding: 25px 20px 20px;
+            text-align: center;
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-.info{
-background:#26166f;
-color:white;
-padding:25px;
-text-align:center;
-position:relative;
-}
+        .cap {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 55px;
+            background: #26166f;
+            border: 3px solid #f7c948;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            color: #f7c948;
+            z-index: 5;
+        }
 
-.cap{
-position:absolute;
-top:-28px;
-left:50%;
-transform:translateX(-50%);
-width:55px;
-height:55px;
-background:#26166f;
-border:3px solid #f7c948;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:22px;
-color:#f7c948;
-}
+        .info h2 {
+            font-size: 30px;
+            font-family: Georgia, serif;
+            margin-top: 10px;
+        }
 
-.info h2{
-font-size:30px;
-font-family:Georgia,serif;
-margin-top:10px;
-}
+        .info h3 {
+            color: #f7c948;
+            margin: 8px 0 15px;
+            font-size: 18px;
+        }
 
-.info h3{
-color:#f7c948;
-margin:8px 0 15px;
-}
+        .info h6 {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: .85;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
 
-.info hr{
-border:none;
-height:1px;
-background:#f7c948;
-width:70%;
-margin:15px auto;
-}
+        .info hr {
+            border: none;
+            height: 1px;
+            background: #f7c948;
+            width: 70%;
+            margin: 15px auto;
+        }
 
-.contact{
-text-align:left;
-margin-top:15px;
-}
+        .contact {
+            text-align: left;
+            margin-top: 15px;
+            flex: 1;
+        }
+        .contact p {
+            margin: 10px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            word-break: break-word;
+        }
+        .contact i {
+            color: #f7c948;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
 
-.contact p{
-margin:10px 0;
-font-size:15px;
-}
+        .social {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        .social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .social a:hover {
+            background: #f7c948;
+            color: #26166f;
+        }
 
-.contact i{
-color:#f7c948;
-margin-right:10px;
-}
+        /* ── Quote ── */
+        .quote {
+            text-align: center;
+            padding: 40px 20px;
+            color: #1c2b5a;
+            font-style: italic;
+            font-size: 22px;
+        }
 
-.social{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:15px;
-}
+        /* ── Footer ── */
+        .footer {
+            background: #001a5c;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
 
-.social a{
-width:40px;
-height:40px;
-background:rgba(255,255,255,.1);
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-text-decoration:none;
-transition:.3s;
-}
+        /* ── Loading ── */
+        .loading-txt {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 20px;
+            color: #555;
+        }
+        .loading-txt i {
+            margin-right: 12px;
+            color: #f7c948;
+        }
 
-.social a:hover{
-background:#f7c948;
-color:#26166f;
-}
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            .visitor-badge {
+                font-size: 14px;
+                padding: 8px 18px;
+            }
+            /* no fixed height needed – aspect-ratio handles it */
+        }
 
-/* Footer Quote */
-
-.quote{
-text-align:center;
-padding:40px 20px;
-color:#1c2b5a;
-font-style:italic;
-font-size:22px;
-}
-
-.footer{
-background:#001a5c;
-color:white;
-padding:25px;
-text-align:center;
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:40px;
-}
-
-}
-
-</style>
+        @media (max-width: 480px) {
+            .info h2 {
+                font-size: 24px;
+            }
+            .info {
+                padding: 20px 15px 15px;
+            }
+            .cap {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                top: -22px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<section class="hero">
-<h1>Our <span>Teachers</span></h1>
-<div class="line"></div>
-<p>Meet Our Experienced and Dedicated Faculty Members</p>
-</section>
-
-<div class="container">
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/691446eccd80f6098.jpeg">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Shahadat Hossain</h2>
-<h3>Assistant Professor</h3>
-<h6>( Principles of finance )</h6>
-
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01689801308</p>
-<p><i class="fas fa-envelope"></i>shahadat0834@gmail.com</p>
-<p><i class="fas fa-location-dot"></i>Department of Finance </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/63bdae6ca632f2456.jpg">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Farhana Jesmine</h2>
-<h3>Assistant Professor</h3>
-<h6>( Introduction to business)</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01552351131</p>
-<p><i class="fas fa-envelope"></i>  </p>
-<p><i class="fas fa-location-dot"></i>Department of Finance </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/69fc1cb8f38a44472.jpeg">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Shereen Akther Jolly</h2>
-<h3>Assistant Professor</h3>
-<h6>( Micro Economics )</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01614725660</p>
-<p><i class="fas fa-envelope"></i></p>
-<p><i class="fas fa-location-dot"></i>Department of Finance </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/68fee9ee8440f2434.jpg">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Gulshan Ara</h2>
-<h3>Assistant Professor</h3>
-<h6>( Business communication )</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01717134625</p>
-<p><i class="fas fa-envelope"></i>gulshan_4ever@ymail.com</p>
-<p><i class="fas fa-location-dot"></i>Department of Finance </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/62d7cde2786142535.png">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Foysal Ahmed</h2>
-<h3>Lecturer</h3>
-<h6>( principles of accounting )</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01914978259</p>
-<p><i class="fas fa-envelope"></i>   </p>
-<p><i class="fas fa-location-dot"></i> Department of Finance </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/63bdb3eb72e329339.jpg">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Sanjoy Kumar Saha</h2>      
-<h3>Lecturer</h3>
-<h6>( Business Math )</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>  </p>
-<p><i class="fas fa-envelope"></i>   </p>
-<p><i class="fas fa-location-dot"></i> Department of Mathematics </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-<div class="card">
-<img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/62d7cde2786142535.png">
-<div class="info">
-<div class="cap"><i class="fas fa-graduation-cap"></i></div>
-
-<h2>Shamima akter</h2>
-<h3>Lecturer</h3>
-<h6>( History )</h6>
-<hr>
-
-<div class="contact">
-<p><i class="fas fa-phone"></i>01776064992</p>
-<p><i class="fas fa-envelope"></i>   </p>
-<p><i class="fas fa-location-dot"></i> Department of History </p>
-</div>
-
-<div class="social">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="quote">
-"Education is the most powerful weapon which you can use to change the world."<br>
-— Nelson Mandela
-</div>
-
-<div class="footer">
-© 2026 University Name. All Rights Reserved.
-</div>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <h1>Our <span>Teachers</span></h1>
+        <div class="line"></div>
+        <p>Meet Our Experienced and Dedicated Faculty Members</p>
+
+        <div class="visitor-badge">
+            <i class="fas fa-eye"></i>
+            Live Visitors: <span id="visitorCount">…</span>
+        </div>
+    </section>
+
+    <!-- ═══ TEACHER CARDS ═══ -->
+    <div class="container" id="teacherContainer">
+        <div class="loading-txt">
+            <i class="fas fa-spinner fa-pulse"></i> Loading teachers…
+        </div>
+    </div>
+
+    <!-- ═══ QUOTE ═══ -->
+    <div class="quote">
+        "Education is the most powerful weapon which you can use to change the world."<br />
+        — Nelson Mandela
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <div class="footer">
+        © 2026 HBUC. All Rights Reserved.
+    </div>
+
+
+    <!-- ════════════════════════════════════════════ -->
+    <!--  FIREBASE – all-in-one module script        -->
+    <!-- ════════════════════════════════════════════ -->
+    <script type="module">
+        // ─── 1. IMPORTS ──────────────────────────────────────
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            doc,
+            setDoc,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            update,
+            increment
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+        // ─── 2. CONFIG ──────────────────────────────────────
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEQ31b4AnS3QgXOkNaLN0cbBh0WTAzz6k",
+            authDomain: "hbuc-teachcer.firebaseapp.com",
+            databaseURL: "https://hbuc-teachcer-default-rtdb.firebaseio.com",
+            projectId: "hbuc-teachcer",
+            storageBucket: "hbuc-teachcer.firebasestorage.app",
+            messagingSenderId: "482109695307",
+            appId: "1:482109695307:web:b5bd4adeaf57fc47cd34ce",
+            measurementId: "G-4X6LKDGD34"
+        };
+
+        // ─── 3. INIT ──────────────────────────────────────
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const rtdb = getDatabase(app);
+
+        console.log("✅ Firebase, Firestore & Realtime DB ready!");
+
+
+        // ─── 4. STATIC FALLBACK DATA (old field names) ──
+        const defaultTeachers = [{
+            id: "t1",
+            name: "Shahadat Hossain",
+            title: "Assistant Professor",
+            subject: "Principles of Finance",
+            phone: "01689801308",
+            email: "shahadat0834@gmail.com",
+            dept: "Department of Finance",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/691446eccd80f6098.jpeg",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t2",
+            name: "Farhana Jesmine",
+            title: "Assistant Professor",
+            subject: "Introduction to Business",
+            phone: "01552351131",
+            email: "",
+            dept: "Department of Finance",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/63bdae6ca632f2456.jpg",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t3",
+            name: "Shereen Akther Jolly",
+            title: "Assistant Professor",
+            subject: "Micro Economics",
+            phone: "01614725660",
+            email: "",
+            dept: "Department of Finance",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/69fc1cb8f38a44472.jpeg",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t4",
+            name: "Gulshan Ara",
+            title: "Assistant Professor",
+            subject: "Business Communication",
+            phone: "01717134625",
+            email: "gulshan_4ever@ymail.com",
+            dept: "Department of Finance",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/68fee9ee8440f2434.jpg",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t5",
+            name: "Foysal Ahmed",
+            title: "Lecturer",
+            subject: "Principles of Accounting",
+            phone: "01914978259",
+            email: "",
+            dept: "Department of Finance",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/62d7cde2786142535.png",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t6",
+            name: "Sanjoy Kumar Saha",
+            title: "Lecturer",
+            subject: "Business Math",
+            phone: "",
+            email: "",
+            dept: "Department of Mathematics",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/63bdb3eb72e329339.jpg",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }, {
+            id: "t7",
+            name: "Shamima Akter",
+            title: "Lecturer",
+            subject: "History",
+            phone: "01776064992",
+            email: "",
+            dept: "Department of History",
+            img: "https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/slider/62d7cde2786142535.png",
+            facebook: "#",
+            linkedin: "#",
+            emailLink: "#"
+        }];
+
+
+        // ─── 5. NORMALIZE: handle both old + admin field names ──
+        function normalizeTeacher(t) {
+            return {
+                id: t.id || t.teacherId || '',
+                name: t.name || 'Unknown',
+                title: t.title || t.designation || 'Faculty',
+                subject: t.subject || '',
+                phone: t.phone || '',
+                email: t.email || '',
+                dept: t.dept || t.department || 'Department',
+                img: t.img || t.imageUrl || '',
+                facebook: t.facebook || '#',
+                linkedin: t.linkedin || '#',
+                emailLink: t.emailLink || (t.email ? `mailto:${t.email}` : '#')
+            };
+        }
+
+
+        // ─── 6. RENDER CARDS ──────────────────────────────
+        function renderCards(teachers) {
+            const container = document.getElementById("teacherContainer");
+            if (!teachers || teachers.length === 0) {
+                container.innerHTML = `
+                            <div class="loading-txt">
+                                <i class="fas fa-exclamation-circle"></i> No teachers found.
+                            </div>
+                        `;
+                return;
+            }
+
+            let html = "";
+            for (const raw of teachers) {
+                const t = normalizeTeacher(raw);
+
+                const name = t.name;
+                const title = t.title;
+                const subject = t.subject;
+                const phone = t.phone;
+                const email = t.email;
+                const dept = t.dept;
+                const img = t.img;
+                const fb = t.facebook;
+                const li = t.linkedin;
+                const em = t.emailLink;
+
+                const hasImg = img && img.trim() !== "";
+                const imgMarkup = hasImg ? `
+                                <img src="${img}" alt="${name}" loading="lazy"
+                                     onerror="this.style.display='none'; this.parentElement.classList.add('img-error')" />
+                            ` : `
+                                <img src="" alt="${name}" style="display:none;" />
+                            `;
+
+                html += `
+                            <div class="card">
+                                <div class="img-wrap ${!hasImg ? 'img-error' : ''}">
+                                    ${imgMarkup}
+                                    <div class="img-fallback">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <span>${name}</span>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="cap"><i class="fas fa-graduation-cap"></i></div>
+                                    <h2>${name}</h2>
+                                    <h3>${title}</h3>
+                                    ${subject ? `<h6>${subject}</h6>` : ""}
+                                    <hr />
+                                    <div class="contact">
+                                        ${phone ? `<p><i class="fas fa-phone"></i>${phone}</p>` : ""}
+                                        ${email ? `<p><i class="fas fa-envelope"></i>${email}</p>` : ""}
+                                        <p><i class="fas fa-location-dot"></i>${dept}</p>
+                                    </div>
+                                    <div class="social">
+                                        <a href="${fb}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="${li}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="${em}" target="_blank"><i class="fas fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }
+
+            container.innerHTML = html;
+        }
+
+
+        // ─── 7. SEED FIRESTORE (only if completely empty) ──
+        async function seedFirestoreIfEmpty() {
+            try {
+                const colRef = collection(db, "teachers");
+                // We'll check emptiness via onSnapshot, but for the seed we use a one-time check.
+                // However, since we're using onSnapshot for everything now,
+                // we only seed when the snapshot comes back empty.
+                // This function is called from within the onSnapshot callback.
+                for (const t of defaultTeachers) {
+                    const docRef = doc(db, "teachers", t.id);
+                    await setDoc(docRef, {
+                        name: t.name,
+                        title: t.title,
+                        subject: t.subject,
+                        phone: t.phone || "",
+                        email: t.email || "",
+                        dept: t.dept,
+                        img: t.img,
+                        facebook: t.facebook || "#",
+                        linkedin: t.linkedin || "#",
+                        emailLink: t.emailLink || "#"
+                    });
+                }
+                console.log("✅ Firestore seeding voltooid!");
+            } catch (err) {
+                console.warn("⚠️ Seeding fout:", err);
+            }
+        }
+
+
+        // ─── 8. LIVE VISITOR COUNTER (Realtime Database) ──
+        function setupVisitorCounter() {
+            const countEl = document.getElementById("visitorCount");
+            const counterRef = ref(rtdb, "visitors");
+
+            update(counterRef, { count: increment(1) })
+                .then(() => {
+                    onValue(counterRef, (snapshot) => {
+                        const data = snapshot.val();
+                        const count = data?.count ?? 0;
+                        countEl.textContent = count;
+                    }, (err) => {
+                        console.warn("⚠️ Realtime DB error:", err);
+                        countEl.textContent = "💥";
+                    });
+                })
+                .catch((err) => {
+                    console.warn("⚠️ Kon visitor niet incrementen:", err);
+                    onValue(counterRef, (snapshot) => {
+                        const data = snapshot.val();
+                        const count = data?.count ?? 0;
+                        countEl.textContent = count;
+                    });
+                });
+        }
+
+
+        // ─── 9. START APP – real-time listener ────────────
+        async function init() {
+            const colRef = collection(db, "teachers");
+            let isSeeding = false;
+
+            // Real-time listener for teachers
+            onSnapshot(colRef, async (snapshot) => {
+                // If collection is empty and we're not already seeding, seed it.
+                if (snapshot.empty && !isSeeding) {
+                    isSeeding = true;
+                    console.log("📦 Firestore is leeg – seeden…");
+                    await seedFirestoreIfEmpty();
+                    isSeeding = false;
+                    // After seeding, the snapshot will trigger again with data.
+                    return;
+                }
+
+                // If still empty after seeding (or no data), show empty state.
+                if (snapshot.empty) {
+                    renderCards([]);
+                    return;
+                }
+
+                // Collect all teacher documents
+                const teachers = [];
+                snapshot.forEach(doc => {
+                    teachers.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Sort by name
+                teachers.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+                // Render (normalize inside renderCards)
+                renderCards(teachers);
+            }, (err) => {
+                console.warn("⚠️ Firestore onSnapshot error:", err);
+                // Fallback: try to load once with getDocs? We'll just show error state.
+                document.getElementById("teacherContainer").innerHTML = `
+                            <div class="loading-txt">
+                                <i class="fas fa-exclamation-triangle"></i> Could not load teachers. Please refresh.
+                            </div>
+                        `;
+            });
+
+            // Visitor counter (independent)
+            setupVisitorCounter();
+        }
+
+        init();
+    </script>
 
 </body>
 </html>

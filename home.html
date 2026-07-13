@@ -266,6 +266,10 @@
     .app-header {
       background: linear-gradient(135deg, #0f1a3a 0%, #1a237e 60%, #2a3a9e 100%);
       padding: 14px 20px 18px;
+      background-image: url("https://hbuc.edu.bd/admin/uploads/nu-theme-1/website-banner6.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -797,7 +801,7 @@
 
     /* ===== welcome banner ===== */
     .welcome-banner {
-      background: linear-gradient(135deg, #0f1a3a 0%, #1a237e 60%, #2a3a9e 100%);
+      background: linear-gradient(135deg, #27442d 0%, #2f994a 60%, #2a9e72 100%);
       border-radius: 20px;
       padding: 20px 24px;
       color: white;
@@ -903,6 +907,11 @@
       box-shadow: 0 4px 16px rgba(26, 35, 126, 0.15);
       flex-shrink: 0;
     }
+    .admin{
+      color: #116444;
+      
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
@@ -910,17 +919,15 @@
   <div class="app-container">
 
     <!-- ===== STATUS BAR (Mobile Only) ===== -->
-    <div class="status-bar">
-      <span>9:41</span>
-      <span><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-three-quarters"></i></span>
-    </div>
+    
 
     <!-- ===== APP HEADER ===== -->
     <div class="app-header">
-      <div class="back-btn"><i class="fas fa-arrow-left"></i></div>
-      <div class="title">HBUC <span>· Finance</span></div>
+      
+      <div class="title"><span></span></div>
       <div class="action-icons">
-        <i class="fas fa-bell"></i>
+
+        <a href="https://hbuc-admin.netlify.app" class="admin"><i class="fa-solid fa-circle-user"></i></a>
       </div>
     </div>
 

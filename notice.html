@@ -1,174 +1,442 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notice Board</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notice Board</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
-}
+    <style>
+        /* ── reset & base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        }
 
-body{
-    min-height:100vh;
-    padding:20px;
-    background:
-    radial-gradient(circle at top left,#60a5fa 0%,transparent 30%),
-    radial-gradient(circle at bottom right,#818cf8 0%,transparent 30%),
-    linear-gradient(135deg,#f8fafc,#e0e7ff,#f1f5f9);
-}
+        body {
+            min-height: 100vh;
+            padding: 20px;
+            background:
+                radial-gradient(circle at top left, #60a5fa 0%, transparent 30%),
+                radial-gradient(circle at bottom right, #818cf8 0%, transparent 30%),
+                linear-gradient(135deg, #f8fafc, #e0e7ff, #f1f5f9);
+        }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-}
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.header{
-    text-align:center;
-    margin-bottom:40px;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-.header h1{
-    font-size:clamp(2rem,5vw,3.2rem);
-    color:#0f172a;
-    margin-bottom:10px;
-}
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: #0f172a;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-.header p{
-    color:#475569;
-}
+        .header p {
+            color: #475569;
+            font-size: 1.1rem;
+        }
 
-.notice-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
-}
+        .notice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
 
-.notice-card{
-    background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    transition:.35s;
-}
+        .notice-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            transition: transform .35s ease, box-shadow .35s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-.notice-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
-}
+        .notice-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, .14);
+        }
 
-.notice-img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
+        /* ── image wrapper (clickable link) ── */
+        .notice-img-link {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+            background: #e2e8f0;
+            cursor: pointer;
+            border-radius: 24px 24px 0 0;
+            /* match card radius */;
+        }
 
-.notice-content{
-    padding:20px;
-}
+        .notice-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
 
-.notice-date{
-    display:inline-block;
-    padding:6px 14px;
-    background:#dbeafe;
-    color:#2563eb;
-    border-radius:50px;
-    font-size:14px;
-    font-weight:600;
-    margin-bottom:15px;
-}
+        /* ── zoom on hover ── */
+        .notice-img-link:hover .notice-img {
+            transform: scale(1.07);
+        }
 
-.notice-title{
-    font-size:22px;
-    font-weight:700;
-    color:#0f172a;
-    margin:12px 0;
-}
+        /* ── overlay ── */
+        .img-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            backdrop-filter: blur(2px);
+        }
 
-.notice-text{
-    color:#475569;
-    line-height:1.8;
-}
+        .notice-img-link:hover .img-overlay {
+            opacity: 1;
+        }
 
-@media(max-width:768px){
+        .img-overlay span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform: translateY(12px);
+            transition: transform 0.35s ease;
+            letter-spacing: 0.3px;
+        }
 
-    .notice-grid{
-        grid-template-columns:1fr;
-    }
+        .notice-img-link:hover .img-overlay span {
+            transform: translateY(0);
+        }
 
-    .notice-img{
-        height:200px;
-    }
+        .img-overlay span::before {
+            content: "🔍";
+            font-size: 18px;
+        }
 
-    .notice-title{
-        font-size:20px;
-    }
-}
-</style>
+        /* ── card content ── */
+        .notice-content {
+            padding: 22px 24px 26px;
+        }
+
+        .notice-date {
+            display: inline-block;
+            padding: 5px 16px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .notice-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 10px 0 12px;
+            line-height: 1.3;
+        }
+
+        .notice-text {
+            color: #475569;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* ── empty state ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .empty-state span {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .empty-state small {
+            color: #94a3b8;
+        }
+
+        /* ── responsive ── */
+        @media (max-width: 768px) {
+            .notice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notice-img-link {
+                height: 200px;
+            }
+
+            .notice-title {
+                font-size: 20px;
+            }
+
+            .notice-content {
+                padding: 18px 20px 22px;
+            }
+
+            .img-overlay span {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .img-overlay span::before {
+                content: "🔍";
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .notice-img-link {
+                height: 170px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="header">
-        <h1>📢 Notice Board</h1>
-        <p>সকল গুরুত্বপূর্ণ নোটিশ এখানে প্রকাশ করা হবে</p>
-    </div>
-
-    <div class="notice-grid">
-
-     
-
-        <!-- Notice 1 -->
-        <div class="notice-card"><a href="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg">
-             <img src="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" alt="Notice Image" class="notice-img">
-        </a>
-           
-
-            <div class="notice-content">
-                <div class="notice-date">1 july 2026</div>
-
-                <div class="notice-title">
-                    ছুটির ঘোষণা
-                </div>
-
-                <div class="notice-text">
-                   এইচএসসি পরীক্ষার দিনগুলোতে কলেজ বন্ধ থাকবে।
-                </div>
-            </div>
+        <div class="header">
+            <h1>📢 Notice Board</h1>
+            <p>সকল গুরুত্বপূর্ণ নোটিশ এখানে প্রকাশ করা হবে</p>
         </div>
 
-
-
-              <!-- Notice 2 -->
-        <div class="notice-card">
-            <img src="images/notice1.jpg" alt="Notice Image" class="notice-img">
-
-            <div class="notice-content">
-                <div class="notice-date">29 June 2026</div>
-
-                <div class="notice-title">
-                    অ্যাসাইনমেন্ট জমা
-                </div>
-
-                <div class="notice-text">
-                    আগামী "১-৭-২০২৬ তারিখের মধ্যে I-B এর Assignment সকল শিক্ষার্থীকে জমা দিতে হবে।
-                </div>
-            </div>
-        </div>
-
-    
-
-       
+        <!-- Dynamic grid – cards will be injected by JavaScript -->
+        <div class="notice-grid" id="noticeGrid"></div>
 
     </div>
 
-</div>
+    <!-- ─── Firebase Import Map ─── -->
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js"
+            }
+        }
+    </script>
+
+    <!-- ─── Application Logic ─── -->
+    <script type="module">
+        // ─── Imports ──────────────────────────────────────────────
+        import { initializeApp } from 'firebase/app';
+        import {
+            getFirestore,
+            collection,
+            query,
+            orderBy,
+            getDocs
+        } from 'firebase/firestore';
+        import {
+            getDatabase,
+            ref,
+            onValue
+        } from 'firebase/database';
+
+        // ─── Firebase Config ──────────────────────────────────────
+        const firebaseConfig = {
+            apiKey: "AIzaSyB39dFGy-3rPx0FvALT0JP3UEhOLOuC-gA",
+            authDomain: "hbuc-notice.firebaseapp.com",
+            databaseURL: "https://hbuc-notice-default-rtdb.firebaseio.com",
+            projectId: "hbuc-notice",
+            storageBucket: "hbuc-notice.firebasestorage.app",
+            messagingSenderId: "183029872977",
+            appId: "1:183029872977:web:bdcc29f6098b54cfc33b70",
+            measurementId: "G-5L8MZ8MWCW"
+        };
+
+        // ─── Initialize Firebase (once) ──────────────────────────
+        const app = initializeApp(firebaseConfig);
+
+        // ─── Database instances ──────────────────────────────────
+        const db = getFirestore(app);
+        const rtdb = getDatabase(app);
+
+        // ─── DOM reference ────────────────────────────────────────
+        const grid = document.getElementById('noticeGrid');
+
+        // ─── Helper: format Firestore Timestamp ──────────────────
+        function formatDate(timestamp) {
+            if (!timestamp) return '—';
+            try {
+                let date;
+                if (typeof timestamp === 'object' && timestamp !== null && 'seconds' in timestamp) {
+                    date = new Date(timestamp.seconds * 1000);
+                } else if (timestamp instanceof Date) {
+                    date = timestamp;
+                } else {
+                    date = new Date(timestamp);
+                }
+                if (isNaN(date.getTime())) return '—';
+                return date.toLocaleDateString('bn-BD', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            } catch (_) {
+                return '—';
+            }
+        }
+
+        // ─── Render notices ──────────────────────────────────────
+        function renderNotices(notices) {
+            grid.innerHTML = '';
+
+            if (!notices || notices.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <span>📭</span>
+                        কোনো নোটিশ পাওয়া যায়নি।
+                    </div>
+                `;
+                return;
+            }
+
+            for (const notice of notices) {
+                const card = document.createElement('div');
+                card.className = 'notice-card';
+
+                // --- Image link (clickable) ---
+                const imgUrl = notice.imageUrl || 'https://placehold.co/600x400/e2e8f0/475569?text=No+Image';
+
+                const link = document.createElement('a');
+                link.className = 'notice-img-link';
+                link.href = imgUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.setAttribute('aria-label', 'View full image');
+
+                const img = document.createElement('img');
+                img.className = 'notice-img';
+                img.src = imgUrl;
+                img.alt = notice.title || 'Notice image';
+                img.loading = 'lazy';
+                link.appendChild(img);
+
+                // Overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'img-overlay';
+                const label = document.createElement('span');
+                label.textContent = 'View Image';
+                overlay.appendChild(label);
+                link.appendChild(overlay);
+
+                card.appendChild(link);
+
+                // --- Content ---
+                const content = document.createElement('div');
+                content.className = 'notice-content';
+
+                const dateBadge = document.createElement('div');
+                dateBadge.className = 'notice-date';
+                dateBadge.textContent = notice.date || formatDate(notice.createdAt) || 'তারিখ নেই';
+                content.appendChild(dateBadge);
+
+                const title = document.createElement('div');
+                title.className = 'notice-title';
+                title.textContent = notice.title || 'শিরোনাম নেই';
+                content.appendChild(title);
+
+                const desc = document.createElement('div');
+                desc.className = 'notice-text';
+                desc.textContent = notice.description || '';
+                content.appendChild(desc);
+
+                card.appendChild(content);
+                grid.appendChild(card);
+            }
+        }
+
+        // ─── Load notices from Firestore ─────────────────────────
+        async function loadNotices() {
+            try {
+                const noticesRef = collection(db, 'notices');
+                const q = query(noticesRef, orderBy('createdAt', 'desc'));
+                const snapshot = await getDocs(q);
+
+                const results = [];
+                snapshot.forEach(doc => {
+                    results.push({ id: doc.id, ...doc.data() });
+                });
+
+                renderNotices(results);
+                return results;
+            } catch (error) {
+                console.error('❌ Failed to load notices:', error);
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <span>⚠️</span>
+                        নোটিশ লোড করতে সমস্যা হয়েছে।<br />
+                        <small>দয়া করে পেজ রিফ্রেশ করুন।</small>
+                    </div>
+                `;
+                throw error;
+            }
+        }
+
+        // ─── Realtime Database listener ──────────────────────────
+        function setupRealtimeTrigger() {
+            try {
+                const statusRef = ref(rtdb, 'noticeStatus');
+                onValue(statusRef, () => {
+                    loadNotices().catch(err => {
+                        console.error('❌ Reload after RTDB change failed:', err);
+                    });
+                }, (error) => {
+                    console.error('❌ Realtime Database listener error:', error);
+                });
+            } catch (error) {
+                console.error('❌ Failed to set up Realtime Database listener:', error);
+            }
+        }
+
+        // ─── Initialisation ───────────────────────────────────────
+        async function init() {
+            try {
+                await loadNotices();
+                setupRealtimeTrigger();
+            } catch (error) {
+                console.error('❌ Initialisation error:', error);
+            }
+        }
+
+        init();
+    </script>
 
 </body>
 </html>
