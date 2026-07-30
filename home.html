@@ -1,1478 +1,1618 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>HBUC · ইউনিভার্সিটি</title>
-
-  <!-- Tailwind + Font Awesome -->
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script type="module" src="js/firebase.js">
-  </script>
-  <style>
-    /* === global reset & base === */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #f6f8fc;
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    .font-serif-luxury {
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    /* ===== glass morphism utilities ===== */
-    .glass {
-      background: rgba(255, 255, 255, 0.70);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.50);
-    }
-
-    .glass-dark {
-      background: rgba(26, 35, 126, 0.12);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    /* ===== APP CONTAINER ===== */
-    .app-container {
-      max-width: 480px;
-      margin: 0 auto;
-      background: #f6f8fc;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      padding-bottom: 80px;
-    }
-
-    /* ===== DESKTOP (>=768px) ===== */
-    @media (min-width: 768px) {
-      body {
-        background: #eef1f7;
-        padding: 24px;
-      }
-
-      .app-container {
-        max-width: 1280px;
-        padding: 0 32px 32px;
-        background: #f6f8fc;
-        border-radius: 32px;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
-        padding-bottom: 32px;
-      }
-
-      .status-bar,
-      .bottom-nav,
-      .mobile-only {
-        display: none !important;
-      }
-
-      .desktop-nav {
-        display: flex !important;
-      }
-
-      .app-header {
-        border-radius: 20px 20px 0 0;
-        margin-top: 0;
-        padding: 18px 32px;
-      }
-
-      .desktop-grid-2 {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-      }
-
-      .desktop-full {
-        grid-column: 1 / -1;
-      }
-
-      .quick-grid {
-        grid-template-columns: repeat(6, 1fr) !important;
-        gap: 16px;
-      }
-
-      .quick-item {
-        padding: 20px 12px;
-        border-radius: 18px;
-        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.60);
-      }
-      .quick-item:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 48px rgba(26, 35, 126, 0.08);
-        background: white;
-      }
-
-      .quick-item .icon-wrap {
-        width: 60px;
-        height: 60px;
-        font-size: 26px;
-        border-radius: 18px;
-      }
-
-      .quick-item .label {
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      .slider-container {
-        height: 420px !important;
-        border-radius: 24px;
-      }
-
-      .counter-card-app {
-        padding: 20px 24px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.60);
-      }
-      .counter-card-app .num {
-        font-size: 36px;
-      }
-      .counter-card-app .lbl {
-        font-size: 13px;
-      }
-      .counter-card-app .icon-bg {
-        width: 56px;
-        height: 56px;
-        font-size: 24px;
-        border-radius: 16px;
-      }
-
-      .notice-card {
-        padding: 24px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.60);
-      }
-
-      .notice-item .content p {
-        font-size: 15px;
-      }
-
-      .gallery-grid-desktop {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .gallery-grid-desktop .col-span-2 {
-        grid-column: 1 / -1;
-      }
-
-      .about-grid-desktop {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: center;
-      }
-
-      .app-footer {
-        border-radius: 24px;
-        padding: 36px 40px;
-        margin-top: 28px;
-        background: rgba(255, 255, 255, 0.80);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.60);
-      }
-
-      .footer-grid-desktop {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1.5fr;
-        gap: 48px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .app-container {
-        padding: 0 48px 48px;
-      }
-      .slider-container {
-        height: 500px !important;
-      }
-      .quick-grid {
-        gap: 20px !important;
-      }
-    }
-
-    /* ===== DESKTOP NAV ===== */
-    .desktop-nav {
-      display: none;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(16px);
-      padding: 8px 20px;
-      border-radius: 60px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-      margin: 16px 0 20px;
-      gap: 2px;
-      flex-wrap: wrap;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.50);
-    }
-
-    .desktop-nav a {
-      color: #4a5568;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 10px 24px;
-      border-radius: 40px;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-    }
-
-    .desktop-nav a:hover {
-      background: rgba(26, 35, 126, 0.06);
-      color: #1a237e;
-    }
-
-    .desktop-nav a.active {
-      background: #1a237e;
-      color: white;
-      box-shadow: 0 6px 20px rgba(26, 35, 126, 0.25);
-    }
-
-    /* ===== STATUS BAR (Mobile) ===== */
-    .status-bar {
-      background: #1f2520;
-      padding: 8px 20px 6px;
-      display: flex;
-      justify-content: space-between;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 11px;
-      font-weight: 500;
-    }
-
-    /* ===== APP HEADER ===== */
-    .app-header {
-      background: linear-gradient(135deg, #0f1a3a 0%, #1a237e 60%, #2a3a9e 100%);
-      padding: 14px 20px 18px;
-      background-image: url("https://hbuc.edu.bd/admin/uploads/nu-theme-1/website-banner6.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app-header::before {
-      content: '';
-      position: absolute;
-      top: -60%;
-      right: -20%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .app-header .back-btn {
-      font-size: 22px;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      transition: all 0.3s;
-    }
-    .app-header .back-btn:active {
-      transform: scale(0.92);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .app-header .title {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-    }
-
-    .app-header .title span {
-      font-weight: 300;
-      opacity: 0.8;
-    }
-
-    .app-header .action-icons {
-      display: flex;
-      gap: 14px;
-      font-size: 18px;
-    }
-
-    .app-header .action-icons i {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    .app-header .action-icons i:active {
-      transform: scale(0.92);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* ===== QUICK ACCESS ===== */
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .quick-item {
-      background: rgba(255, 255, 255, 0.70);
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      padding: 14px 8px;
-      text-align: center;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.50);
-    }
-
-    .quick-item:active {
-      transform: scale(0.95);
-    }
-
-    .quick-item .icon-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 8px;
-      font-size: 20px;
-      transition: all 0.3s;
-    }
-
-    .quick-item:hover .icon-wrap {
-      transform: scale(1.05) rotate(-2deg);
-    }
-
-    .quick-item .icon-wrap.blue {
-      background: linear-gradient(135deg, #e8edff, #d4dcff);
-      color: #1a237e;
-    }
-    .quick-item .icon-wrap.green {
-      background: linear-gradient(135deg, #e6f7ed, #c8f0da);
-      color: #0d7a3e;
-    }
-    .quick-item .icon-wrap.purple {
-      background: linear-gradient(135deg, #f0e8ff, #e0d0ff);
-      color: #6c3cb0;
-    }
-    .quick-item .icon-wrap.orange {
-      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-      color: #e65100;
-    }
-    .quick-item .icon-wrap.red {
-      background: linear-gradient(135deg, #fde8e8, #fccccc);
-      color: #c62828;
-    }
-    .quick-item .icon-wrap.teal {
-      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-      color: #00695c;
-    }
-
-    .quick-item .label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #1a2332;
-      letter-spacing: 0.2px;
-    }
-
-    /* ===== NOTICE CARD ===== */
-    .notice-card {
-      background: rgba(255, 255, 255, 0.70);
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.50);
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
-    }
-
-    .notice-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .notice-header h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #1a2332;
-    }
-
-    .notice-header a {
-      font-size: 12px;
-      color: #1a237e;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 4px 12px;
-      border-radius: 40px;
-      background: rgba(26, 35, 126, 0.06);
-      transition: all 0.3s;
-    }
-
-    .notice-header a:hover {
-      background: rgba(26, 35, 126, 0.12);
-    }
-
-    .notice-item {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .notice-item:last-child {
-      border-bottom: none;
-    }
-
-    .notice-item .badge {
-      background: #1a237e;
-      color: white;
-      font-size: 8px;
-      padding: 2px 12px;
-      border-radius: 40px;
-      font-weight: 600;
-      white-space: nowrap;
-      margin-top: 2px;
-      letter-spacing: 0.3px;
-    }
-
-    .notice-item .badge.green {
-      background: linear-gradient(135deg, #0d7a3e, #0f9d4e);
-    }
-    .notice-item .badge.orange {
-      background: linear-gradient(135deg, #e65100, #f57c00);
-    }
-
-    .notice-item .content {
-      flex: 1;
-    }
-
-    .notice-item .content p {
-      font-size: 13px;
-      color: #1a2332;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-
-    .notice-item .content .meta {
-      font-size: 10px;
-      color: #8a94a6;
-      margin-top: 3px;
-      display: flex;
-      gap: 12px;
-    }
-
-    /* ===== SLIDER ===== */
-    .slider-container {
-      height: 200px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-    }
-
-    .slide-img {
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    .dot-active {
-      background: #1a237e !important;
-      opacity: 1 !important;
-      transform: scale(1.3);
-      box-shadow: 0 0 12px rgba(26, 35, 126, 0.25);
-    }
-
-    .dot-inactive {
-      background: rgba(26, 35, 126, 0.25) !important;
-      opacity: 0.6 !important;
-    }
-
-    .dot {
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* ===== COUNTER CARDS ===== */
-    .counter-card-app {
-      background: rgba(255, 255, 255, 0.70);
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 14px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.50);
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
-      transition: all 0.3s;
-    }
-
-    .counter-card-app:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-    }
-
-    .counter-card-app .num {
-      font-size: 26px;
-      font-weight: 800;
-      color: #1a2332;
-      line-height: 1.1;
-    }
-
-    .counter-card-app .lbl {
-      font-size: 11px;
-      color: #8a94a6;
-      font-weight: 500;
-    }
-
-    .counter-card-app .icon-bg {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    /* ===== BOTTOM NAV (Mobile) ===== */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 4px 0 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.50);
-      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.03);
-      z-index: 100;
-      border-radius: 24px 24px 0 0;
-    }
-
-    .bottom-nav .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 9px;
-      color: #8a94a6;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      padding: 4px 12px;
-      border-radius: 20px;
-      position: relative;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      text-decoration: none;
-    }
-
-    .bottom-nav .nav-item i {
-      font-size: 20px;
-      margin-bottom: 1px;
-      transition: all 0.3s;
-    }
-
-    .bottom-nav .nav-item.active {
-      color: #1a237e;
-      font-weight: 600;
-    }
-
-    .bottom-nav .nav-item.active i {
-      background: rgba(26, 35, 126, 0.08);
-      padding: 4px 10px;
-      border-radius: 12px;
-    }
-
-    .bottom-nav .nav-item:active {
-      transform: scale(0.92);
-    }
-
-    /* ===== FOOTER ===== */
-    .app-footer {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 24px 24px 0 0;
-      padding: 24px 18px 28px;
-      margin-top: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.50);
-    }
-
-    /* ===== MOBILE RESPONSIVE ===== */
-    @media (max-width: 430px) {
-      .quick-grid {
-        gap: 8px;
-      }
-      .quick-item {
-        padding: 10px 4px;
-        border-radius: 14px;
-      }
-      .quick-item .icon-wrap {
-        width: 40px;
-        height: 40px;
-        font-size: 17px;
-        border-radius: 12px;
-      }
-      .quick-item .label {
-        font-size: 9px;
-      }
-      .app-header .title {
-        font-size: 16px;
-      }
-    }
-
-    /* ===== touch feedback ===== */
-    .touch-btn {
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* ===== about image ===== */
-    .about-img {
-      border-radius: 24px;
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .about-img:hover {
-      transform: scale(1.02) rotate(-1deg);
-    }
-
-    /* ===== footer contact chips ===== */
-    .contact-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(241, 245, 249, 0.60);
-      padding: 8px 14px;
-      border-radius: 40px;
-      border: 1px solid rgba(226, 232, 240, 0.40);
-      transition: all 0.3s;
-      backdrop-filter: blur(4px);
-    }
-
-    .contact-chip:hover {
-      background: rgba(232, 237, 255, 0.80);
-      border-color: rgba(26, 35, 126, 0.20);
-      transform: translateX(4px);
-    }
-
-    .contact-chip-icon {
-      width: 28px;
-      height: 28px;
-      background: rgba(26, 35, 126, 0.06);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1a237e;
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-
-    /* ===== newsletter ===== */
-    .newsletter-wrap {
-      display: flex;
-      align-items: center;
-      background: rgba(241, 245, 249, 0.60);
-      border-radius: 40px;
-      padding: 4px 4px 4px 16px;
-      border: 1px solid rgba(226, 232, 240, 0.40);
-      transition: all 0.3s;
-      backdrop-filter: blur(4px);
-    }
-
-    .newsletter-wrap:focus-within {
-      border-color: #1a237e;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.06);
-    }
-
-    .newsletter-icon {
-      color: #1a237e;
-      font-size: 14px;
-      margin-right: 8px;
-    }
-
-    .newsletter-input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 10px 0;
-      font-size: 13px;
-      outline: none;
-      color: #1a2332;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .newsletter-input::placeholder {
-      color: #94a3b8;
-      font-weight: 300;
-    }
-
-    .subscribe-btn {
-      background: linear-gradient(135deg, #1a237e, #2a3a9e);
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: 100%;
-      box-shadow: 0 6px 24px rgba(26, 35, 126, 0.20);
-    }
-
-    .subscribe-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(26, 35, 126, 0.25);
-    }
-
-    .subscribe-btn:active {
-      transform: scale(0.96);
-    }
-
-    .footer-divider {
-      border-top: 1px solid rgba(226, 232, 240, 0.50);
-      width: 100%;
-    }
-
-    .bottom-link {
-      color: #64748b;
-      transition: color 0.2s;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    .bottom-link:hover {
-      color: #1a237e;
-    }
-
-    /* ===== welcome banner ===== */
-    .welcome-banner {
-      background: linear-gradient(135deg, #27442d 0%, #2f994a 60%, #2a9e72 100%);
-      border-radius: 20px;
-      padding: 20px 24px;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .welcome-banner::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      right: -10%;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .welcome-banner .sub {
-      font-size: 12px;
-      opacity: 0.7;
-      font-weight: 400;
-      letter-spacing: 0.3px;
-    }
-
-    .welcome-banner h2 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-top: 2px;
-      letter-spacing: -0.3px;
-    }
-
-    .welcome-banner p {
-      font-size: 12px;
-      opacity: 0.75;
-      margin-top: 4px;
-      line-height: 1.5;
-      max-width: 80%;
-    }
-
-    /* ===== gallery overlay ===== */
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.50));
-      color: white;
-      font-size: 9px;
-      font-weight: 600;
-      padding: 6px 0;
-      text-align: center;
-      letter-spacing: 0.3px;
-    }
-
-    /* smooth scroll */
-    .scroll-smooth {
-      scroll-behavior: smooth;
-    }
-
-    /* ===== feature chips in about ===== */
-    .feature-chip {
-      background: rgba(241, 245, 249, 0.60);
-      backdrop-filter: blur(4px);
-      border-radius: 14px;
-      padding: 12px 8px;
-      text-align: center;
-      border: 1px solid rgba(226, 232, 240, 0.30);
-      transition: all 0.3s;
-    }
-
-    .feature-chip:hover {
-      transform: translateY(-2px);
-      background: white;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-    }
-
-    .feature-chip i {
-      color: #1a237e;
-      font-size: 18px;
-    }
-
-    .feature-chip p {
-      font-size: 10px;
-      font-weight: 600;
-      color: #1a2332;
-      margin-top: 4px;
-    }
-
-    /* ===== brand logo in footer ===== */
-    .brand-logo-circle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a237e, #2a3a9e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 14px;
-      box-shadow: 0 4px 16px rgba(26, 35, 126, 0.15);
-      flex-shrink: 0;
-    }
-    .admin{
-      color: #116444;
-      
-      border-radius: 50%;
-    }
-
-
-
-
-
-body{
-    margin:0;
-    padding:40px 20px;
-    background:#f4f7fb;
-    font-family:'Segoe UI',sans-serif;
-}
-
-.download-box{
-    max-width:420px;
-    margin:40px auto;
-    padding:30px 25px;
-    text-align:center;
-    background:#ffffff;
-    border-radius:20px;
-    border:1px solid #e5e7eb;
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
-}
-
-.download-box h2{
-    margin:0;
-    color:#1f2937;
-    font-size:28px;
-}
-
-.download-box p{
-    margin:12px 0 25px;
-    color:#6b7280;
-    font-size:15px;
-    line-height:1.6;
-}
-
-.download-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    padding:14px 34px;
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
-    color:#fff;
-    text-decoration:none;
-    font-size:17px;
-    font-weight:600;
-    border-radius:14px;
-    box-shadow:0 10px 25px rgba(37,99,235,.35);
-    transition:.3s;
-}
-
-.download-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 35px rgba(37,99,235,.45);
-}
-
-.download-btn:active{
-    transform:scale(.97);
-}
-
-@media (max-width:480px){
-
-    .download-box{
-        padding:25px 18px;
-        margin:20px auto;
-    }
-
-    .download-box h2{
-        font-size:24px;
-    }
-
-    .download-btn{
-        width:100%;
-        padding:14px;
-        font-size:16px;
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>HBUC · ইউনিভার্সিটি</title>
+
+    <!-- Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ───────────── RESET & BASE ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f4fb;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+        }
+
+        /* ───────────── APP CONTAINER ───────────── */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            min-height: 100vh;
+            background: #f1f4fb;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 88px;
+            /* space for fixed bottom nav */
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 24px;
+                background: #e8ecf5;
+                align-items: center;
+            }
+            .app-container {
+                max-width: 1280px;
+                border-radius: 36px;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+                padding: 0 32px 96px 32px;
+                min-height: auto;
+            }
+            .status-bar {
+                display: none !important;
+            }
+            .app-header {
+                border-radius: 20px 20px 0 0;
+                margin-top: 0;
+                padding: 18px 32px;
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 20 !important;
+            }
+            .desktop-nav {
+                display: flex !important;
+            }
+            .desktop-grid-2 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+            .desktop-full {
+                grid-column: 1 / -1;
+            }
+            .quick-grid {
+                grid-template-columns: repeat(6, 1fr) !important;
+                gap: 16px;
+            }
+            .quick-item {
+                padding: 20px 12px;
+                border-radius: 18px;
+                transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+                background: rgba(255, 255, 255, 0.75);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.60);
+            }
+            .quick-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 48px rgba(26, 35, 126, 0.08);
+                background: white;
+            }
+            .quick-item .icon-wrap {
+                width: 60px;
+                height: 60px;
+                font-size: 26px;
+                border-radius: 18px;
+            }
+            .quick-item .label {
+                font-size: 13px;
+                font-weight: 600;
+            }
+            .slider-container {
+                height: 420px !important;
+                border-radius: 24px;
+            }
+            .counter-card-app {
+                padding: 20px 24px;
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.75);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.60);
+            }
+            .counter-card-app .num {
+                font-size: 36px;
+            }
+            .counter-card-app .lbl {
+                font-size: 13px;
+            }
+            .counter-card-app .icon-bg {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+                border-radius: 16px;
+            }
+            .notice-card {
+                padding: 24px;
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.75);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.60);
+            }
+            .notice-item .content p {
+                font-size: 15px;
+            }
+            .about-grid-desktop {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                align-items: center;
+            }
+            .app-footer {
+                border-radius: 24px;
+                padding: 36px 40px;
+                margin-top: 28px;
+                background: rgba(255, 255, 255, 0.80);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.60);
+            }
+            .footer-grid-desktop {
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+                gap: 48px;
+            }
+            .download-box {
+                max-width: 100% !important;
+                margin: 20px auto !important;
+                padding: 30px !important;
+            }
+            .sticky-nav-mobile {
+                display: none !important;
+            }
+            /* ডেস্কটপে বটম নেভ সম্পূর্ণ স্কোয়ার + bottom:0 */
+            .bottom-nav {
+                max-width: 1280px !important;
+                bottom: 0 !important;
+                padding: 12px 24px !important;
+                border-radius: 0 !important;
+                gap: 8px !important;
+                margin: 0 !important;
+            }
+            .bottom-nav .nav-link {
+                padding: 10px 20px !important;
+                font-size: 13px !important;
+                border-radius: 0 !important;
+                flex-direction: row !important;
+                gap: 8px !important;
+            }
+            .bottom-nav .nav-link i {
+                font-size: 16px !important;
+            }
+            .bottom-nav .nav-link .label-text {
+                display: inline !important;
+                font-size: 13px !important;
+                font-weight: 500 !important;
+            }
+            .bottom-nav .nav-link .badge {
+                position: relative !important;
+                top: auto !important;
+                right: auto !important;
+                font-size: 9px !important;
+                padding: 1px 8px !important;
+                margin-left: 2px !important;
+            }
+            .bottom-nav .nav-link.dash {
+                padding: 10px 24px !important;
+                border-radius: 0 !important;
+            }
+            .bottom-nav .nav-link.dash .label-text {
+                color: white !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .app-container {
+                padding: 0 48px 100px 48px;
+            }
+            .slider-container {
+                height: 500px !important;
+            }
+            .quick-grid {
+                gap: 20px !important;
+            }
+            .bottom-nav {
+                max-width: 1280px !important;
+                padding: 14px 32px !important;
+                border-radius: 0 !important;
+                bottom: 0 !important;
+                margin: 0 !important;
+            }
+        }
+
+        /* ───────────── STICKY STATUS BAR ───────────── */
+        .status-bar {
+            position: relative;
+            top: 0;
+            z-index: 30;
+            background: #f1f4fb;
+            padding: 10px 0px 4px 0px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1e293b;
+            flex-shrink: 0;
+            letter-spacing: 0.3px;
+        }
+        .status-bar .time {
+            font-weight: 700;
+        }
+        .status-bar .icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar .icons i {
+            font-size: 0.8rem;
+            color: #475569;
+        }
+        .status-bar .battery {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .status-bar .battery .level {
+            width: 18px;
+            height: 9px;
+            border: 1.5px solid #475569;
+            border-radius: 0px;
+            padding: 1px;
+            position: relative;
+        }
+        .status-bar .battery .level::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 2px;
+            width: 3px;
+            height: 5px;
+            background: #475569;
+            border-radius: 0 0px 0px 0;
+        }
+        .status-bar .battery .level .fill {
+            height: 100%;
+            width: 72%;
+            background: #22c55e;
+            border-radius: 1px;
+        }
+
+        /* ───────────── STICKY APP HEADER ───────────── */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            padding: 12px 0px 1px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(243, 241, 241, 0.6);
+            background-image: url('https://hbuc.edu.bd/admin/uploads/nu-theme-1/website-banner6.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+            flex-shrink: 0;
+        }
+        .app-header .left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .app-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f8f8ff, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+            flex-shrink: 0;
+        }
+        .app-header .greeting {
+            display: flex;
+            flex-direction: column;
+        }
+        .app-header .greeting .hello {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .app-header .greeting .name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+        .app-header .greeting .name span {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .app-header .right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .app-header .right .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.60);
+            backdrop-filter: blur(8px);
+            color: #475569;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .app-header .right .icon-btn:active {
+            transform: scale(0.92);
+        }
+        .app-header .right .icon-btn .dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            border: 2px solid #fff;
+        }
+        .app-header .right .icon-btn:hover {
+            background: #fff;
+            color: #a7a7bb;
+        }
+
+        /* ───────────── DESKTOP NAV ───────────── */
+        .desktop-nav {
+            display: none;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            padding: 8px 20px;
+            border-radius: 60px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+            margin: 16px 0 20px;
+            gap: 2px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.50);
+        }
+        .desktop-nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 24px;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .desktop-nav a:hover {
+            background: rgba(26, 35, 126, 0.06);
+            color: #3a7e1a;
+        }
+        .desktop-nav a.active {
+            background: #1a597e;
+            color: white;
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.25);
+        }
+
+        /* ───────────── WELCOME BANNER ───────────── */
+        .welcome-banner {
+            background: linear-gradient(135deg, #02f029, #261558);
+            border-radius: 20px;
+            padding: 20px 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.20);
+        }
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.10) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .welcome-banner .sub {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+        .welcome-banner h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 2px;
+            letter-spacing: -0.3px;
+        }
+        .welcome-banner p {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 4px;
+            line-height: 1.5;
+            max-width: 80%;
+        }
+
+        /* ───────────── QUICK ACTIONS ───────────── */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .quick-item {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 16px;
+            padding: 14px 8px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+        .quick-item:active {
+            transform: scale(0.94);
+        }
+        .quick-item .icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        .quick-item:hover .icon-wrap {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        .quick-item .icon-wrap.blue {
+            background: linear-gradient(135deg, #e8edff, #d4dcff);
+            color: #6366f1;
+        }
+        .quick-item .icon-wrap.green {
+            background: linear-gradient(135deg, #e6f7ed, #c8f0da);
+            color: #14b8a6;
+        }
+        .quick-item .icon-wrap.purple {
+            background: linear-gradient(135deg, #f0e8ff, #e0d0ff);
+            color: #8b5cf6;
+        }
+        .quick-item .icon-wrap.orange {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #f59e0b;
+        }
+        .quick-item .icon-wrap.red {
+            background: linear-gradient(135deg, #fde8e8, #fccccc);
+            color: #ef4444;
+        }
+        .quick-item .icon-wrap.teal {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            color: #14b8a6;
+        }
+        .quick-item .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a2332;
+        }
+
+        /* ───────────── SLIDER ───────────── */
+        .slider-container {
+            height: 200px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+        .slide-img {
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .dot {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.40);
+            border: none;
+            padding: 0;
+        }
+        .dot-active {
+            background: #6366f1 !important;
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.30);
+        }
+        .dot-inactive {
+            background: rgba(255, 255, 255, 0.30) !important;
+        }
+
+        /* ───────────── COUNTER CARDS ───────────── */
+        .counter-card-app {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 18px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .counter-card-app::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 18px 18px 0 0;
+            background: linear-gradient(90deg, #08ff3d, #3e05eb);
+        }
+        .counter-card-app:nth-child(2)::before {
+            background: linear-gradient(90deg, #3200e6, #e9047a);
+        }
+        .counter-card-app .num {
+            font-size: 26px;
+            font-weight: 800;
+            color: #054112;
+            line-height: 1.1;
+        }
+        .counter-card-app .lbl {
+            font-size: 11px;
+            font-weight: 500;
+            color: #03852a;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .counter-card-app .icon-bg {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ───────────── NOTICE CARD ───────────── */
+        .notice-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 18px;
+            padding: 18px;
+        }
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .notice-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .notice-header a {
+            font-size: 12px;
+            color: #1ac903;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 4px 12px;
+            border-radius: 40px;
+            background: rgba(99, 102, 241, 0.06);
+            transition: 0.3s;
+        }
+        .notice-header a:hover {
+            background: rgba(99, 102, 241, 0.12);
+        }
+        .notice-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(203, 213, 225, 0.20);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+        .notice-item .badge {
+            background: #5354a7;
+            color: white;
+            font-size: 8px;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+        .notice-item .badge.green {
+            background: #14b8a6;
+        }
+        .notice-item .badge.orange {
+            background: #f59e0b;
+        }
+        .notice-item .content {
+            flex: 1;
+        }
+        .notice-item .content p {
+            font-size: 13px;
+            color: #1e293b;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .notice-item .content .meta {
+            font-size: 10px;
+            color: #5d6f88;
+            margin-top: 3px;
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ───────────── GLASS CARD ───────────── */
+        .glass-card {
+            background: rgba(234, 238, 236, 0.589);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 18px;
+            padding: 18px;
+        }
+        .about-img {
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .about-img:hover {
+            transform: scale(1.02) rotate(-1deg);
+        }
+        .feature-chip {
+            background: rgba(232, 238, 238, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 14px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid rgba(54, 34, 34, 0.082);
+            transition: all 0.3s;
+        }
+        .feature-chip:hover {
+            transform: translateY(-2px);
+            background: rgb(247, 247, 247);
+            box-shadow: 0 4px 16px rgba(204, 204, 204, 0.03);
+        }
+        .feature-chip i {
+            color: #12a819a6;
+            font-size: 18px;
+        }
+        .feature-chip p {
+            font-size: 10px;
+            font-weight: 600;
+            color: #071a3a;
+            margin-top: 4px;
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.50));
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 6px 0;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        /* ───────────── FOOTER ───────────── */
+        .app-footer {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 24px 24px 0 0;
+            padding: 24px 18px 28px;
+            margin-top: 20px;
+        }
+        .contact-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.50);
+            padding: 8px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.60);
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .contact-chip:hover {
+            background: rgba(255, 255, 255, 0.80);
+            transform: translateX(4px);
+        }
+        .contact-chip-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(99, 102, 241, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8472c2;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .newsletter-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.50);
+            border-radius: 40px;
+            padding: 4px 4px 4px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.60);
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .newsletter-wrap:focus-within {
+            border-color: #cfcfe4;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.06);
+        }
+        .newsletter-icon {
+            color: #6366f1;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .newsletter-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 10px 0;
+            font-size: 13px;
+            outline: none;
+            color: #1a2332;
+            font-family: 'Inter', sans-serif;
+        }
+        .newsletter-input::placeholder {
+            color: #94a3b8;
+            font-weight: 300;
+        }
+        .subscribe-btn {
+            background: linear-gradient(135deg, #1e208f, #028538);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.20);
+        }
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.25);
+        }
+        .subscribe-btn:active {
+            transform: scale(0.96);
+        }
+        .brand-logo-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+            flex-shrink: 0;
+        }
+        .footer-divider {
+            border-top: 1px solid rgba(203, 213, 225, 0.30);
+            width: 100%;
+        }
+        .bottom-link {
+            color: #64748b;
+            transition: color 0.2s;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .bottom-link:hover {
+            color: #6366f1;
+        }
+
+        /* ───────────── DOWNLOAD BOX ───────────── */
+        .download-box {
+            max-width: 420px;
+            margin: 20px auto;
+            padding: 25px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.02);
+        }
+        .download-box h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .download-box p {
+            margin: 12px 0 25px;
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 34px;
+            background: linear-gradient(135deg, #26d326, #2b028b);
+            color: #fff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+            transition: 0.3s;
+        }
+        .download-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 35px rgba(99, 102, 241, 0.45);
+        }
+        .download-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           BOTTOM FIXED NAVIGATION – সম্পূর্ণ স্কোয়ার + bottom:0 + margin:0
+           ═══════════════════════════════════════════════════ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0 !important;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 420px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 0 !important;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.70);
+            gap: 2px;
+            transition: all 0.3s ease;
+            margin: 0 !important;
+        }
+
+        .bottom-nav .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            padding: 6px 8px;
+            border-radius: 0 !important;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            white-space: nowrap;
+            min-width: 44px;
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .bottom-nav .nav-link i {
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .bottom-nav .nav-link .label-text {
+            display: block;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            margin-top: 1px;
+        }
+
+        .bottom-nav .nav-link .badge {
+            background: #ef4444;
+            color: #fff;
+            font-size: 0.4rem;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 20px;
+            position: absolute;
+            top: 0px;
+            right: 2px;
+            line-height: 1.4;
+        }
+
+        .bottom-nav .nav-link.active {
+            color: #065f24;
+        }
+        .bottom-nav .nav-link.active i {
+            transform: translateY(-1px);
+        }
+
+        /* ড্যাশবোর্ড বাটন – এটিও স্কোয়ার */
+        .bottom-nav .nav-link.dash {
+            background: linear-gradient(135deg, #63f16a, #8bfab0);
+            color: white !important;
+            padding: 6px 14px;
+            border-radius: 0 !important;
+            box-shadow: 0 4px 16px rgba(144, 144, 189, 0.2);
+            flex-direction: row !important;
+            gap: 6px !important;
+        }
+        .bottom-nav .nav-link.dash i {
+            color: white !important;
+            font-size: 1rem !important;
+        }
+        .bottom-nav .nav-link.dash .label-text {
+            color: white !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+        }
+        .bottom-nav .nav-link.dash.active {
+            background: linear-gradient(135deg, #01bd39, #3123f5);
+            box-shadow: 0 6px 20px rgba(5, 5, 27, 0.3);
+            border-radius: 20px;
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 460px) {
+            .app-header {
+                padding: 10px 16px 14px 16px;
+            }
+            .app-header .greeting .name {
+                font-size: 1rem;
+            }
+            .app-header .avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 0.8rem;
+            }
+            .quick-item {
+                padding: 10px 4px;
+                border-radius: 14px;
+            }
+            .quick-item .icon-wrap {
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+                border-radius: 12px;
+            }
+            .quick-item .label {
+                font-size: 9px;
+            }
+            .counter-card-app .num {
+                font-size: 22px;
+            }
+            .counter-card-app .icon-bg {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+            }
+            .notice-item .content p {
+                font-size: 12px;
+            }
+            .status-bar {
+                padding: 8px 16px 2px 16px;
+                font-size: 0.65rem;
+            }
+
+            .bottom-nav {
+                bottom: 0 !important;
+                padding: 4px 6px;
+                border-radius: 0 !important;
+                width: calc(100% - 20px);
+                gap: 0px;
+                margin: 0 !important;
+            }
+            .bottom-nav .nav-link {
+                font-size: 0.4rem;
+                padding: 4px 4px;
+                min-width: 36px;
+                border-radius: 0 !important;
+            }
+            .bottom-nav .nav-link i {
+                font-size: 0.95rem;
+            }
+            .bottom-nav .nav-link .label-text {
+                font-size: 7px;
+            }
+            .bottom-nav .nav-link.dash {
+                padding: 4px 10px;
+                border-radius: 0 !important;
+            }
+            .bottom-nav .nav-link.dash .label-text {
+                font-size: 9px !important;
+            }
+            .bottom-nav .nav-link .badge {
+                font-size: 0.35rem;
+                padding: 0px 5px;
+                top: 0px;
+                right: 0px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .quick-grid {
+                gap: 6px;
+            }
+            .quick-item .icon-wrap {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+            }
+            .quick-item .label {
+                font-size: 8px;
+            }
+            .counter-card-app {
+                padding: 10px 12px;
+            }
+            .counter-card-app .num {
+                font-size: 18px;
+            }
+            .bottom-nav .nav-link {
+                min-width: 30px;
+                padding: 3px 2px;
+            }
+            .bottom-nav .nav-link i {
+                font-size: 0.8rem;
+            }
+            .bottom-nav .nav-link .label-text {
+                font-size: 6px;
+            }
+            .bottom-nav .nav-link.dash {
+                padding: 3px 8px;
+            }
+            .bottom-nav .nav-link.dash .label-text {
+                font-size: 8px !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="app-container">
+    <div class="app-container">
 
-    <!-- ===== STATUS BAR (Mobile Only) ===== -->
-    
-
-    <!-- ===== APP HEADER ===== -->
-    <div class="app-header">
-      
-      <div class="title"><span></span></div>
-      <div class="action-icons">
-
-        <a href="https://hbuc-admin.netlify.app" class="admin"><i class="fa-solid fa-circle-user"></i></a>
-      </div>
-    </div>
-
-    <!-- ===== DESKTOP NAV (Hidden on Mobile) ===== -->
-    <div class="desktop-nav">
-      <a href="#" class="active">Home</a>
-      <a href="teacher.html">Teachers</a>
-      <a href="student.html">Students</a>
-      <a href="subject.html">Subjects</a>
-      <a href="notice.html">Notices</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact Us</a>
-    </div>
-
-    <!-- ===== WELCOME BANNER ===== -->
-    <div class="px-4 pt-3">
-      <div class="welcome-banner">
-        <p class="sub"><i class="fas fa-graduation-cap mr-1.5"></i>Finance Department</p>
-        <h2>Welcome to HBUC</h2>
-        <p>We are committed to quality education and building a better future.</p>
-      </div>
-    </div>
-
-    <!-- ===== QUICK ACCESS ===== -->
-    <div class="px-4 mt-4">
-      <div class="quick-grid">
-        <a href="notice.html" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap blue"><i class="fas fa-bullhorn"></i></div>
-          <div class="label">Notice</div>
-        </a>
-        <a href="#about" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap green"><i class="fas fa-calendar-alt"></i></div>
-          <div class="label">About Us</div>
-        </a>
-        <a href="teacher.html" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap purple"><i class="fas fa-chalkboard-teacher"></i></div>
-          <div class="label">Teachers</div>
-        </a>
-        <a href="student.html" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap orange"><i class="fas fa-user-graduate"></i></div>
-          <div class="label">Students</div>
-        </a>
-        <a href="subject.html" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap red"><i class="fas fa-images"></i></div>
-          <div class="label">Subjects</div>
-        </a>
-        <a href="#contact" class="quick-item" style="text-decoration:none;">
-          <div class="icon-wrap teal"><i class="fas fa-phone-alt"></i></div>
-          <div class="label">Contact</div>
-        </a>
-      </div>
-    </div>
-
-    <!-- ===== SLIDER ===== -->
-    <div class="px-4 mt-4 relative">
-      <div class="relative w-full slider-container">
-        <img id="slide1" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/66b352033738c2985.jpg" class="slide-img absolute w-full h-full object-cover opacity-100" alt="campus 1">
-        <img id="slide2" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00dc3622f21802.jpg" class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 2">
-        <img id="slide3" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00ef0934149645.jpg" class="slide-img absolute w-full h-full object-cover opacity-0" alt="campus 3">
-      </div>
-      <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn backdrop-blur-sm">
-        &#10094;
-      </button>
-      <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 touch-btn backdrop-blur-sm">
-        &#10095;
-      </button>
-      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2.5 z-10">
-        <button data-index="0" class="dot w-2.5 h-2.5 rounded-full transition-all dot-active touch-btn"></button>
-        <button data-index="1" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
-        <button data-index="2" class="dot w-2.5 h-2.5 rounded-full transition-all dot-inactive touch-btn"></button>
-      </div>
-    </div>
-
-    <!-- ===== DESKTOP GRID (2 Columns on Desktop) ===== -->
-    <div class="desktop-grid-2" style="display:block;">
-
-      <!-- Left Column -->
-      <div>
-
-        <!-- ===== NOTICE SECTION ===== -->
-        <div class="px-4 mt-4">
-          <div class="notice-card">
-            <div class="notice-header">
-              <h3><i class="fas fa-bullhorn text-[#1a237e] mr-2"></i>Latest Notice</h3>
-              <a href="notice.html">View All <i class="fas fa-chevron-right text-[10px]"></i></a>
+        <!-- ═══ APP HEADER (Sticky) ═══ -->
+        <header class="app-header">
+            <div class="right">
+                <button class="icon-btn" aria-label="Notifications">
+                    <a href="https://hbuc-admin.netlify.app"> <i class="fa-regular fa-circle-user"></i></a>
+                    <span class="dot"></span>
+                </button>
             </div>
-            <div class="notice-item">
-              <span class="badge">NEW</span>
-              <div class="content">
-                <p>Go to notice board</p>
-              </div>
+        </header>
+
+        <!-- ═══ DESKTOP NAV ═══ -->
+        <nav class="desktop-nav">
+            <a href="#" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="teacher.html">Teachers</a>
+            <a href="student.html">Students</a>
+            <a href="subject.html">Subjects</a>
+            <a href="notice.html">Notices</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- ═══ WELCOME BANNER ═══ -->
+        <div class="px-4 pt-3">
+            <div class="welcome-banner">
+                <p class="sub"><i class="fas fa-graduation-cap mr-1.5"></i>Finance Department</p>
+                <h2>Welcome to HBUC</h2>
+                <p>We are committed to quality education and building a better future.</p>
             </div>
-            <div class="notice-item">
-              <span class="badge green">UPDATE</span>
-              <div class="content">
-                <p>Go to notice board</p>
-              </div>
-            </div>
-            <div class="notice-item">
-              <span class="badge orange">URGENT</span>
-              <div class="content">
-                <p>Go to notice board</p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <!-- ===== COUNTER CARDS ===== -->
-        <div class="px-4 mt-4 flex gap-3">
-          <div class="counter-card-app">
-            <div class="icon-bg" style="background:linear-gradient(135deg,#e8edff,#d4dcff); color:#1a237e;"><i class="fas fa-user-graduate"></i></div>
-            <div>
-              <div class="counter num" data-target="19">0</div>
-              <div class="lbl">Students</div>
+        <!-- ═══ SLIDER ═══ -->
+        <div class="px-4 mt-4 relative">
+            <div class="relative w-full slider-container">
+                <img id="slide1" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/66b352033738c2985.jpg" class="slide-img opacity-100" alt="campus 1">
+                <img id="slide2" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00dc3622f21802.jpg" class="slide-img opacity-0" alt="campus 2">
+                <img id="slide3" src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/website/section/62d00ef0934149645.jpg" class="slide-img opacity-0" alt="campus 3">
             </div>
-          </div>
-          <div class="counter-card-app">
-            <div class="icon-bg" style="background:linear-gradient(135deg,#f0e8ff,#e0d0ff); color:#6c3cb0;"><i class="fas fa-chalkboard-teacher"></i></div>
-            <div>
-              <div class="counter num" data-target="7">0</div>
-              <div class="lbl">Teachers</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right Column -->
-      <div>
-
-        <!-- ===== OUR JOURNEY (Gallery) ===== -->
-        <div class="px-4 mt-4">
-          <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-sm">
-            <h3 class="text-base font-bold text-[#1a2332] mb-3"><i class="fas fa-images text-[#1a237e] mr-2"></i>Our Journey</h3>
-            <div class="grid grid-cols-2 gap-2.5">
-              <div class="rounded-xl overflow-hidden shadow-sm">
-                <a href="image/h1.jpeg" target="_blank"><img src="image/h1.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
-              </div>
-              <div class="rounded-xl overflow-hidden shadow-sm">
-                <a href="image/h2.jpeg" target="_blank"><img src="image/h2.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
-              </div>
-              <div class="col-span-2 rounded-xl overflow-hidden shadow-sm">
-                <video controls class="w-full max-h-44 object-cover">
-                  <source src="image/hv1.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="rounded-xl overflow-hidden relative shadow-sm group">
-                <a href="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" target="_blank">
-                  <img src="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="routine">
-                </a>
-                <div class="gallery-overlay">Class Routine</div>
-              </div>
-              <div class="rounded-xl overflow-hidden relative shadow-sm group">
-                <a href="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" target="_blank">
-                  <img src="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="holiday">
-                </a>
-                <div class="gallery-overlay">ছুটির দিনসমূহ</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-
-
-
-
-   
-    <div class="download-box">
-
-    <h2>📱 Download App</h2>
-    <p>Get the latest version of our application.</p>
-
-    <a href="https://www.appcreator24.com/app4107760-zsuitv" " class="download-btn">
-        ⬇ Download App
-    </a>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- ===== ABOUT SECTION (Full Width) ===== -->
-    <section id="about" class="px-4 mt-4 desktop-full">
-      <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-sm">
-        <span class="text-[#1a237e] uppercase text-[10px] tracking-[0.2em] font-semibold"><i class="fas fa-info-circle mr-1.5"></i>Educational Platform</span>
-        <h2 class="text-xl font-bold text-[#1a2332] mt-1">আমাদের ওয়েবসাইট সম্পর্কে</h2>
-        <div class="w-12 h-1 bg-gradient-to-r from-[#1a237e] to-[#2a3a9e] mt-2 mb-4 rounded-full"></div>
-
-        <div class="about-grid-desktop">
-          <!-- Left: Text -->
-          <div>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              আমাদের কলেজের সকল শিক্ষার্থী ও শিক্ষকদের জন্য একটি আধুনিক, তথ্যসমৃদ্ধ এবং সহজে ব্যবহারযোগ্য প্ল্যাটফর্ম তৈরির লক্ষ্য নিয়ে এই ওয়েবসাইটটি তৈরি করা হয়েছে।
-            </p>
-            <p class="text-gray-600 text-sm leading-relaxed mt-3">
-              শিক্ষার্থীদের সুবিধার কথা বিবেচনা করে এই প্ল্যাটফর্মে কলেজ জীবনের চার বছরের সকল বিষয়ভিত্তিক নোট, গুরুত্বপূর্ণ ক্লাস ম্যাটেরিয়াল, সাজেশন এবং প্রয়োজনীয় শিক্ষাসামগ্রী সংরক্ষণ ও আপলোড করা হবে।
-            </p>
-            <p class="text-gray-600 text-sm leading-relaxed mt-3">
-              নিয়মিত নতুন নোট, অ্যাসাইনমেন্ট, পরীক্ষার আপডেট, রুটিন, শিক্ষক ও শিক্ষার্থীদের তথ্য এবং কলেজের বিভিন্ন অনুষ্ঠানের তথ্য প্রকাশ করা হবে। আমাদের লক্ষ্য হলো শিক্ষার্থীদের পড়াশোনাকে আরও সহজ, দ্রুত এবং কার্যকর করে তোলা।
-            </p>
-
-            <!-- Features -->
-            <div class="grid grid-cols-2 gap-2.5 mt-4">
-              <div class="feature-chip">
-                <i class="fas fa-book-open"></i>
-                <p>Study Notes</p>
-              </div>
-              <div class="feature-chip">
-                <i class="fas fa-calendar-check"></i>
-                <p>Exam Updates</p>
-              </div>
-              <div class="feature-chip">
-                <i class="fas fa-pen-fancy"></i>
-                <p>Assignments</p>
-              </div>
-              <div class="feature-chip">
-                <i class="fas fa-users"></i>
-                <p>Support</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Image -->
-          <div class="flex justify-center mt-4 md:mt-0">
-            <img src="image/pic4.jpeg" alt="About Us" class="about-img w-full max-w-xs md:max-w-sm object-cover">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FOOTER (Contact Us) ===== -->
-    <footer class="app-footer" id="contact">
-      <div class="footer-grid-desktop">
-        <!-- COL 1: Brand -->
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="brand-logo-circle"><img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/logo.svg" alt=""></div>
-            <span class="text-lg font-extrabold text-[#1a2332]">HBUC</span>
-          </div>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            "এখানে একাডেমি-সম্পর্কিত সকল গ্রুপের লিংক দেওয়া হয়েছে, যাতে সবাই সহজেই পড়াশোনার তথ্য, নোটিশ এবং গুরুত্বপূর্ণ আপডেট জানতে পারে।" 📚✨
-          </p>
-          <div class="flex gap-3 mt-4">
-            <span class="text-xs text-gray-500 font-medium flex items-center">Friends</span>
-            <a href="https://m.me/j/AbbqkhQcpepfV0eT/" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
-              <i class="fab fa-facebook-messenger"></i>
-            </a>
-            <span class="text-xs text-gray-500 font-medium flex items-center ml-1">Main</span>
-            <a href="https://chat.whatsapp.com/E2dTp1AvVuhIb6KKTeGQbV" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-            <span class="text-xs text-gray-500 font-medium flex items-center ml-1">History</span>
-            <a href="https://chat.whatsapp.com/C8gqmXhhXmn5o1OumpEfEK" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#1a237e] border border-gray-200/50 text-sm hover:bg-[#1a237e] hover:text-white transition backdrop-blur-sm">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- COL 2: Quick Links -->
-        <div>
-          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Quick Links
-          </h4>
-          <ul class="space-y-2.5 text-sm text-gray-500">
-            <li><a href="#" class="hover:text-[#1a237e] transition">Home</a></li>
-            <li><a href="teacher.html" class="hover:text-[#1a237e] transition">Teachers</a></li>
-            <li><a href="student.html" class="hover:text-[#1a237e] transition">Students</a></li>
-            <li><a href="subject.html" class="hover:text-[#1a237e] transition">Subjects</a></li>
-            <li><a href="notice.html" class="hover:text-[#1a237e] transition">Notices</a></li>
-            <li><a href="#about" class="hover:text-[#1a237e] transition">About Us</a></li>
-            <li><a href="#contact" class="hover:text-[#1a237e] transition">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- COL 3: CONTACT -->
-        <div>
-          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Contact Info
-          </h4>
-          <div class="space-y-3">
-            <div class="contact-chip">
-              <div class="contact-chip-icon"><i class="fas fa-map-pin"></i></div>
-              <span class="text-gray-600 text-sm">Mizan road, rampura, Dhaka-1000</span>
-            </div>
-            <div class="contact-chip">
-              <div class="contact-chip-icon"><i class="fas fa-phone"></i></div>
-              <span class="text-gray-600 text-sm">+880 01621183068</span>
-            </div>
-            <div class="contact-chip">
-              <div class="contact-chip-icon"><i class="fas fa-envelope"></i></div>
-              <span class="text-gray-600 text-sm">rsiyam548@gmail.com</span>
-            </div>
-            <div class="contact-chip">
-              <div class="contact-chip-icon"><i class="fas fa-clock"></i></div>
-              <span class="text-gray-600 text-sm">Sat–Thu: 8AM – 6PM</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- COL 4: NEWSLETTER -->
-        <div>
-          <h4 class="text-xs font-bold text-[#1a2332] uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="w-6 h-0.5 bg-[#1a237e]/30"></span>Stay Updated
-          </h4>
-          <p class="text-gray-500 text-sm mb-4">
-            Get latest news, events & updates directly in your inbox.
-          </p>
-          <div class="space-y-3">
-            <div class="newsletter-wrap">
-              <i class="fas fa-envelope newsletter-icon"></i>
-              <input type="email" placeholder="Enter your email" class="newsletter-input">
-            </div>
-            <button class="subscribe-btn">
-              <span><i class="fas fa-arrow-right mr-2"></i> Subscribe</span>
+            <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 backdrop-blur-sm">
+                &#10094;
             </button>
-          </div>
-          <p class="text-gray-600 text-xs mt-3 flex items-center gap-1.5">
-            <i class="fas fa-check-circle text-[#1a237e] text-xs"></i>
-            Remember Me •
-          </p>
+            <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white text-lg font-bold px-2.5 py-1 rounded-full transition z-10 backdrop-blur-sm">
+                &#10095;
+            </button>
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2.5 z-10">
+                <button data-index="0" class="dot dot-active"></button>
+                <button data-index="1" class="dot dot-inactive"></button>
+                <button data-index="2" class="dot dot-inactive"></button>
+            </div>
         </div>
-      </div>
 
-      <!-- Divider -->
-      <div class="footer-divider my-8"></div>
+        <!-- ═══ DESKTOP GRID ═══ -->
+        <div class="desktop-grid-2" style="display:block;">
 
-      <!-- Bottom Bar -->
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-gray-600 text-sm">
-          © 2026 <span class="text-gray-800 font-medium">HBUC</span> · Made by Samiur Rahman (Siyam)
-        </p>
-        <div class="flex items-center gap-5 text-sm">
-          <a href="#" class="bottom-link">Privacy</a>
-          <span class="text-gray-300">•</span>
-          <a href="#" class="bottom-link">Terms</a>
-          <span class="text-gray-300">•</span>
-          <a href="#" class="bottom-link">Cookies</a>
-          <span class="text-gray-300">•</span>
-          <a href="#" class="bottom-link">Support</a>
+            <!-- Left Column -->
+            <div>
+
+                <!-- ═══ NOTICE SECTION ═══ -->
+                <div class="px-4 mt-4">
+                    <div class="notice-card">
+                        <div class="notice-header">
+                            <h3><i class="fas fa-bullhorn text-[#6366f1] mr-2"></i>Latest Notice</h3>
+                            <a href="notice.html">View All <i class="fas fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                        <div class="notice-item">
+                            <span class="badge">NEW</span>
+                            <div class="content">
+                                <p>Go to notice board</p>
+                            </div>
+                        </div>
+                        <div class="notice-item">
+                            <span class="badge green">UPDATE</span>
+                            <div class="content">
+                                <p>Go to notice board</p>
+                            </div>
+                        </div>
+                        <div class="notice-item">
+                            <span class="badge orange">URGENT</span>
+                            <div class="content">
+                                <p>Go to notice board</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ COUNTER CARDS ═══ -->
+                <div class="px-4 mt-4 flex gap-3">
+                    <div class="counter-card-app">
+                        <div class="icon-bg" style="background:linear-gradient(135deg,#e8edff,#d4dcff); color:#057420;"><i class="fas fa-user-graduate"></i></div>
+                        <div>
+                            <div class="counter num" data-target="19">0</div>
+                            <div class="lbl">Students</div>
+                        </div>
+                    </div>
+                    <div class="counter-card-app">
+                        <div class="icon-bg" style="background:linear-gradient(135deg,#f0e8ff,#e0e0e0); color:#099214;"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div>
+                            <div class="counter num" data-target="8">0</div>
+                            <div class="lbl">Teachers</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column -->
+            <div>
+
+                <!-- ═══ GALLERY ═══ -->
+                <div class="px-4 mt-4">
+                    <div class="glass-card">
+                        <h3 class="text-base font-bold text-[#0f172a] mb-3"><i class="fas fa-images text-[#0e8b3e] mr-2"></i>Our Journey</h3>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div class="rounded-xl overflow-hidden shadow-sm">
+                                <a href="image/h1.jpeg" target="_blank"><img src="image/h1.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
+                            </div>
+                            <div class="rounded-xl overflow-hidden shadow-sm">
+                                <a href="image/h2.jpeg" target="_blank"><img src="image/h2.jpeg" class="w-full h-28 object-cover hover:scale-105 transition duration-500" alt="gallery"></a>
+                            </div>
+                            <div class="col-span-2 rounded-xl overflow-hidden shadow-sm">
+                                <video controls class="w-full max-h-44 object-cover">
+                                    <source src="image/hv1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="rounded-xl overflow-hidden relative shadow-sm group">
+                                <a href="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" target="_blank">
+                                    <img src="https://i.ibb.co.com/Z6FX6Fdt/Whats-App-Image-2026-06-17-at-12-06-38-PM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="routine">
+                                </a>
+                                <div class="gallery-overlay">Class Routine</div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden relative shadow-sm group">
+                                <a href="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" target="_blank">
+                                    <img src="https://i.ibb.co.com/27wQ20bG/Whats-App-Image-2026-07-01-at-11-14-51-AM.jpg" class="w-full h-28 object-cover cursor-pointer group-hover:scale-105 transition duration-500" alt="holiday">
+                                </a>
+                                <div class="gallery-overlay">ছুটির দিনসমূহ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
-    </footer>
-  </div>
 
-  <!-- ===== JAVASCRIPT ===== -->
-  <script>
-    (function() {
-      // Slider
-      const slides = [
-        document.getElementById('slide1'),
-        document.getElementById('slide2'),
-        document.getElementById('slide3')
-      ];
-      const dots = document.querySelectorAll('.dot');
-      let currentIndex = 0;
-      let autoInterval = null;
+        <!-- ═══ DOWNLOAD APP ═══ -->
+        <div class="download-box">
+            <h2>📱 Download App</h2>
+            <p>Get the latest version of our application.</p>
+            <a href="https://www.appcreator24.com/app4107760-zsuitv" class="download-btn">
+                ⬇ Download App
+            </a>
+        </div>
 
-      function changeSlide(index) {
-        if (index < 0) index = slides.length - 1;
-        if (index >= slides.length) index = 0;
-        slides.forEach((img, i) => {
-          img.style.opacity = '0';
-        });
-        slides[index].style.opacity = '1';
-        dots.forEach((dot, i) => {
-          if (i === index) {
-            dot.classList.remove('dot-inactive');
-            dot.classList.add('dot-active');
-          } else {
-            dot.classList.remove('dot-active');
-            dot.classList.add('dot-inactive');
-          }
-        });
-        currentIndex = index;
-      }
+        <!-- ═══ ABOUT SECTION ═══ -->
+        <section id="about" class="px-4 mt-4 desktop-full">
+            <div class="glass-card">
+                <span class="text-[#06961a] uppercase text-[10px] tracking-[0.2em] font-semibold"><i class="fas fa-info-circle mr-1.5"></i>Educational Platform</span>
+                <h2 class="text-xl font-bold text-[#0f172a] mt-1">আমাদের ওয়েবসাইট সম্পর্কে</h2>
+                <div class="w-12 h-1 bg-gradient-to-r from-[#63f1a3] to-[#a78bfa] mt-2 mb-4 rounded-full"></div>
 
-      function nextSlide() { changeSlide(currentIndex + 1);
-        resetAutoPlay(); }
+                <div class="about-grid-desktop">
+                    <div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            আমাদের কলেজের সকল শিক্ষার্থী ও শিক্ষকদের জন্য একটি আধুনিক, তথ্যসমৃদ্ধ এবং সহজে ব্যবহারযোগ্য প্ল্যাটফর্ম তৈরির লক্ষ্য নিয়ে এই ওয়েবসাইটটি তৈরি করা হয়েছে।
+                        </p>
+                        <p class="text-gray-600 text-sm leading-relaxed mt-3">
+                            শিক্ষার্থীদের সুবিধার কথা বিবেচনা করে এই প্ল্যাটফর্মে কলেজ জীবনের চার বছরের সকল বিষয়ভিত্তিক নোট, গুরুত্বপূর্ণ ক্লাস ম্যাটেরিয়াল, সাজেশন এবং প্রয়োজনীয় শিক্ষাসামগ্রী সংরক্ষণ ও আপলোড করা হবে।
+                        </p>
+                        <p class="text-gray-600 text-sm leading-relaxed mt-3">
+                            নিয়মিত নতুন নোট, অ্যাসাইনমেন্ট, পরীক্ষার আপডেট, রুটিন, শিক্ষক ও শিক্ষার্থীদের তথ্য এবং কলেজের বিভিন্ন অনুষ্ঠানের তথ্য প্রকাশ করা হবে। আমাদের লক্ষ্য হলো শিক্ষার্থীদের পড়াশোনাকে আরও সহজ, দ্রুত এবং কার্যকর করে তোলা।
+                        </p>
 
-      function prevSlide() { changeSlide(currentIndex - 1);
-        resetAutoPlay(); }
+                        <div class="grid grid-cols-2 gap-2.5 mt-4">
+                            <div class="feature-chip">
+                                <i class="fas fa-book-open"></i>
+                                <p>Study Notes</p>
+                            </div>
+                            <div class="feature-chip">
+                                <i class="fas fa-calendar-check"></i>
+                                <p>Exam Updates</p>
+                            </div>
+                            <div class="feature-chip">
+                                <i class="fas fa-pen-fancy"></i>
+                                <p>Assignments</p>
+                            </div>
+                            <div class="feature-chip">
+                                <i class="fas fa-users"></i>
+                                <p>Support</p>
+                            </div>
+                        </div>
+                    </div>
 
-      function resetAutoPlay() {
-        if (autoInterval) { clearInterval(autoInterval);
-          autoInterval = null; }
-        autoInterval = setInterval(nextSlide, 4500);
-      }
+                    <div class="flex justify-center mt-4 md:mt-0">
+                        <img src="image/pic4.jpeg" alt="About Us" class="about-img w-full max-w-xs md:max-w-sm object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      document.getElementById('nextBtn').addEventListener('click', nextSlide);
-      document.getElementById('prevBtn').addEventListener('click', prevSlide);
-      dots.forEach((dot, idx) => {
-        dot.addEventListener('click', function() { changeSlide(idx);
-          resetAutoPlay(); });
-      });
-      resetAutoPlay();
+        <!-- ═══ FOOTER ═══ -->
+        <footer class="app-footer" id="contact">
+            <div class="footer-grid-desktop">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="brand-logo-circle"><img src="https://hbuc.edu.bd/admin/uploads/nu-theme-1/logo.svg" alt="logo" class="w-full h-full object-cover rounded-full"></div>
+                        <span class="text-lg font-extrabold text-[#0f172a]">HBUC</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        "এখানে একাডেমি-সম্পর্কিত সকল গ্রুপের লিংক দেওয়া হয়েছে, যাতে সবাই সহজেই পড়াশোনার তথ্য, নোটিশ এবং গুরুত্বপূর্ণ আপডেট জানতে পারে।" 📚✨
+                    </p>
+                    <div class="flex gap-3 mt-4">
+                        <span class="text-xs text-gray-500 font-medium flex items-center">Friends</span>
+                        <a href="https://m.me/j/AbbqkhQcpepfV0eT/" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#006dd4] border border-gray-200/50 text-sm hover:bg-[#23c79e] hover:text-white transition backdrop-blur-sm">
+                            <i class="fab fa-facebook-messenger"></i>
+                        </a>
+                        <span class="text-xs text-gray-500 font-medium flex items-center ml-1">Main</span>
+                        <a href="https://chat.whatsapp.com/E2dTp1AvVuhIb6KKTeGQbV" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#00ff40] border border-gray-200/50 text-sm hover:bg-[#04e00f] hover:text-white transition backdrop-blur-sm">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <span class="text-xs text-gray-500 font-medium flex items-center ml-1">History</span>
+                        <a href="https://chat.whatsapp.com/C8gqmXhhXmn5o1OumpEfEK" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#00ff2a] border border-gray-200/50 text-sm hover:bg-[#63f1a3] hover:text-white transition backdrop-blur-sm">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        </a>
+                        <span class="text-xs text-gray-500 font-medium flex items-center ml-1">ICT</span>
+                        <a href="https://chat.whatsapp.com/Hx5gQqSlFKFLNhRPA4QXNP" class="w-9 h-9 rounded-full bg-gray-100/60 flex items-center justify-center text-[#00ff2a] border border-gray-200/50 text-sm hover:bg-[#63f1a3] hover:text-white transition backdrop-blur-sm">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div> 
+                </div>
 
-      // Counters
-      const counters = document.querySelectorAll('.counter');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const counter = entry.target;
-            if (!counter.dataset.started) {
-              counter.dataset.started = true;
-              animateCounter(counter);
+                <div>
+                    <h4 class="text-xs font-bold text-[#0f172a] uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <span class="w-6 h-0.5 bg-[#6366f1]/30"></span>Quick Links
+                    </h4>
+                    <ul class="space-y-2.5 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-[#6366f1] transition">Home</a></li>
+                        <li><a href="teacher.html" class="hover:text-[#6366f1] transition">Teachers</a></li>
+                        <li><a href="student.html" class="hover:text-[#6366f1] transition">Students</a></li>
+                        <li><a href="subject.html" class="hover:text-[#6366f1] transition">Subjects</a></li>
+                        <li><a href="notice.html" class="hover:text-[#6366f1] transition">Notices</a></li>
+                        <li><a href="#about" class="hover:text-[#6366f1] transition">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-[#6366f1] transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-[#0f172a] uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <span class="w-6 h-0.5 bg-[#6366f1]/30"></span>Contact Info
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="contact-chip">
+                            <div class="contact-chip-icon"><i class="fas fa-map-pin"></i></div>
+                            <span class="text-gray-600 text-sm">Mizan road, rampura, Dhaka-1000</span>
+                        </div>
+                        <div class="contact-chip">
+                            <div class="contact-chip-icon"><i class="fas fa-phone"></i></div>
+                            <span class="text-gray-600 text-sm">+880 01621183068</span>
+                        </div>
+                        <div class="contact-chip">
+                            <div class="contact-chip-icon"><i class="fas fa-envelope"></i></div>
+                            <span class="text-gray-600 text-sm">rsiyam548@gmail.com</span>
+                        </div>
+                        <div class="contact-chip">
+                            <div class="contact-chip-icon"><i class="fas fa-clock"></i></div>
+                            <span class="text-gray-600 text-sm">Sat–Thu: 8AM – 6PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-[#0f172a] uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <span class="w-6 h-0.5 bg-[#6366f1]/30"></span>Stay Updated
+                    </h4>
+                    <p class="text-gray-500 text-sm mb-4">
+                        Get latest news, events & updates directly in your inbox.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="newsletter-wrap">
+                            <i class="fas fa-envelope newsletter-icon"></i>
+                            <input type="email" placeholder="Enter your email" class="newsletter-input">
+                        </div>
+                        <button class="subscribe-btn">
+                            <span><i class="fas fa-arrow-right mr-2"></i> Subscribe</span>
+                        </button>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-3 flex items-center gap-1.5">
+                        <i class="fas fa-check-circle text-[#6366f1] text-xs"></i>
+                        Remember Me •
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-divider my-8"></div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-sm">
+                    © 2026 <span class="text-gray-800 font-medium">HBUC</span> · Made by Samiur Rahman (Siyam)
+                </p>
+                <div class="flex items-center gap-5 text-sm">
+                    <a href="#" class="bottom-link">Privacy</a>
+                    <span class="text-gray-300">•</span>
+                    <a href="#" class="bottom-link">Terms</a>
+                    <span class="text-gray-300">•</span>
+                    <a href="#" class="bottom-link">Cookies</a>
+                    <span class="text-gray-300">•</span>
+                    <a href="#" class="bottom-link">Support</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /app-container -->
+
+
+    <!-- ═══════════════════════════════════════════════════
+    BOTTOM FIXED NAVIGATION – bottom:0, margin:0, স্কোয়ার
+    ═══════════════════════════════════════════════════ -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="#" class="nav-link dash active">
+            <i class="fa-solid fa-house-user"></i>
+            <span class="label-text">Home</span>
+        </a>
+        <a href="student.html" class="nav-link">
+            <i class="fas fa-user-graduate"></i>
+            <span class="label-text">Students</span>
+            <span class="badge">১৯</span>
+        </a>
+        <a href="teacher.html" class="nav-link">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span class="label-text">Teachers</span>
+        </a>
+        <a href="subject.html" class="nav-link">
+            <i class="fas fa-book-open"></i>
+            <span class="label-text">Subjects</span>
+        </a>
+        <a href="notice.html" class="nav-link">
+            <i class="fas fa-bullhorn"></i>
+            <span class="label-text">Notice</span>
+            <span class="badge">৩</span>
+        </a>
+    </nav>
+
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script>
+        (function() {
+            // ─── Slider ───
+            const slides = [
+                document.getElementById('slide1'),
+                document.getElementById('slide2'),
+                document.getElementById('slide3')
+            ];
+            const dots = document.querySelectorAll('.dot');
+            let currentIndex = 0;
+            let autoInterval = null;
+
+            function changeSlide(index) {
+                if (index < 0) index = slides.length - 1;
+                if (index >= slides.length) index = 0;
+                slides.forEach((img, i) => {
+                    img.style.opacity = i === index ? '1' : '0';
+                });
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('dot-active', i === index);
+                    dot.classList.toggle('dot-inactive', i !== index);
+                });
+                currentIndex = index;
             }
-          }
-        });
-      }, { threshold: 0.3 });
-      counters.forEach(counter => observer.observe(counter));
 
-      function animateCounter(counter) {
-        const target = parseInt(counter.dataset.target, 10);
-        let current = 0;
-        const increment = Math.max(1, Math.ceil(target / 80));
+            function nextSlide() { changeSlide(currentIndex + 1);
+                resetAutoPlay(); }
 
-        function update() {
-          current += increment;
-          if (current >= target) { counter.innerText = target; return; }
-          counter.innerText = Math.ceil(current);
-          requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-      }
+            function prevSlide() { changeSlide(currentIndex - 1);
+                resetAutoPlay(); }
 
-      // Bottom nav active
-      document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-        item.addEventListener('click', function() {
-          document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
-          this.classList.add('active');
-        });
-      });
+            function resetAutoPlay() {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(nextSlide, 4500);
+            }
 
-      // Desktop nav active
-      document.querySelectorAll('.desktop-nav a').forEach(item => {
-        item.addEventListener('click', function() {
-          document.querySelectorAll('.desktop-nav a').forEach(n => n.classList.remove('active'));
-          this.classList.add('active');
-        });
-      });
-    })();
-  </script>
+            document.getElementById('nextBtn').addEventListener('click', nextSlide);
+            document.getElementById('prevBtn').addEventListener('click', prevSlide);
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', function() { changeSlide(idx);
+                    resetAutoPlay(); });
+            });
+            resetAutoPlay();
+
+            // ─── Counters ───
+            const counters = document.querySelectorAll('.counter');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        if (!counter.dataset.started) {
+                            counter.dataset.started = true;
+                            const target = parseInt(counter.dataset.target, 10);
+                            let current = 0;
+                            const increment = Math.max(1, Math.ceil(target / 80));
+
+                            function update() {
+                                current += increment;
+                                if (current >= target) { counter.innerText = target; return; }
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(update);
+                            }
+                            requestAnimationFrame(update);
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            counters.forEach(counter => observer.observe(counter));
+
+            // ─── Bottom Nav Active ───
+            const bottomLinks = document.querySelectorAll('.bottom-nav .nav-link');
+            bottomLinks.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    bottomLinks.forEach(n => n.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // ─── Desktop Nav Active ───
+            document.querySelectorAll('.desktop-nav a').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.desktop-nav a').forEach(n => n.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // ─── Live Time & Greeting ───
+            const timeEl = document.getElementById('liveTime');
+            const greetingEl = document.getElementById('greetingTime');
+
+            function pad(n) { return String(n).padStart(2, '0'); }
+
+            function getGreeting(h) {
+                if (h < 12) return 'Good Morning';
+                if (h < 18) return 'Good Afternoon';
+                return 'Good Evening';
+            }
+
+            function updateClock() {
+                const now = new Date();
+                const h = now.getHours();
+                const m = now.getMinutes();
+                if (timeEl) timeEl.textContent = pad(h) + ':' + pad(m);
+                if (greetingEl) greetingEl.textContent = getGreeting(h);
+            }
+            updateClock();
+            setInterval(updateClock, 30000);
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) updateClock();
+            });
+
+            // ─── (মোবাইলে) স্ক্রিনের সাথে খাপ খাওয়ানো ───
+            function adjustBottomNav() {
+                const nav = document.getElementById('bottomNav');
+                if (!nav) return;
+                const vw = window.innerWidth;
+                // ডেস্কটপে max-width কন্ট্রোল CSS-এ আছে
+            }
+            adjustBottomNav();
+            window.addEventListener('resize', adjustBottomNav);
+        })();
+    </script>
 
 </body>
 </html>
